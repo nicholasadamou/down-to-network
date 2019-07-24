@@ -11,12 +11,12 @@ const { ApolloServer, gql } = require("apollo-server-express");
 const typeDefs = gql`
   type User {
     name: string,
-	role: string,
-	eduction: string,
-	location: string,
-	bio: string,
-	experiences: string,
-	fun_facts: string
+    role: string,
+    eduction: string,
+    location: string,
+    bio: string,
+    experiences: string,
+    fun_facts: string
   }
   type Query {
     users: [User]
