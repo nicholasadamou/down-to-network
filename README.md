@@ -74,6 +74,12 @@ This project uses the following technologies:
 - [**Abstract**](https://www.abstract.com/) - Use Abstract to manage, collaborate and version your Sketch files. Our version control for designers supports a modern design workflow.
 - [**Invision**](https://www.invisionapp.com/) - InVision is the digital product design platform used to make the world's best customer experiences.
 
+```bash
+git clone https://github.com/nicholasadamou/DownToNetwork
+cd DownToNetwork
+yarn install-dependencies # alteratively, 'npm' can be used
+```
+
 ## License
 
 DownToNetwork is © 2019, Nicholas Adamou.
