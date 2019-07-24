@@ -1,6 +1,6 @@
 {
-	"name": "downtonetwork-backend",
-	"description": "The back-end of Down To Network",
+	"name": "functions",
+	"description": "Cloud Functions for Firebase",
 	"version": "1.0.0",
 	"scripts": {
 		"serve": "firebase serve --only functions",
