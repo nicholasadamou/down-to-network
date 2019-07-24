@@ -37,7 +37,7 @@ This project was created for the Summer IBM HackCIO event, where fellow IBM inte
 3. Environmental Friendly
 4. Onboarding Process.
 
-🏆 **_DownToNetwork_** **won** under the category **_Community Building_** with **_Most likely to be used at IBM_**.
+🏆 **_DownToNetwork_** **won** under the category **_Community Building_** and voted **_Most likely to be used at IBM_**.
 
 DownToNetwork is a dynamic web / mobile app optimized to connect new fellow IBMers to experienced IBMers through the power of matching.
 
