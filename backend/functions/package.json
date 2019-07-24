@@ -1,6 +1,7 @@
 {
 	"name": "downtonetwork-backend",
 	"description": "The back-end of Down To Network",
+	"version": "1.0.0",
 	"scripts": {
 		"serve": "firebase serve --only functions",
 		"shell": "firebase functions:shell",

@@ -1,7 +1,7 @@
 {
     "name": "downtonetwork-frontend",
     "description": "The front-end of Down To Network",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "private": true,
     "dependencies": {
         "@carbon/colors": "^10.1.1",
