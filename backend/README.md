@@ -48,12 +48,28 @@ This project uses the following technologies:
 **The Back-End**:
 
 - [**Firebase**](https://firebase.google.com/) - Firebase is Google's mobile platform that helps you quickly develop high-quality apps and grow your business.
+- [**Apollo Server**](https://github.com/apollographql/apollo-server) - GraphQL server for Express.
 
 ## How To Use
 
-```bash
-yarn install # alteratively, 'npm' can be used
+```shell
+# Install
+yarn install
+# Locally serve
+yarn serve
+# Deploy
+yarn deploy
 ```
+
+## Routes
+
+GraphQL Playground: `https://us-central1-<project-id>.cloudfunctions.net/api`
+
+GraphQL Endpoint: `https://us-central1-<project-id>.cloudfunctions.net/api/graphql`
+
+## Use
+
+Go to the GraphQL Playground route and enter the GraphQL endpoint route into the GraphQL Server address bar to connect the playground to your endpoint. Now you can query away and develop your app!
 
 ## License
 

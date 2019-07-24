@@ -64,6 +64,7 @@ This project uses the following technologies:
 **The Back-End**:
 
 - [**Firebase**](https://firebase.google.com/) - Firebase is Google's mobile platform that helps you quickly develop high-quality apps and grow your business.
+- [**Apollo Server**](https://github.com/apollographql/apollo-server) - GraphQL server for Express.
 
 ## 📚 The Design Stack
 
