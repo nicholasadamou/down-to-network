@@ -74,7 +74,7 @@ This project uses the following technologies:
 - [**Abstract**](https://www.abstract.com/) - Use Abstract to manage, collaborate and version your Sketch files. Our version control for designers supports a modern design workflow.
 - [**Invision**](https://www.invisionapp.com/) - InVision is the digital product design platform used to make the world's best customer experiences.
 
-## Installing Dependencies
+## How To Use
 
 ```bash
 git clone https://github.com/nicholasadamou/DownToNetwork
