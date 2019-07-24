@@ -47,12 +47,11 @@ This project uses the following technologies:
 
 **The Front-End**:
 
--   [**React.js**](https://reactjs.org/) - For building the interface along with:
-    - [**React Router**](https://reacttraining.com/react-router/) - for declarative routing for React.
-    - [**React Context API**](https://reactjs.org/docs/context.html) - Context provides a way to pass data through the component tree without having to pass props down manually at every level.
-    - [**React-Apollo**](https://github.com/apollographql/react-apollo) - for interfacing with Apollo Client.
-    - [**Styled-Components**](https://www.styled-components.com/) - for styling.
-    - [**Jest**](https://jestjs.io/) & [**Enzyme**](https://github.com/airbnb/enzyme) - for Testing.
+- [**React.js**](https://reactjs.org/) - For building the interface along with:
+  - [**React Router**](https://reacttraining.com/react-router/) - for declarative routing for React.
+  - [**React Context API**](https://reactjs.org/docs/context.html) - Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+  - [**React-Apollo**](https://github.com/apollographql/react-apollo) - for interfacing with Apollo Client.
+  - [**Styled-Components**](https://www.styled-components.com/) - for styling.
 - [**Apollo-Client**](https://github.com/apollographql/apollo-client) - For Data Management.
   - Performing GraphQL **Mutations**
   - Fetching GraphQL **Queries**
