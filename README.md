@@ -86,7 +86,7 @@ yarn install-dependencies # alteratively, 'npm' can be used
 
 ## License
 
-DownToNetwork is © 2019, Nicholas Adamou.
+DownToNetwork is © 2019, Nicholas Adamou, Edward Lovely, Stephen Alt, Diana Bank, & Julia Lauer.
 
 It is free software, and may be redistributed under the terms specified in the [LICENSE] file.
 
