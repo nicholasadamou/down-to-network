@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-<h4 align="center">The mono repo that holds both the <a href="backend">backend/</a> & the <a href="frontend">frontend/</a> of <em>DownToNetwork</em>.</h4>
+<h4 align="center">The mono repo that holds the <a href="backend">backend/</a>, the <a href="frontend">frontend/</a>, and the <a href="design">design/</a> of <em>DownToNetwork</em>.</h4>
 
 <p align="center">
   <a href="https://github.com/nicholasadamou/DownToNetworks/blob/master/LICENSE.txt">
