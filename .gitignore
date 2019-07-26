@@ -5,6 +5,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -30,3 +31,6 @@ package-lock.json
 
 # don't save the copy of @carbon's styles in the root folder
 \@carbon
+
+# misc.
+.cache
