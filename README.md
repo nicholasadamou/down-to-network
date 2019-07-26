@@ -12,15 +12,6 @@
   <a href="https://github.com/nicholasadamou/DownToNetworks/blob/master/LICENSE.txt">
       <img src="https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square" alt="License">
   </a>
-  <a href="https://david-dm.org/nicholasadamou/DownToNetworks#info=devDependencies">
-      <img src="https://img.shields.io/david/dev/nicholasadamou/DownToNetworks.svg?style=flat-square" alt="devDependencies">
-  </a>
-  <a href="https://dependabot.com">
-      <img src="https://api.dependabot.com/badges/status?host=github&repo=nicholasadamou/DownToNetworks" alt="dependabot">
-  </a>
-  <a href="https://travis-ci.org/nicholasadamou/DownToNetworks">
-      <img src="https://img.shields.io/travis/nicholasadamou/DownToNetworks/master.svg?style=flat-square" alt="Build Status">
-  </a>
   <a href="https://saythanks.io/to/NicholasAdamou">
       <img src="https://img.shields.io/badge/say-thanks-ff69b4.svg" alt="Say Thanks">
   </a>

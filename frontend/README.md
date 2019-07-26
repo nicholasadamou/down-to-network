@@ -12,15 +12,6 @@
   <a href="https://github.com/nicholasadamou/DownToNetworks/blob/master/LICENSE.txt">
       <img src="https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square" alt="License">
   </a>
-  <a href="https://david-dm.org/nicholasadamou/DownToNetworks#info=devDependencies">
-      <img src="https://img.shields.io/david/dev/nicholasadamou/DownToNetworks.svg?style=flat-square" alt="devDependencies">
-  </a>
-  <a href="https://dependabot.com">
-      <img src="https://api.dependabot.com/badges/status?host=github&repo=nicholasadamou/DownToNetworks" alt="dependabot">
-  </a>
-  <a href="https://travis-ci.org/nicholasadamou/DownToNetworks">
-      <img src="https://img.shields.io/travis/nicholasadamou/DownToNetworks/master.svg?style=flat-square" alt="Build Status">
-  </a>
   <a href="https://saythanks.io/to/NicholasAdamou">
       <img src="https://img.shields.io/badge/say-thanks-ff69b4.svg" alt="Say Thanks">
   </a>
@@ -50,17 +41,17 @@ This project uses the following technologies:
 **The Front-End**:
 
 -   [**React.js**](https://reactjs.org/) - For building the interface along with:
-    - [**React Router**](https://reacttraining.com/react-router/) - for declarative routing for React.
-    - [**React Context API**](https://reactjs.org/docs/context.html) - Context provides a way to pass data through the component tree without having to pass props down manually at every level.
-    - [**React-Apollo**](https://github.com/apollographql/react-apollo) - for interfacing with Apollo Client.
-    - [**Styled-Components**](https://www.styled-components.com/) - for styling.
-- [**Apollo-Client**](https://github.com/apollographql/apollo-client) - For Data Management.
-  - Performing GraphQL **Mutations**
-  - Fetching GraphQL **Queries**
-  - **Caching** GraphQL Data
-  - Managing **Local State**
-  - **Error** and **Loading** UI States
-  - Apollo Client replaces the need for redux + data fetching/caching libraries.
+    -   [**React Router**](https://reacttraining.com/react-router/) - for declarative routing for React.
+    -   [**React Context API**](https://reactjs.org/docs/context.html) - Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+    -   [**React-Apollo**](https://github.com/apollographql/react-apollo) - for interfacing with Apollo Client.
+    -   [**Styled-Components**](https://www.styled-components.com/) - for styling.
+-   [**Apollo-Client**](https://github.com/apollographql/apollo-client) - For Data Management.
+    -   Performing GraphQL **Mutations**
+    -   Fetching GraphQL **Queries**
+    -   **Caching** GraphQL Data
+    -   Managing **Local State**
+    -   **Error** and **Loading** UI States
+    -   Apollo Client replaces the need for redux + data fetching/caching libraries.
 
 ## How To Use
 
