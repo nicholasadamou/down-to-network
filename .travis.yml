@@ -3,13 +3,9 @@
 #
 # https://docs.travis-ci.com
 
-before_script:
-  - cd frontend/
 
 install:
-  - npx yarn install && npx yarn run build
-
-after_script:
+  - cd frontend/ npx yarn install && npx yarn run build
   - cd ../backend && npx yarn install && npx yarn run build
 
 language: node_js
