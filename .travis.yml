@@ -5,8 +5,7 @@
 
 
 install:
-  - cd frontend/ npx yarn install && npx yarn run build
-  - cd ../backend && npx yarn install && npx yarn run build
+  - cd frontend/ npx yarn install && npx yarn run build && cd ../backend && npx yarn install && npx yarn run build
 
 language: node_js
 node_js:
