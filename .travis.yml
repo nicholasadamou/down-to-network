@@ -6,6 +6,8 @@
 install:
   - npx yarn install && npx yarn run build
 
+script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PROJECT; then echo "$PROJECT is being built"; else echo "$PROJECT is NOT being built"; fi
+
 language: node_js
 node_js:
   - 'lts/*'
