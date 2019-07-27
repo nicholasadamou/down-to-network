@@ -28,5 +28,5 @@ if git diff --name-only "$TRAVIS_COMMIT_RANGE" | sort -u | uniq | grep "$PROJECT
 		npx yarn build # Build the project.
 	}
 else
-	echo "Skipping because diff $TRAVIS_COMMIT_RANGE doesn't indicate any changes that were made in $PROJECT."
+	echo "Skipping because diff $TRAVIS_COMMIT_RANGE doesn't indicate that there were any changes that were made in $PROJECT."
 fi
