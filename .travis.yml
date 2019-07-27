@@ -3,7 +3,7 @@
 #
 # https://docs.travis-ci.com
 
-script: if .travis/build-condition.sh $TRAVIS_COMMIT_RANGE $PROJECT; then echo "$PROJECT is being built"; else echo "$PROJECT is NOT being built"; fi
+script: ./build.sh
 
 language: node_js
 node_js:
