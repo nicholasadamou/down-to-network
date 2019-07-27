@@ -10,4 +10,4 @@ if [[ -z $2 ]]; then
     exit 1
 fi
 
-git diff --name-only $1 | sort -u | uniq | grep $2 > /dev/null
+git diff --name-only "$1" | sort -u | uniq | grep "$2" > /dev/null
