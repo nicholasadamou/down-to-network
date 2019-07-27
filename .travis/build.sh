@@ -3,6 +3,9 @@
 # Print commands and their arguments as they are executed.
 set -x
 
+TRAVIS_COMMIT_RANGE="$1"
+PROJECT="$2"
+
 # Make sure both $TRAVIS_COMMIT_RANGE & $PROJECT are defined
 # before proceeding.
 if [[ -z $1 ]]; then
@@ -23,4 +26,6 @@ if git diff --name-only "$1" | sort -u | uniq | grep "$2" > /dev/null; then
 		npx yarn install # Install dependencies.
 		npx yarn build # Build the project.
 	}
+else
+	echo "Skipping because diff $TRAVIS_COMMIT_RANGE doesn't indicate any changes were made in $PROJECT"
 fi
