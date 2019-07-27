@@ -3,17 +3,18 @@
 # Print commands and their arguments as they are executed.
 set -x
 
+# Define $TRAVIS_COMMIT_RANGE & $PROJECT
 TRAVIS_COMMIT_RANGE="$1"
 PROJECT="$2"
 
 # Make sure both $TRAVIS_COMMIT_RANGE & $PROJECT are defined
 # before proceeding.
-if [[ -z $1 ]]; then
+if [[ -z $TRAVIS_COMMIT_RANGE ]]; then
     echo "\$TRAVIS_COMMIT_RANGE must not be empty."
     exit 1
 fi
 
-if [[ -z $2 ]]; then
+if [[ -z $PROJECT ]]; then
     echo "Skipping because \$PROJECT is not defined."
     exit 0
 fi
