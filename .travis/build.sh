@@ -12,10 +12,9 @@ if [[ -z $2 ]]; then
     exit 0
 fi
 
-git diff --name-only "$1" | sort -u | uniq | grep "$2" > /dev/null
-
-cd "$PROJECT" && {
-	npx yarn install
-	npx yarn build
+git diff --name-only "$1" | sort -u | uniq | grep "$2" > /dev/null && {
+	cd "$PROJECT" && {
+		npx yarn install
+		npx yarn build
+	}
 }
-
