@@ -4,7 +4,8 @@
 	"description": "A dynamic web / mobile app optimized to connect new fellow IBMers to experienced IBMers through the power of matching.",
 	"scripts": {
 		"install-dependencies": "cd backend/ && yarn install && cd ../frontend/ && yarn install",
-		"build": "cd backend/ && yarn build && cd ../frontend/ && yarn build"
+		"build": "cd backend/ && yarn build && cd ../frontend/ && yarn build",
+		"clean": "cd backend/ && yarn clean && cd ../frontend/ && yarn clean"
 	},
 	"license": "MIT",
 	"repository": {
