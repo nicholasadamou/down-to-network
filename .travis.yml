@@ -3,7 +3,7 @@
 #
 # https://docs.travis-ci.com
 
-script: ./build.sh
+script: .travis/build.sh "$TRAVIS_COMMIT_RANGE" "$PROJECT"
 
 language: node_js
 node_js:
