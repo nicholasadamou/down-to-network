@@ -21,7 +21,7 @@ fi
 
 # Check if $PROJECT folder contains any differences compared to the
 # last commit.
-if git diff --name-only "$1" | sort -u | uniq | grep "$2" > /dev/null; then
+if git diff --name-only "$TRAVIS_COMMIT_RANGE" | sort -u | uniq | grep "$PROJECT" > /dev/null; then
 	# If there are differences, then change directory to $PROJECT.
 	cd "$PROJECT" && {
 		npx yarn install # Install dependencies.
