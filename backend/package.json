@@ -23,7 +23,7 @@
 	},
 	"devDependencies": {
 		"firebase-functions-test": "^0.1.6",
-		"firebase-tools": "^6.9.2",
+		"firebase-tools": "^7.2.1",
 		"parcel-bundler": "^1.12.3",
 		"xo": "^0.24.0"
 	},
