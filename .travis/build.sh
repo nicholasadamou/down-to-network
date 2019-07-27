@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x
-
 if [[ -z $1 ]]; then
     echo "\$TRAVIS_COMMIT_RANGE must be defined."
     exit 1
