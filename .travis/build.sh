@@ -17,10 +17,10 @@ fi
 
 # Check if $PROJECT folder contains any differences compared to the
 # last commit.
-git diff --name-only "$1" | sort -u | uniq | grep "$2" > /dev/null && {
+if git diff --name-only "$1" | sort -u | uniq | grep "$2" > /dev/null; then
 	# If there are differences, then change directory to $PROJECT.
 	cd "$PROJECT" && {
 		npx yarn install # Install dependencies.
-		npx yarn build # Build the project.
+		#npx yarn build # Build the project.
 	}
-}
+fi
