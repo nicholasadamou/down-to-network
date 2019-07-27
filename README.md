@@ -9,15 +9,15 @@
 <h4 align="center">The mono repo that holds the <a href="backend">backend/</a>, the <a href="frontend">frontend/</a>, and the <a href="design">design/</a> of <em>DownToNetwork</em>.</h4>
 
 <p align="center">
-  <a href="https://github.com/nicholasadamou/DownToNetworks/blob/master/LICENSE.txt">
+  <a href="https://github.com/nicholasadamou/DownToNetwork/blob/master/LICENSE.txt">
       <img src="https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square" alt="License">
   </a>
 
   <a href="https://dependabot.com">
-      <img src="https://api.dependabot.com/badges/status?host=github&repo=nicholasadamou/DownToNetworks" alt="dependabot">
+      <img src="https://api.dependabot.com/badges/status?host=github&repo=nicholasadamou/DownToNetwork" alt="dependabot">
   </a>
-  <a href="https://travis-ci.org/nicholasadamou/DownToNetworks">
-      <img src="https://img.shields.io/travis/nicholasadamou/DownToNetworks/master.svg?style=flat-square" alt="Build Status">
+  <a href="https://travis-ci.org/nicholasadamou/DownToNetwork">
+      <img src="https://img.shields.io/travis/nicholasadamou/DownToNetwork/master.svg?style=flat-square" alt="Build Status">
   </a>
   <a href="https://saythanks.io/to/NicholasAdamou">
       <img src="https://img.shields.io/badge/say-thanks-ff69b4.svg" alt="Say Thanks">
