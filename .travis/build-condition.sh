@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 if [[ -z $1 ]]; then
     echo "Commit range cannot be empty"
     exit 1
