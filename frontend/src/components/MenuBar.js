@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 import * as ROUTES from '../constants/routes'
 
 import Home20 from '@carbon/icons-react/es/home/20';
-import ThumbsUp20 from '@carbon/icons-react/es/thumbs-up/20';
-import Chat20 from '@carbon/icons-react/es/chat/20';
 import User20 from '@carbon/icons-react/es/user/20';
 
 const Wrapper = styled.div`
@@ -50,18 +48,8 @@ const MenuBar = () => {
 		<Wrapper>
 			<ul>
 				<li>
-					<Link to={ROUTES.HOME}>
+					<Link to={ROUTES.DASHBOARD}>
 						<Home20 />
-					</Link>
-				</li>
-				{/* <li>
-					<Link to={ROUTES.LIKES}>
-						<ThumbsUp20 />
-					</Link>
-				</li> */}
-				<li>
-					<Link to={ROUTES.CHAT}>
-						<Chat20 />
 					</Link>
 				</li>
 				<li>

@@ -1,20 +1,18 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import { withRouter } from 'react-router-dom'
 
 import styled from 'styled-components'
 
 import Layout from '../../components/Layout/Layout'
-import ActionBar from './components/ActionBar'
-import SignUpForm from './components/SignUpForm'
+import Form from './components/Form/Form'
 
 import './index.scss'
 
 const Wrapper = styled.div`
 	padding: 10px;
-	margin-bottom: 120px;
 
-	text-align: center;
+	height: 100%;
 
 	overflow-x: hidden;
 
@@ -28,14 +26,12 @@ const Wrapper = styled.div`
 	}
 `
 
-const SignUpPage = (props) => {
+const SignUpPage = props => {
 	return (
 		<Layout>
 			<Wrapper>
-				<h1>Build Your Profile</h1>
-				<SignUpForm />
+				<Form />
 			</Wrapper>
-			{/* <ActionBar /> */}
 		</Layout>
 	)
 }

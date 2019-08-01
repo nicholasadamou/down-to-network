@@ -43,29 +43,36 @@ This project uses the following technologies:
 
 **The Back-End**:
 
-- [**Firebase**](https://firebase.google.com/) - Firebase is Google's mobile platform that helps you quickly develop high-quality apps and grow your business.
-- [**Apollo Server**](https://github.com/apollographql/apollo-server) - GraphQL server for Express.
+- [**GraphQL-Yoga**](https://github.com/prisma/graphql-yoga) - An [_Express_](https://expressjs.com/) GraphQL Server For:
+  - Implementing **Query and Mutation Resolvers**
+  - Custom **Server Side Logic**
+  - **Sending** Email
+  - Performing **JWT Authentication**
+  - Checking **Permissions**
+- [**Prisma**](https://github.com/prisma/prisma) - A [_GraphQL_](https://graphql.org/) Database Interface.
+  - Provides a set of GraphQL **CRUD APIs** for a MySQL, Postgres or MongoDB **Database**.
+  - **Schema** Definition
+  - Data **Relationships**
+  - **Queried** Directly from our Yoga Server
+  - **Self-hosted** or as-a-service
 
-## How To Use
+## Installing Dependencies
 
-```shell
-# Install
-yarn install
-# Locally serve
-yarn serve
-# Deploy
-yarn deploy
+The following snippet only needs to be ran once if dependencies are not installed:
+
+```bash
+yarn install # Installs dependencies
 ```
 
-## Routes
+## Building & Running _SickFits_'s Back-End
 
-GraphQL Playground: `https://us-central1-<project-id>.cloudfunctions.net/api`
+To _properly_ compile the back-end of _DownToNetwork_ `.env` must exist. For an example of what `.env` should look like, look at [.env.example](.env.example).
 
-GraphQL Endpoint: `https://us-central1-<project-id>.cloudfunctions.net/api/graphql`
+To launch the [**Prisma**](https://github.com/prisma/prisma) GraphQL Development Server for the **back-end**, simply run the following:
 
-## Use
-
-Go to the GraphQL Playground route and enter the GraphQL endpoint route into the GraphQL Server address bar to connect the playground to your endpoint. Now you can query away and develop your app!
+```bash
+yarn start
+```
 
 ## License
 

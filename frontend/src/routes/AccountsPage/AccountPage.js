@@ -7,8 +7,6 @@ import MenuBar from '../../components/MenuBar'
 
 import EditAccountForm from './components/EditAccountForm'
 
-import { withFirebase } from '../../components/Firebase';
-
 import './index.scss'
 
 const Wrapper = styled.div`
@@ -53,4 +51,4 @@ class AccountPage extends React.Component {
 	}
 }
 
-export default withFirebase(AccountPage)
+export default AccountPage

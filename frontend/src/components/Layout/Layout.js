@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import  { FirebaseContext } from '../Firebase';
+// import  { FirebaseContext } from '../Firebase';
 
 import Header from './components/Header'
 
 const Layout = props => {
 	const { children } = props
-	const { firebase } = useContext(FirebaseContext)
+	// const { firebase } = useContext(FirebaseContext)
 
 	return (
 		<>

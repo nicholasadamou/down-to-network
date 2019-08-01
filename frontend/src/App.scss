@@ -2,3 +2,9 @@
 @import '~@carbon/type/scss/type';
 @import '~@carbon/layout/scss/layout';
 @import '~@carbon/grid/scss/grid';
+
+html, body, #root {
+    height: 100%;
+
+    overflow: hidden;
+}

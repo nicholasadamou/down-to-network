@@ -6,7 +6,7 @@ const Header = () => {
 	return (
 		<CarbonHeader aria-label="DTN">
 			<HeaderName href="/">
-				DTN
+				Down To Network?
 			</HeaderName>
 		</CarbonHeader>
 	);
