@@ -43,18 +43,7 @@ This project uses the following technologies:
 
 **The Back-End**:
 
-- [**GraphQL-Yoga**](https://github.com/prisma/graphql-yoga) - An [_Express_](https://expressjs.com/) GraphQL Server For:
-  - Implementing **Query and Mutation Resolvers**
-  - Custom **Server Side Logic**
-  - **Sending** Email
-  - Performing **JWT Authentication**
-  - Checking **Permissions**
-- [**Prisma**](https://github.com/prisma/prisma) - A [_GraphQL_](https://graphql.org/) Database Interface.
-  - Provides a set of GraphQL **CRUD APIs** for a MySQL, Postgres or MongoDB **Database**.
-  - **Schema** Definition
-  - Data **Relationships**
-  - **Queried** Directly from our Yoga Server
-  - **Self-hosted** or as-a-service
+- [**EasyGraphQL-Firebase**](https://github.com/EasyGraphQL/easygraphql-firebase) - easygraphql-firebase is global package that will create a GraphQL server connected to your Firebase real-time database just using a GraphQL schema. 
 
 ## Installing Dependencies
 

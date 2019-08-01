@@ -43,23 +43,14 @@ This project uses the following technologies:
 
 **The Front-End**:
 
-- [**React.js**](https://reactjs.org/) - For building the interface along with:
-  - [**React Router**](https://reacttraining.com/react-router/) - for declarative routing for React.
-  - [**React Context API**](https://reactjs.org/docs/context.html) - Context provides a way to pass data through the component tree without having to pass props down manually at every level.
-  - [**React-Apollo**](https://github.com/apollographql/react-apollo) - for interfacing with Apollo Client.
-  - [**Styled-Components**](https://www.styled-components.com/) - for styling.
-- [**Apollo-Client**](https://github.com/apollographql/apollo-client) - For Data Management.
-  - Performing GraphQL **Mutations**
-  - Fetching GraphQL **Queries**
-  - **Caching** GraphQL Data
-  - Managing **Local State**
-  - **Error** and **Loading** UI States
-  - Apollo Client replaces the need for redux + data fetching/caching libraries.
+-   [**React.js**](https://reactjs.org/) - For building the interface along with:
+    -   [**React Router**](https://reacttraining.com/react-router/) - for declarative routing for React.
+    -   [**React Context API**](https://reactjs.org/docs/context.html) - Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+    -   [**Styled-Components**](https://www.styled-components.com/) - for styling.
 
 **The Back-End**:
 
-- [**Firebase**](https://firebase.google.com/) - Firebase is Google's mobile platform that helps you quickly develop high-quality apps and grow your business.
-- [**Apollo Server**](https://github.com/apollographql/apollo-server) - GraphQL server for Express.
+- [**EasyGraphQL-Firebase**](https://github.com/EasyGraphQL/easygraphql-firebase) - easygraphql-firebase is global package that will create a GraphQL server connected to your Firebase real-time database just using a GraphQL schema.
 
 ## 📚 The Design Stack
 
