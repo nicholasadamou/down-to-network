@@ -48,10 +48,6 @@ This project uses the following technologies:
     -   [**React Context API**](https://reactjs.org/docs/context.html) - Context provides a way to pass data through the component tree without having to pass props down manually at every level.
     -   [**Styled-Components**](https://www.styled-components.com/) - for styling.
 
-**The Back-End**:
-
-- [**EasyGraphQL-Firebase**](https://github.com/EasyGraphQL/easygraphql-firebase) - easygraphql-firebase is global package that will create a GraphQL server connected to your Firebase real-time database just using a GraphQL schema.
-
 ## 📚 The Design Stack
 
 This project uses the following technologies:

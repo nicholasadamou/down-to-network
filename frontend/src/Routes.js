@@ -8,6 +8,8 @@ import {
 
 import * as ROUTES from './constants/routes';
 
+import { withFirebase } from './components/Firebase'
+
 import Loading from './components/Loading'
 
 const SignInPage = lazy(() => import('./routes/SignInPage/SignInPage'))
@@ -19,7 +21,13 @@ const Routes = () => {
 	return (
 		<Suspense fallback={<Loading />}>
 			<Switch>
-				<Route exact path={ROUTES.LANDING} render={() => <Redirect to={ROUTES.SIGN_IN} />} />
+				<Route exact path={ROUTES.LANDING} render={() => {
+					if (localStorage.getItem('authUser') !== undefined) {
+						return <Redirect to={ROUTES.DASHBOARD} />
+					} else {
+						return <Redirect to={ROUTES.SIGN_IN} />
+					}
+				}} />
 				<Route exact path={ROUTES.SIGN_IN} render={props => {
 						return <SignInPage {...props} />
 					}}
@@ -41,4 +49,4 @@ const Routes = () => {
 	)
 }
 
-export default Routes
+export default withFirebase(Routes)
