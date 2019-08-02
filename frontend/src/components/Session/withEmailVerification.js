@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AuthUserContext from './Context'
+import AuthUserContext from './AuthUserContext'
 import { withFirebase } from '../Firebase'
 
 const needsEmailVerification = authUser =>
