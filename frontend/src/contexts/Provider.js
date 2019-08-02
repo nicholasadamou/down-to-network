@@ -63,7 +63,11 @@ class Provider extends Component {
 		} else if (cell.id === 'role') {
 			account.role = cell.value
 		} else if (cell.id === 'match-settings') {
-			account.matchSettings = cell.value
+			let matchSettings = []
+			
+			cell.value.forEach(setting => matchSettings.push(setting.id))
+
+			account.matchSettings = matchSettings
 		}
 
 		this.setState({

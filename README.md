@@ -48,6 +48,10 @@ This project uses the following technologies:
     -   [**React Context API**](https://reactjs.org/docs/context.html) - Context provides a way to pass data through the component tree without having to pass props down manually at every level.
     -   [**Styled-Components**](https://www.styled-components.com/) - for styling.
 
+**The Back-End**:
+
+-   [**Firebase**](https://firebase.google.com/) - Google's mobile platform that helps you quickly develop high-quality apps and grow your business.
+
 ## 📚 The Design Stack
 
 This project uses the following technologies:

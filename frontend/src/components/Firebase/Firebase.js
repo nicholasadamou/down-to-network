@@ -2,7 +2,7 @@ import firebase from 'firebase'
 import app from 'firebase/app'
 import 'firebase/auth'
 
-import { map } from 'lodash' 
+import { filter, map } from 'lodash' 
 
 const config = {
 	apiKey: process.env.REACT_APP_API_KEY,
@@ -30,22 +30,6 @@ class Firebase {
 		this.auth = app.auth();
 		this.database = app.database();
 	}
-
-	// *** Query API ***
-
-	mapSnapshotToEntity = snapshot => ({ id: snapshot.key, ...snapshot.val() })
-	mapSnapshotToEntities = snapshot => map(snapshot.val(), (value, id) => ({ id, ...value }))
-
-	ref = path => this.database.ref(path)
-	getValue = path => this.ref(path).once('value')
-	getEntity = path => this.getValue(path).then(this.mapSnapshotToEntity)
-	getEntities = path => this.getValue(path).then(this.mapSnapshotToEntities)
-
-	// *** User API ***
-
-	user = uid => this.ref(`users/${uid}`)
-
-	users = () => this.getEntities('users')
 
 	// *** Auth API ***
 
@@ -95,6 +79,26 @@ class Firebase {
 				fallback()
 			}
 		})
+
+	// *** Query API ***
+
+	mapSnapshotToEntity = snapshot => ({ id: snapshot.key, ...snapshot.val() })
+	mapSnapshotToEntities = snapshot => map(snapshot.val(), (value, id) => ({ id, ...value }))
+
+	ref = path => this.database.ref(path)
+	getValue = path => this.ref(path).once('value')
+	getEntity = path => this.getValue(path).then(this.mapSnapshotToEntity)
+	getEntities = path => this.getValue(path).then(this.mapSnapshotToEntities)
+
+	// *** User API ***
+
+	user = uid => this.getEntity(`users/${uid}`)
+
+	users = () => this.getEntities('users')
+
+	// *** Matching API ***
+
+	matches = criteria => this.users.then(users => filter(users, { matchSettings: criteria }))
 }
 
 export default Firebase
