@@ -30,10 +30,21 @@ class Provider extends Component {
 		this.handleSignOut = this.handleSignOut.bind(this)
 		this.handlePasswordReset = this.handlePasswordReset.bind(this)
 		this.setAccount = this.setAccount.bind(this)
+		this.removeAccountAttributeByKey = this.removeAccountAttributeByKey.bind(this)
 
 		this.isAccountValid = this.isAccountValid.bind(this)
 		this.validateEmail = this.validateEmail.bind(this)
 		this.validatePassword = this.validatePassword.bind(this)
+	}
+
+	removeAccountAttributeByKey = (target) => {
+		const { account } = this.state
+
+		delete account[`${target}`]
+
+		this.setState({
+			account
+		}, () => console.log('Provider.account=', this.state.account))
 	}
 
 	setAccount = (id, e) => {
@@ -58,7 +69,16 @@ class Provider extends Component {
 		} else if (cell.id === 'password') {
 			account.password = cell.value
 		} else if (cell.id === 'avatar') {
-			account.avatar = cell.value
+			let reader = new FileReader()
+			let file = cell.value
+
+			if (file) {
+				reader.readAsDataURL(file)
+			}
+
+			reader.addEventListener("load", () => {
+				account.avatar = reader.result
+			}, false)
 		} else if (cell.id === 'first-name') {
 			account.firstName = cell.value
 		} else if (cell.id === 'last-name') {
@@ -117,12 +137,13 @@ class Provider extends Component {
 		const { account } = this.state
 		const { firebase } = this.props
 
-		const { email, firstName, lastName, role, matchSettings } = account
+		const { avatar, email, firstName, lastName, role, matchSettings } = account
 
 		firebase.doCreateUserWithEmailAndPassword(account.email, account.password).then(authUser => {
 			// Create a user in your Firebase realtime database
 			return firebase.user(`${authUser.user.uid}`).set({
 				name: `${firstName} ${lastName}`,
+				avatar,
 				email,
 				role,
 				matchSettings
@@ -191,8 +212,9 @@ class Provider extends Component {
 					handlePasswordReset: this.handlePasswordReset,
 					handleSignOut: this.handleSignOut,
 					setAccount: this.setAccount,
+					removeAccountAttributeByKey: this.removeAccountAttributeByKey,
 					validateEmail: this.validateEmail,
-					validatePassword: this.validatePassword,
+					validatePassword: this.validatePassword
 				}}
 			>
 				{ children }

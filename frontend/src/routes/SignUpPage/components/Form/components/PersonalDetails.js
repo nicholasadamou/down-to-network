@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 
-import { Form, TextInput, Select, SelectItem } from 'carbon-components-react'
-
-import CustomUploadButton from 'react-firebase-file-uploader/lib/CustomUploadButton'
+import { Form, FileUploader, Button, TextInput, Select, SelectItem } from 'carbon-components-react'
 
 import AccountContext from '../../../../../contexts/Account/AccountContext'
-
-import { withFirebase } from '../../../../../components/Firebase'
 
 import ActionBar from './ActionBar'
 
@@ -19,30 +15,22 @@ class PersonalDetails extends Component {
         this.state = {
             error: false,
             errorMessage: '',
-            avatar: "",
-            isUploading: false,
-            progress: 0,
-            avatarURL: ""
+            removeImageBtnDisabled: true
         }
 
         this.saveAndContinue = this.saveAndContinue.bind(this)
         this.back = this.back.bind(this)
-
-        this.handleUploadStart = this.handleUploadStart.bind(this)
-        this.handleProgress = this.handleProgress.bind(this)
-        this.handleUploadError = this.handleUploadError.bind(this)
-        this.handleUploadSuccess = this.handleUploadSuccess.bind(this)
     }
 
     saveAndContinue = () => {
         const { account } = this.context
 
-        if (account.firstName !== undefined && account.lastName !== undefined && account.role !== undefined) {
+        if (account.avatar !== undefined && account.firstName !== undefined && account.lastName !== undefined && account.role !== undefined) {
             this.props.nextStep()
         } else {
             this.setState({
                 error: true,
-                errorMessage: 'Fields, first-name, last-name, and role are required to continue.'
+                errorMessage: 'Fields, profile-picture, first-name, last-name, and role are required to continue.'
             })
         }
     }
@@ -51,73 +39,46 @@ class PersonalDetails extends Component {
         this.props.prevStep()
     }
 
-    handleUploadStart = () => this.setState({ error: false, isUploading: true, progress: 0 })
-    
-    handleProgress = progress => this.setState({ progress })
-    
-    handleUploadError = error => {
-        this.setState({ isUploading: false })
-        
-        this.setState({
-            error: true,
-            errorMessage: error.message
-        }, () => console.log('error=', this.state.errorMessage))
-    }
-
-    handleUploadSuccess = filename => {
-        const { firebase } = this.props
-        const { setAccount } = this.context
-
-        this.setState({ avatar: filename, progress: 100, isUploading: false })
-
-        firebase
-        .app
-        .storage()
-        .ref(`${firebase.auth.user}/profilePicture/${filename}`)
-        .child(filename)
-        .getDownloadURL()
-        .then(url => {
-            this.setState({ avatarURL: url })
-            setAccount('avatar', url)
-        }).catch(error => {
-			this.setState({
-				error
-			}, () => console.log('error=', error))
-		})
-    }
-
     render() {
-        const { setAccount } = this.context
-        const { firebase } = this.props
-        const { error, errorMessage } = this.state
+        const { setAccount, removeAccountAttributeByKey } = this.context
+        const { removeImageBtnDisabled, error, errorMessage } = this.state
+
+        let fileUploader;
 
         return(
             <Form>
                 <h1>Build your Profile</h1>
-                <label className="bx--label">Profile Picture *</label>
-                {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
-                {this.state.avatarURL && <img src={this.state.avatarURL} alt="avatar" />}
-                <CustomUploadButton
-                    accept="image/*"
+                <FileUploader
+                    labelTitle="Profile Picture *"
+                    labelDescription="only .jpg files at 500MB or less."
+                    buttonLabel="Choose a image"
                     name="avatar"
-                    randomizeFilename
-                    storageRef={firebase.app.storage().ref(`${firebase.auth.user}/profilePicture`)}
-                    onUploadStart={this.handleUploadStart}
-                    onUploadError={this.handleUploadError}
-                    onUploadSuccess={this.handleUploadSuccess}
-                    onProgress={this.handleProgress}
-                    style={{ 
-                        display: 'block',
-                        width: '150px',
-                        padding: 10,
-                        backgroundColor: '#171717', 
-                        color: 'white', 
-                        cursor: 'pointer',
-                        borderRadius: 4
+                    filenameStatus="complete"
+                    accept={['.jpg']}
+                    ref={node => (fileUploader = node)}
+                    onChange={e => {
+                        this.setState({
+                            error: false,
+                            removeImageBtnDisabled: false
+                        })
+
+                        setAccount('avatar', e.target.files[0])
+                    }}
+                />
+                <Button
+                    kind="secondary"
+                    disabled={removeImageBtnDisabled}
+                    onClick={() => {
+                        this.setState({
+                            removeImageBtnDisabled: true
+                        })
+
+                        fileUploader.clearFiles()
+                        removeAccountAttributeByKey('avatar')
                     }}
                 >
-                    Select a file
-                </CustomUploadButton>
+                    Remove image
+                </Button>
                 <TextInput
                     id="first-name"
                     name="first-name"
@@ -203,4 +164,4 @@ class PersonalDetails extends Component {
     }
 }
 
-export default withFirebase(PersonalDetails)
+export default PersonalDetails

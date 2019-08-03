@@ -13,7 +13,7 @@ class FormBase extends Component {
 		super(props)
 
 		this.state = {
-			step: 2,
+			step: 1,
 			error: ''
 		}
 
