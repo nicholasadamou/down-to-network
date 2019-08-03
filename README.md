@@ -29,7 +29,7 @@ This project was created for the Summer IBM HackCIO event, where fellow IBM inte
 1. Inclusion
 2. Community Building
 3. Environmental Friendly
-4. Onboarding Process.
+4. Onboarding Process
 
 🏆 **_DownToNetwork_** **won** under the category **_Community Building_** and voted **_Most likely to be used at IBM_**.
 
