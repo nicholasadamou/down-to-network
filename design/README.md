@@ -35,8 +35,6 @@ This project was created for the Summer IBM HackCIO event, where fellow IBM inte
 
 DownToNetwork is a dynamic web / mobile app optimized to connect new fellow IBMers to experienced IBMers through the power of matching.
 
-⚠️ To access the demo of 'DownToNetwork' visit this link: [DownToNetwork demo](https://DownToNetwork.netlify.com/).
-
 ## 📚 The Design Stack
 
 This project uses the following technologies:
