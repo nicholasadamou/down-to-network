@@ -77,7 +77,7 @@ const Wrapper = styled.div`
 `
 
 const SignInPage = props => {
-	const { account, setAccount, validateEmail, handleSignIn, error } = useContext(AccountContext)
+	const { account, setAccount, validateEmail, handleLogin, error } = useContext(AccountContext)
 
 	const isValid = validateEmail(account.email) && (account.password !== undefined || account.password !== '')
 
@@ -85,7 +85,7 @@ const SignInPage = props => {
 		<Layout>
 			<ImageLogo src={logo} alt="logo" />
 			<Wrapper>
-				<Form onSubmit={handleSignIn}>
+				<Form onSubmit={handleLogin}>
 					<h1>Sign In</h1>
 					{
 						error && (

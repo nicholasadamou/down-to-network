@@ -94,7 +94,7 @@ const ForgotPasswordPage = props => {
 							window.location.href = `${ROUTES.LANDING}`
 						}}
 					>
-					Back
+						Back
 					</Button>
 				</Form>
 			</Wrapper>

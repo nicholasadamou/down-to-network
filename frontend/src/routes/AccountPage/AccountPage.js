@@ -5,7 +5,8 @@ import styled from 'styled-components'
 import Layout from '../../components/Layout/Layout'
 import MenuBar from '../../components/MenuBar'
 
-import EditAccountForm from './components/EditAccountForm'
+// import EditAccountForm from './components/EditAccountForm'
+import SignOutButton from './components/SignOutButton'
 
 import './index.scss'
 
@@ -31,9 +32,7 @@ class AccountPage extends React.Component {
 	constructor(props) {
 		super(props)
 
-		this.state = {
-			users: []
-		}
+		this.state = {}
 	}
 
 	componentWillMount() {}
@@ -42,8 +41,8 @@ class AccountPage extends React.Component {
 		return (
 			<Layout>
 				<Wrapper>
-					<h1>Edit Your Profile</h1>
-					<EditAccountForm />
+					<h1>Manage Your Profile</h1>
+					<SignOutButton />
 				</Wrapper>
 				<MenuBar />
 			</Layout>

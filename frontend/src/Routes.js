@@ -16,6 +16,7 @@ const SignInPage = lazy(() => import('./routes/SignInPage/SignInPage'))
 const SignUpPage = lazy(() => import('./routes/SignUpPage/SignUpPage'))
 const DashboardPage = lazy(() => import('./routes/DashboardPage/DashboardPage'))
 const ForgotPasswordPage = lazy(() => import('./routes/ForgotPasswordPage/ForgotPasswordPage'))
+const AccountPage = lazy(() => import('./routes/AccountPage/AccountPage'))
 
 const Routes = () => {
 	return (
@@ -42,6 +43,10 @@ const Routes = () => {
 				/>
 				<Route exact path={ROUTES.DASHBOARD} render={props => {
 						return <DashboardPage {...props} />
+					}}
+				/>
+				<Route exact path={ROUTES.ACCOUNT} render={props => {
+						return <AccountPage {...props} />
 					}}
 				/>
 			</Switch>

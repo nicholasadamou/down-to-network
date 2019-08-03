@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
 
+import { Button } from 'carbon-components-react'
+
 import AccountContext from '../../../contexts/Account/AccountContext'
 
 const SignOutButton = () => {
-    const { handleSignOut } = useContext(Context)
+    const { handleSignOut } = useContext(AccountContext)
 
     return (
         <Button kind="primary" onClick={handleSignOut}>
