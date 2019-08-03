@@ -9,7 +9,7 @@ import { Form, TextInput, Button } from 'carbon-components-react'
 
 import * as ROUTES from '../../constants/routes'
 
-import Context from '../../contexts/Context'
+import AccountContext from '../../contexts/Account/AccountContext'
 
 import './index.scss'
 
@@ -62,7 +62,7 @@ const Wrapper = styled.div`
 `
 
 const ForgotPasswordPage = props => {
-	const { account, setAccount, validateEmail, handlePasswordReset, error } = useContext(Context)
+	const { account, setAccount, validateEmail, handlePasswordReset, error } = useContext(AccountContext)
 
 	const isValid = validateEmail(account.email)
 

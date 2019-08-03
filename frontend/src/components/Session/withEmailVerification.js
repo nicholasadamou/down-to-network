@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 	overflow: hidden;
 
 	@media (max-width: 375px) {
-		align-items: center;
+		align-items: flex-start;
 		justify-content: flex-end;
 	}
 
@@ -43,7 +43,7 @@ const Wrapper = styled.div`
 	button {
 		margin-top: 20px;
 
-		width: 20rem;
+		width: 18rem;
 
 		font-size: large;
 

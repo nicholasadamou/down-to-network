@@ -4,14 +4,14 @@ import { Form, TextInput } from 'carbon-components-react'
 
 import ActionBar from './ActionBar'
 
-import Context from '../../../../../contexts/Context'
+import AccountContext from '../../../../../contexts/Account/AccountContext'
 
 import * as ROUTES from '../../../../../constants/routes'
 
 const { PasswordInput } = TextInput
 
 class UserDetails extends Component {
-    static contextType = Context
+    static contextType = AccountContext
 
     constructor(props) {
         super(props)

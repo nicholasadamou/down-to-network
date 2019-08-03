@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import { withAuthentication } from './components/Session'
 
-import Provider from './contexts/Provider'
+import Provider from './contexts/Account/Provider'
 import Routes from './Routes'
 
 const App = () => {

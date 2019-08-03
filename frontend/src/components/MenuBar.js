@@ -23,12 +23,19 @@ const Wrapper = styled.div`
 		align-items: center;
 		justify-content: space-between;
 
+		height: 100%;
+
 		list-style-type: none;
 
 		li {
-			display: inline-block;
+			display: flex;
+			align-items: center;
 
-			padding: 15px;
+			height: 100%;
+
+			padding: 20px;
+    		
+			line-height: 0;
 
 			svg {
 				fill: white;

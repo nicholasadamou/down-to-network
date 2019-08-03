@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-import GlobalContext from './Context'
+import AccountContext from './AccountContext'
 
-import * as ROUTES from '../constants/routes'
+import * as ROUTES from '../../constants/routes'
 
-import { withFirebase } from '../components/Firebase'
+import { withFirebase } from '../../components/Firebase'
 
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use'
 
@@ -27,6 +27,7 @@ class Provider extends Component {
 
 		this.handleLogin = this.handleLogin.bind(this)
 		this.handleSignUp = this.handleSignUp.bind(this)
+		this.handleSignOut = this.handleSignOut.bind(this)
 		this.handlePasswordReset = this.handlePasswordReset.bind(this)
 		this.setAccount = this.setAccount.bind(this)
 
@@ -56,6 +57,8 @@ class Provider extends Component {
 			account.email = cell.value
 		} else if (cell.id === 'password') {
 			account.password = cell.value
+		} else if (cell.id === 'avatar') {
+			account.avatar = cell.value
 		} else if (cell.id === 'first-name') {
 			account.firstName = cell.value
 		} else if (cell.id === 'last-name') {
@@ -63,11 +66,7 @@ class Provider extends Component {
 		} else if (cell.id === 'role') {
 			account.role = cell.value
 		} else if (cell.id === 'match-settings') {
-			let matchSettings = []
-			
-			cell.value.forEach(setting => matchSettings.push(setting.id))
-
-			account.matchSettings = matchSettings
+			account.matchSettings = cell.value.map(setting => setting.id)
 		}
 
 		this.setState({
@@ -76,7 +75,13 @@ class Provider extends Component {
 	}
 
 	isAccountValid = account => {
-		return account.email !== '' && account.password && account.firstName !== '' && account.lastName !== '' && account.role !== '' && account.matchSettings !== undefined
+		return account.email !== '' 
+				&& account.password !== '' 
+				&& account.avatar !== '' 
+				&& account.firstName !== '' 
+				&& account.lastName !== '' 
+				&& account.role !== '' 
+				&& account.matchSettings !== undefined
 	}
 
 	validateEmail = email => {
@@ -158,24 +163,40 @@ class Provider extends Component {
 		window.location.href = `${ROUTES.LANDING}`
 	}
 
-	componentDidMount() {}
+	handleSignOut = e => {
+		e.preventDefault()
+
+		const { firebase } = this.props
+
+		if (localStorage.getItem('authUser') !== undefined) {
+			firebase.doSignOut()
+			localStorage.removeItem('authUser')
+
+			this.setState({
+				account: {}
+			},() => console.log('account=', this.state.account))
+
+			window.location.href = `${ROUTES.LANDING}`
+		}
+	}
 
 	render() {
 		const { children } = this.props
 
 		return (
-			<GlobalContext.Provider value={{
+			<AccountContext.Provider value={{
 					...this.state,
 					handleLogin: this.handleLogin,
 					handleSignUp: this.handleSignUp,
 					handlePasswordReset: this.handlePasswordReset,
+					handleSignOut: this.handleSignOut,
 					setAccount: this.setAccount,
 					validateEmail: this.validateEmail,
 					validatePassword: this.validatePassword,
 				}}
 			>
 				{ children }
-			</GlobalContext.Provider>
+			</AccountContext.Provider>
 		)
 	}
 }

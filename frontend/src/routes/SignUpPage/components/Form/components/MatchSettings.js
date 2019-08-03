@@ -6,10 +6,10 @@ import MultiSelect from './MultiSelect/MultiSelect'
 
 import ActionBar from './ActionBar'
 
-import Context from '../../../../../contexts/Context'
+import AccountContext from '../../../../../contexts/Account/AccountContext'
 
 class MatchSettings extends Component {
-    static contextType = Context
+    static contextType = AccountContext
 
     constructor(props) {
         super(props)

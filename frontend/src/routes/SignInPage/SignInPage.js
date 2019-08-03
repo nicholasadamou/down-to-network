@@ -9,7 +9,7 @@ import { Form, TextInput, Button } from 'carbon-components-react'
 
 import * as ROUTES from '../../constants/routes'
 
-import Context from '../../contexts/Context'
+import AccountContext from '../../contexts/Account/AccountContext'
 
 import logo from '../../assets/logo.png'
 
@@ -77,7 +77,7 @@ const Wrapper = styled.div`
 `
 
 const SignInPage = props => {
-	const { account, setAccount, validateEmail, handleSignIn, error } = useContext(Context)
+	const { account, setAccount, validateEmail, handleSignIn, error } = useContext(AccountContext)
 
 	const isValid = validateEmail(account.email) && (account.password !== undefined || account.password !== '')
 
