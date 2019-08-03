@@ -90,7 +90,7 @@ class UserDetails extends Component {
                     id="password"
                     name="password"
                     labelText="Password *"
-                    helperText="At least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length"
+                    helperText="At least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length."
                     placeholder="***************"
                     hideLabel={false}
                     onBlur={e => {
