@@ -116,7 +116,7 @@ class Provider extends Component {
 
 		firebase.doCreateUserWithEmailAndPassword(account.email, account.password).then(authUser => {
 			// Create a user in your Firebase realtime database
-			return firebase.user(authUser.user.uid).set({
+			return firebase.user(`${authUser.user.uid}`).set({
 				name: `${firstName} ${lastName}`,
 				email,
 				role,
