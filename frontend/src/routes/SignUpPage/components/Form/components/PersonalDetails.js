@@ -50,11 +50,11 @@ class PersonalDetails extends Component {
                 <h1>Build your Profile</h1>
                 <FileUploader
                     labelTitle="Profile Picture *"
-                    labelDescription="only .jpg files at 500MB or less."
+                    labelDescription="only .jpg, .jpeg files at 500MB or less."
                     buttonLabel="Choose a image"
                     name="avatar"
                     filenameStatus="complete"
-                    accept={['.jpg']}
+                    accept={['.jpg', '.jpeg']}
                     ref={node => (fileUploader = node)}
                     onChange={e => {
                         this.setState({
@@ -152,7 +152,7 @@ class PersonalDetails extends Component {
                 />
 
                 {error ? (
-                    <span className="error-message">
+                    <span style={{ lineHeight: 2 }}>
                         <span role="img" aria-label="warning">⚠️</span>
                         {errorMessage}
                     </span>

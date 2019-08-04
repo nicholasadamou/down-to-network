@@ -73,7 +73,7 @@ const ForgotPasswordPage = props => {
                     <h1>Reset your Password</h1>
 					{
 						error && (
-							<span className="error-message">
+							<span style={{ lineHeight: 2 }}>
 								<span role="img" aria-label="warning">⚠️</span>
 								{error.message}
 							</span>

@@ -116,7 +116,7 @@ class UserDetails extends Component {
                 />
 
                 {error ? (
-                    <span className="error-message">
+                    <span style={{ lineHeight: 2 }}>
                         <span role="img" aria-label="warning">⚠️</span>
                         {errorMessage}
                     </span>

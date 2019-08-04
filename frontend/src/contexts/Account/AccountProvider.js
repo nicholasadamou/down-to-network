@@ -16,19 +16,32 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   on your personal account page.
 `
 
-class Provider extends Component {
+const INITIAL_STATE = {
+	user: {},
+	account: {},
+	passwordOne: '',
+	passwordTwo: '',
+	avatar: '',
+	error: ''
+}
+
+class AccountProvider extends Component {
 	constructor(props) {
 		super(props)
 
-		this.state = {
-			account: {},
-			error: ''
-		}
+		this.state = { ...INITIAL_STATE }
 
 		this.handleLogin = this.handleLogin.bind(this)
 		this.handleSignUp = this.handleSignUp.bind(this)
 		this.handleSignOut = this.handleSignOut.bind(this)
+		this.handleCloseAccount = this.handleCloseAccount.bind(this)
+		this.handleChangeProfilePicture = this.handleChangeProfilePicture.bind(this)
 		this.handlePasswordReset = this.handlePasswordReset.bind(this)
+		this.handlePasswordChange = this.handlePasswordChange.bind(this)
+		
+		this.setPassword = this.setPassword.bind(this)
+		this.setAvatar = this.setAvatar.bind(this)
+		this.removeAvatar = this.removeAvatar.bind(this)
 		this.setAccount = this.setAccount.bind(this)
 		this.removeAccountAttributeByKey = this.removeAccountAttributeByKey.bind(this)
 
@@ -44,7 +57,39 @@ class Provider extends Component {
 
 		this.setState({
 			account
-		}, () => console.log('Provider.account=', this.state.account))
+		}, () => console.log('AccountProvider.account=', this.state.account))
+	}
+
+	setPassword = (id, password) => {
+		if (id === 'passwordOne') {
+			this.setState({
+				passwordOne: password
+			}, () => console.log('passwordOne=', this.state.passwordOne))
+		} else if (id === 'passwordTwo') {
+			this.setState({
+				passwordTwo: password
+			}, () => console.log('passwordTwo=', this.state.passwordTwo))
+		}
+	}
+
+	setAvatar = file => {
+		let reader = new FileReader()
+
+		if (file) {
+			reader.readAsDataURL(file)
+		}
+
+		reader.addEventListener("load", () => {
+			this.setState({
+				avatar: reader.result
+			}, () => console.log('avatar=', this.state.avatar))
+		}, false)
+	}
+
+	removeAvatar = () => {
+		this.setState({
+			avatar: ''
+		})
 	}
 
 	setAccount = (id, e) => {
@@ -91,7 +136,7 @@ class Provider extends Component {
 
 		this.setState({
 			account,
-		}, () => console.log('Provider.account=', this.state.account))
+		}, () => console.log('AccountProvider.account=', this.state.account))
 	}
 
 	isAccountValid = account => {
@@ -128,7 +173,7 @@ class Provider extends Component {
 			}, () => console.log('error=', error))
 		})
 
-		console.log('Provider.handleLogin=', account)
+		console.log('AccountProvider.handleLogin=', account)
 	}
 
 	handleSignUp = e => {
@@ -140,9 +185,11 @@ class Provider extends Component {
 		const { avatar, email, firstName, lastName, role, matchSettings } = account
 
 		firebase.doCreateUserWithEmailAndPassword(account.email, account.password).then(authUser => {
-			// Create a user in your Firebase realtime database
+			// Create a user in your Firebase real time database
 			return firebase.user(`${authUser.user.uid}`).set({
 				name: `${firstName} ${lastName}`,
+				firstName,
+				lastName,
 				avatar,
 				email,
 				role,
@@ -166,7 +213,7 @@ class Provider extends Component {
 		})
 
 
-		console.log('Provider.handleSignUp=', account)
+		console.log('AccountProvider.handleSignUp=', account)
 	}
 
 	handlePasswordReset = e => {
@@ -184,21 +231,140 @@ class Provider extends Component {
 		window.location.href = `${ROUTES.LANDING}`
 	}
 
+	handlePasswordChange = e => {
+		e.preventDefault()
+
+		const { firebase } = this.props
+		const { account, passwordOne } = this.state
+
+		firebase
+			.doPasswordUpdate(passwordOne)
+			.then(() => {
+				// Update account password
+				account.password = passwordOne
+
+				// Reset state
+				this.setState({ 
+					passwordOne: '',
+					passwordTwo: '',
+					error: null
+				})
+
+				// Redirect to account page
+				window.location.href = `${ROUTES.ACCOUNT}`				
+			})
+			.catch(error => {
+				this.setState({
+					error
+				}, () => console.log('error=', error))
+			})
+	}
+
+	handleChangeProfilePicture = e => {
+		e.preventDefault()
+
+		const { user, account, avatar } = this.state
+		const { firebase } = this.props
+
+		firebase
+			.ref(`users/${user.uid}`).child(user.uid).update({
+				avatar
+			})
+			.then(() => {
+				// Update account avatar
+				account.avatar = avatar
+
+				// Reset state
+				this.setState({
+					avatar: null,
+					error: null
+				})
+
+				// Redirect to account page
+				window.location.href = `${ROUTES.ACCOUNT}`
+			})
+			.catch(error => {
+				this.setState({
+					error
+				}, () => console.log('error=', error))
+			})
+	}
+
 	handleSignOut = e => {
 		e.preventDefault()
 
 		const { firebase } = this.props
 
 		if (localStorage.getItem('authUser') !== undefined) {
+			// Sign out
 			firebase.doSignOut()
+
+			// Remove auth token
 			localStorage.removeItem('authUser')
 
+			// Reset state
 			this.setState({
-				account: {}
-			},() => console.log('account=', this.state.account))
+				...INITIAL_STATE
+			}, () => console.log('state=', this.state))
 
+			// Redirect to landing page
 			window.location.href = `${ROUTES.LANDING}`
 		}
+	}
+
+	handleCloseAccount = e => {
+		e.preventDefault()
+
+		const { firebase } = this.props
+		const { user } = this.state
+
+		if (window.confirm('Are you sure you want to close your account? This cannot be undone!')) {
+			if (localStorage.getItem('authUser') !== undefined) {
+				// Remove user from auth system
+				user
+					.delete()
+					.then(() => {
+						// Remove user from real time database
+						firebase.ref(`users/${user.uid}`).remove()
+
+						// Remove auth token
+						localStorage.removeItem('authUser')
+
+						// Reset state
+						this.setState({
+							...INITIAL_STATE
+						}, () => console.log('state=', this.state))
+
+						// Redirect to landing page
+						window.location.href = `${ROUTES.LANDING}`
+					})
+					.catch(error => {
+						this.setState({
+							error
+						}, () => console.log('error=', error))
+					})
+			}
+		}
+	}
+
+	componentDidMount() {
+		const { firebase } = this.props
+
+        firebase.auth.onAuthStateChanged(authUser => {
+            if (authUser) {
+				this.setState({
+					user: authUser
+				}, () => console.log('user=', this.state.user))
+
+                firebase.getValue(`users/${authUser.uid}`).then(snapshot => {
+					const dbUser = snapshot.val()
+
+					this.setState({
+						account: dbUser
+					}, () => console.log('account=', this.state.account))
+				})
+            }
+        })
 	}
 
 	render() {
@@ -209,8 +375,14 @@ class Provider extends Component {
 					...this.state,
 					handleLogin: this.handleLogin,
 					handleSignUp: this.handleSignUp,
-					handlePasswordReset: this.handlePasswordReset,
 					handleSignOut: this.handleSignOut,
+					handleCloseAccount: this.handleCloseAccount,
+					handleChangeProfilePicture: this.handleChangeProfilePicture,
+					handlePasswordReset: this.handlePasswordReset,
+					handlePasswordChange: this.handlePasswordChange,
+					setPassword: this.setPassword,
+					setAvatar: this.setAvatar,
+					removeAvatar: this.removeAvatar,
 					setAccount: this.setAccount,
 					removeAccountAttributeByKey: this.removeAccountAttributeByKey,
 					validateEmail: this.validateEmail,
@@ -223,4 +395,4 @@ class Provider extends Component {
 	}
 }
 
-export default withFirebase(Provider)
+export default withFirebase(AccountProvider)

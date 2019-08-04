@@ -89,7 +89,7 @@ const SignInPage = props => {
 					<h1>Sign In</h1>
 					{
 						error && (
-							<span className="error-message">
+							<span style={{ lineHeight: 2 }}>
 								<span role="img" aria-label="warning">⚠️</span>
 								{error.message}
 							</span>

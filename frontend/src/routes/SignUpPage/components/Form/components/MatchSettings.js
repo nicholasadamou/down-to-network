@@ -66,7 +66,7 @@ class MatchSettings extends Component {
                     nextTextLabel="Sign Up"
                 />
                 {this.state.error || this.context.error ? (
-                    <span className="error-message">
+                    <span style={{ lineHeight: 2 }}>
                         <span role="img" aria-label="warning">⚠️</span>
                         {(errorMessage && errorMessage) || (this.context.error.message && this.context.error.message)}
                     </span>

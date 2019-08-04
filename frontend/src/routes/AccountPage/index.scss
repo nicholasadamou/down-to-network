@@ -1,7 +1,9 @@
-.bx--btn--primary {
+.bx--btn--primary, .bx--btn--danger {
+    display: block;
+    
     width: 100%;
 
-    margin: 0 auto;
+    margin: 10px 0;
 }
 
 .chooseFileButton {
