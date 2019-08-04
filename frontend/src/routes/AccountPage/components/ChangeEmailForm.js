@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import styled from 'styled-components'
 
-import { Form, Button, TextInput, TextInputSkeleton } from 'carbon-components-react'
+import { Form, Button, TextInput } from 'carbon-components-react'
 
 import { withFirebase } from '../../../contexts/Firebase'
 
@@ -26,7 +26,7 @@ class EmailChangeForm extends Component {
 
     render() {
         const { errorMessage } = this.state
-        const { validateEmail, handleEmailChange, setEmail, email, account, loading } = this.context
+        const { validateEmail, handleEmailChange, setEmail, email, account } = this.context
 
         const isValid = validateEmail(email) && email !== account.email
 
@@ -34,46 +34,41 @@ class EmailChangeForm extends Component {
             <Wrapper>
                 <h1>Change Account Email</h1>
                 <Form onSubmit={handleEmailChange}>
-                    { loading 
-                        ?
-                            <TextInputSkeleton /> 
-                        :
-                            <TextInput
-                                id="email"
-                                name="email"
-                                labelText="Email"
-                                type="email"
-                                placeholder={account.email}
-                                hideLabel={false}
-                                onBlur={e => {
-                                    const email = e.target.value
+                    <TextInput
+                        id="email"
+                        name="email"
+                        labelText="Email"
+                        type="email"
+                        placeholder="Stephen.Alt@ibm.com"
+                        hideLabel={false}
+                        onBlur={e => {
+                            const email = e.target.value
 
-                                    if (validateEmail(email) && email !== account.email) {
-                                        this.setState({
-                                            error: false
-                                        })
+                            if (validateEmail(email) && email !== account.email) {
+                                this.setState({
+                                    error: false
+                                })
 
-                                        setEmail(e, email)
-                                    } else if (validateEmail(email) && email === account.email) {
-                                        this.setState({
-                                            error: true,
-                                            errorMessage: 'The email address that was entered is the same as the old one.'
-                                        })
-                                    } else if (validateEmail(email) && email !== account.email) { 
-                                        this.setState({
-                                            error: true,
-                                            errorMessage: 'The email address that was entered is already in use.'
-                                        })
-                                    } else {
-                                        this.setState({
-                                            error: true,
-                                            errorMessage: 'The email address that was entered is invaild.'
-                                        })
-                                    }
-                                }}
-                            />
-                    }
-                    
+                                setEmail(e, email)
+                            } else if (validateEmail(email) && email === account.email) {
+                                this.setState({
+                                    error: true,
+                                    errorMessage: 'The email address that was entered is the same as the old one.'
+                                })
+                            } else if (validateEmail(email) && email !== account.email) { 
+                                this.setState({
+                                    error: true,
+                                    errorMessage: 'The email address that was entered is already in use.'
+                                })
+                            } else {
+                                this.setState({
+                                    error: true,
+                                    errorMessage: 'The email address that was entered is invaild.'
+                                })
+                            }
+                        }}
+                    />
+
                     {this.state.error || this.context.error ? (
                         <div style={{ lineHeight: 2, marginBottom: 20 }}>
                             <span role="img" aria-label="warning">⚠️</span>  
