@@ -16,12 +16,17 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   on your personal account page.
 `
 
-const INITIAL_STATE = {
-	user: {},
-	account: {},
+const INITIAL_ACCOUNT = {
+	email: '',
 	passwordOne: '',
 	passwordTwo: '',
 	avatar: '',
+}
+
+const INITIAL_STATE = {
+	user: {},
+	account: {},
+	...INITIAL_ACCOUNT,
 	loading: true,
 	error: ''
 }
@@ -36,10 +41,12 @@ class AccountProvider extends Component {
 		this.handleSignUp = this.handleSignUp.bind(this)
 		this.handleSignOut = this.handleSignOut.bind(this)
 		this.handleCloseAccount = this.handleCloseAccount.bind(this)
-		this.handleChangeProfilePicture = this.handleChangeProfilePicture.bind(this)
+		this.handleEmailChange = this.handleEmailChange.bind(this)
 		this.handlePasswordReset = this.handlePasswordReset.bind(this)
 		this.handlePasswordChange = this.handlePasswordChange.bind(this)
+		this.handleChangeProfilePicture = this.handleChangeProfilePicture.bind(this)
 		
+		this.setEmail = this.setEmail.bind(this)
 		this.setPassword = this.setPassword.bind(this)
 		this.setAvatar = this.setAvatar.bind(this)
 		this.removeAvatar = this.removeAvatar.bind(this)
@@ -60,6 +67,12 @@ class AccountProvider extends Component {
 		this.setState({
 			account
 		}, () => console.log('AccountProvider.account=', this.state.account))
+	}
+
+	setEmail = email => {
+		this.setState({
+				email
+		}, () => console.log('email=', this.state.email))
 	}
 
 	setPassword = (id, password) => {
@@ -216,6 +229,37 @@ class AccountProvider extends Component {
 
 
 		console.log('AccountProvider.handleSignUp=', account)
+	}
+
+	handleEmailChange = (e, email) => {
+		e.preventDefault()
+
+		const { user, account } = this.state
+		const { firebase } = this.props
+
+		user
+			.updateEmail(email)
+			.then(() => {
+				return firebase.doSendEmailVerification()
+			})
+			.then(() => {
+				// Update account email
+				account.email = email
+
+				// Reset state
+				this.setState({ 
+					email: '',
+					error: null
+				})
+
+				// Redirect to account page
+				window.location.href = `${ROUTES.ACCOUNT}`
+			})
+			.catch(error => {
+				this.setState({
+					error
+				}, () => console.log('error=', error))
+			})
 	}
 
 	handlePasswordReset = e => {
@@ -384,17 +428,19 @@ class AccountProvider extends Component {
 					handleSignUp: this.handleSignUp,
 					handleSignOut: this.handleSignOut,
 					handleCloseAccount: this.handleCloseAccount,
-					doesUserExist: this.doesUserExist,
-					handleChangeProfilePicture: this.handleChangeProfilePicture,
+					handleEmailChange: this.handleEmailChange,
 					handlePasswordReset: this.handlePasswordReset,
 					handlePasswordChange: this.handlePasswordChange,
+					handleChangeProfilePicture: this.handleChangeProfilePicture,
+					setEmail: this.setEmail,
 					setPassword: this.setPassword,
 					setAvatar: this.setAvatar,
 					removeAvatar: this.removeAvatar,
 					setAccount: this.setAccount,
 					removeAccountAttributeByKey: this.removeAccountAttributeByKey,
 					validateEmail: this.validateEmail,
-					validatePassword: this.validatePassword
+					validatePassword: this.validatePassword,
+					doesUserExist: this.doesUserExist,
 				}}
 			>
 				{ children }

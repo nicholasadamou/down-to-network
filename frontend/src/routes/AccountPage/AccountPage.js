@@ -6,6 +6,7 @@ import Layout from '../../components/Layout/Layout'
 import MenuBar from '../../components/MenuBar'
 
 import ChangeProfilePictureForm from './components/ChangeProfilePictureForm'
+import ChangeEmailForm from './components/ChangeEmailForm'
 import ChangePasswordForm from './components/ChangePasswordForm'
 import SignOutButton from './components/SignOutButton'
 import CloseAccountButton from './components/CloseAccountButton'
@@ -53,6 +54,7 @@ class AccountPage extends React.Component {
 				<Wrapper>
 					<h1>Manage Your Profile</h1>
 					<ChangeProfilePictureForm />
+					<ChangeEmailForm />
 					<ChangePasswordForm />
 					<SignOutButton />
 					<CloseAccountButton />

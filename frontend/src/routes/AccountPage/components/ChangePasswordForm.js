@@ -44,12 +44,14 @@ class PasswordChangeForm extends Component {
                         placeholder="***************"
                         hideLabel={false}
                         onBlur={e => {
-                            if (validatePassword(e.target.value)) {
+                            const password = e.target.value
+
+                            if (validatePassword(password)) {
                                 this.setState({
                                     error: false
                                 })
 
-                                setPassword('passwordOne', e.target.value)
+                                setPassword('passwordOne', password)
                             } else {
                                 this.setState({
                                     error: true,
@@ -65,12 +67,14 @@ class PasswordChangeForm extends Component {
                         placeholder="***************"
                         hideLabel={false}
                         onBlur={e => {
-                            if (validatePassword(e.target.value)) {
+                           const password = e.target.value
+
+                            if (validatePassword(password)) {
                                 this.setState({
                                     error: false
                                 })
 
-                                setPassword('passwordTwo', e.target.value)
+                                setPassword('passwordTwo', password)
                             } else {
                                 this.setState({
                                     error: true,
