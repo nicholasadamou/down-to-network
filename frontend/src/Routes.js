@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, Suspense, useContext } from 'react'
 
 import {
 	Switch,
@@ -8,7 +8,8 @@ import {
 
 import * as ROUTES from './constants/routes';
 
-import { withFirebase } from './components/Firebase'
+import { withFirebase } from './contexts/Firebase'
+import AccountContext from './contexts/Account/AccountContext'
 
 import Loading from './components/Loading'
 
@@ -19,14 +20,16 @@ const ForgotPasswordPage = lazy(() => import('./routes/ForgotPasswordPage/Forgot
 const AccountPage = lazy(() => import('./routes/AccountPage/AccountPage'))
 
 const Routes = () => {
+	const { doesUserExist } = useContext(AccountContext)
+
 	return (
 		<Suspense fallback={<Loading />}>
 			<Switch>
 				<Route exact path={ROUTES.LANDING} render={() => {
-					if (localStorage.getItem('authUser') !== undefined) {
-						return <Redirect to={ROUTES.DASHBOARD} />
-					} else {
+					if (!doesUserExist()) {
 						return <Redirect to={ROUTES.SIGN_IN} />
+					} else {
+						return <Redirect to={ROUTES.DASHBOARD} />
 					}
 				}} />
 				<Route exact path={ROUTES.SIGN_IN} render={props => {
@@ -42,11 +45,19 @@ const Routes = () => {
 					}}
 				/>
 				<Route exact path={ROUTES.DASHBOARD} render={props => {
-						return <DashboardPage {...props} />
+						if (!doesUserExist()) {
+							return <Redirect to={ROUTES.SIGN_IN} />
+						} else {
+							return <DashboardPage {...props} />
+						}
 					}}
 				/>
 				<Route exact path={ROUTES.ACCOUNT} render={props => {
-						return <AccountPage {...props} />
+						if (!doesUserExist()) {
+							return <Redirect to={ROUTES.SIGN_IN} />
+						} else {
+							return <AccountPage {...props} />
+						}
 					}}
 				/>
 			</Switch>

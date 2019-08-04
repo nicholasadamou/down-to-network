@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 
 import styled from 'styled-components'
 
-import { Form, Button, FileUploader } from 'carbon-components-react'
+import { Form, Button, FileUploader, SkeletonPlaceholder } from 'carbon-components-react'
 
-import { withFirebase } from '../../../components/Firebase'
+import { withFirebase } from '../../../contexts/Firebase'
 
 import AccountContext from '../../../contexts/Account/AccountContext'
 
@@ -35,7 +35,7 @@ class ChangeProfilePictureForm extends Component {
 
     render() {
         const { removeImageBtnDisabled } = this.state
-        const { handleChangeProfilePicture, setAvatar, removeAvatar, avatar, account, error } = this.context
+        const { handleChangeProfilePicture, setAvatar, removeAvatar, avatar, account, loading, error } = this.context
 
         let fileUploader
 
@@ -43,11 +43,15 @@ class ChangeProfilePictureForm extends Component {
             <Wrapper>
                 <h1>Change Account Profile Picture</h1>
                 <Form onSubmit={handleChangeProfilePicture}>
-                    { account.avatar !== '' && avatar === '' 
+                    { loading
                         ?
-                            <img src={account.avatar} alt="avatar" style={{ width: '25%' }} /> 
+                            <SkeletonPlaceholder />
                         :
-                            <img src={avatar} alt="avatar" style={{ width: '25%' }} /> 
+                            account.avatar !== '' && avatar === ''
+                            ?
+                                <img src={account.avatar} alt="avatar" style={{ width: '25%' }} /> 
+                            :
+                                <img src={avatar} alt="avatar" style={{ width: '25%' }} /> 
                     }
                     <FileUploader
                         labelTitle="Profile Picture *"

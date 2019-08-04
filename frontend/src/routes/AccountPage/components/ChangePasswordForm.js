@@ -4,14 +4,14 @@ import styled from 'styled-components'
 
 import { Form, Button, TextInput } from 'carbon-components-react'
 
-import { withFirebase } from '../../../components/Firebase'
+import { withFirebase } from '../../../contexts/Firebase'
 
 import AccountContext from '../../../contexts/Account/AccountContext'
 
 const { PasswordInput } = TextInput
 
 const Wrapper = styled.div`
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 `
 
 class PasswordChangeForm extends Component {

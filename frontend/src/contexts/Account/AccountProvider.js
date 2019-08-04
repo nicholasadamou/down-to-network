@@ -4,7 +4,7 @@ import AccountContext from './AccountContext'
 
 import * as ROUTES from '../../constants/routes'
 
-import { withFirebase } from '../../components/Firebase'
+import { withFirebase } from '../../contexts/Firebase'
 
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use'
 
@@ -22,6 +22,7 @@ const INITIAL_STATE = {
 	passwordOne: '',
 	passwordTwo: '',
 	avatar: '',
+	loading: true,
 	error: ''
 }
 
@@ -48,6 +49,7 @@ class AccountProvider extends Component {
 		this.isAccountValid = this.isAccountValid.bind(this)
 		this.validateEmail = this.validateEmail.bind(this)
 		this.validatePassword = this.validatePassword.bind(this)
+		this.doesUserExist = this.doesUserExist.bind(this)
 	}
 
 	removeAccountAttributeByKey = (target) => {
@@ -307,8 +309,8 @@ class AccountProvider extends Component {
 				...INITIAL_STATE
 			}, () => console.log('state=', this.state))
 
-			// Redirect to landing page
-			window.location.href = `${ROUTES.LANDING}`
+			// Redirect to Sign In page
+			window.location.href = `${ROUTES.SIGN_IN}`
 		}
 	}
 
@@ -335,8 +337,8 @@ class AccountProvider extends Component {
 							...INITIAL_STATE
 						}, () => console.log('state=', this.state))
 
-						// Redirect to landing page
-						window.location.href = `${ROUTES.LANDING}`
+						// Redirect to Sign In page
+						window.location.href = `${ROUTES.SIGN_IN}`
 					})
 					.catch(error => {
 						this.setState({
@@ -345,6 +347,10 @@ class AccountProvider extends Component {
 					})
 			}
 		}
+	}
+
+	doesUserExist = () => {
+		return this.state.user && localStorage.getItem('authUser')
 	}
 
 	componentDidMount() {
@@ -360,7 +366,8 @@ class AccountProvider extends Component {
 					const dbUser = snapshot.val()
 
 					this.setState({
-						account: dbUser
+						account: dbUser,
+						loading: false,
 					}, () => console.log('account=', this.state.account))
 				})
             }
@@ -377,6 +384,7 @@ class AccountProvider extends Component {
 					handleSignUp: this.handleSignUp,
 					handleSignOut: this.handleSignOut,
 					handleCloseAccount: this.handleCloseAccount,
+					doesUserExist: this.doesUserExist,
 					handleChangeProfilePicture: this.handleChangeProfilePicture,
 					handlePasswordReset: this.handlePasswordReset,
 					handlePasswordChange: this.handlePasswordChange,

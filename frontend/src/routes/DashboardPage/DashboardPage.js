@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 
 // import styled from 'styled-components'
 
-import { withAuthorization, withEmailVerification } from '../../components/Session';
+import { withAuthorization, withEmailVerification } from '../../contexts/Session';
 
 import Layout from '../../components/Layout/Layout'
 import MenuBar from '../../components/MenuBar'

@@ -14,7 +14,7 @@ import './index.scss'
 
 const Wrapper = styled.div`
 	padding: 20px;
-	margin-bottom: 60px;
+	margin-bottom: 40px;
 
 	width: 50%;
 

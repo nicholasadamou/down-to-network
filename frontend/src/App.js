@@ -3,9 +3,9 @@ import './App.scss'
 
 import { BrowserRouter as Router } from 'react-router-dom'
 
-import { withAuthentication } from './components/Session'
-
+import { withAuthentication } from './contexts/Session'
 import AccountProvider from './contexts/Account/AccountProvider'
+
 import Routes from './Routes'
 
 const App = () => {
