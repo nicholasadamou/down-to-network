@@ -90,7 +90,7 @@ class PasswordChangeForm extends Component {
                     )}
 
                     <Button kind="primary" disabled={!isValid} type="submit">
-                        Reset My Password
+                        Change My Password
                     </Button>
                 </Form>
             </Wrapper>
