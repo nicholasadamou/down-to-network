@@ -37,6 +37,8 @@ class ChangeProfilePictureForm extends Component {
         const { removeImageBtnDisabled } = this.state
         const { handleChangeProfilePicture, setAvatar, removeAvatar, avatar, account, loading, error } = this.context
 
+        const isValid = avatar !== '';
+
         let fileUploader
 
         return (
@@ -95,6 +97,7 @@ class ChangeProfilePictureForm extends Component {
 
                     <Button 
                         kind="primary" 
+                        disabled={!isValid}
                         type="submit"
                         style={{ display: 'block', margin: 0, marginTop: 10 }}
                     >
