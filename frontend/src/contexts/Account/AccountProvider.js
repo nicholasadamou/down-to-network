@@ -215,7 +215,7 @@ class AccountProvider extends Component {
 		const { account } = this.state
 		const { firebase } = this.props
 
-		const { avatar, email, firstName, lastName, role, matchSettings } = account
+		const { avatar, firstName, lastName, role, matchSettings } = account
 
 		firebase.doCreateUserWithEmailAndPassword(account.email, account.password).then(authUser => {
 			// Create a user in your Firebase real time database
@@ -224,7 +224,6 @@ class AccountProvider extends Component {
 				firstName,
 				lastName,
 				avatar,
-				email,
 				role,
 				matchSettings
 			})

@@ -21,34 +21,14 @@ class EmailChangeForm extends Component {
         this.state = { 
             error: null,
             errorMessage: '',
-            emails: []
         }
     }
 
-    componentDidMount() {
-        const { firebase } = this.props
-        
-        firebase.auth.onAuthStateChanged(authUser => {
-            if (authUser) {
-                firebase.getValue(`users/${authUser.uid}`).then(snapshot => {
-					const account = snapshot.val()
-                    const { email } = account
-
-					firebase.users().then(response => {
-                        this.setState({
-                            emails: response.filter(account => account.email !== email).map(account => account.email)
-                        }, () => console.log('emails=', this.state.emails))
-                    })
-				})
-            }
-        })
-    }
-
     render() {
-        const { emails, errorMessage } = this.state
+        const { errorMessage } = this.state
         const { validateEmail, handleEmailChange, setEmail, email, account, loading } = this.context
 
-        const isValid = validateEmail(email) && email !== account.email && !emails.includes(email)
+        const isValid = validateEmail(email) && email !== account.email
 
         return (
             <Wrapper>
@@ -68,18 +48,18 @@ class EmailChangeForm extends Component {
                                 onBlur={e => {
                                     const email = e.target.value
 
-                                    if (validateEmail(email) && email !== account.email && !emails.includes(email)) {
+                                    if (validateEmail(email) && email !== account.email) {
                                         this.setState({
                                             error: false
                                         })
 
                                         setEmail(e, email)
-                                    } else if (validateEmail(email) && email === account.email && !emails.includes(email)) {
+                                    } else if (validateEmail(email) && email === account.email) {
                                         this.setState({
                                             error: true,
                                             errorMessage: 'The email address that was entered is the same as the old one.'
                                         })
-                                    } else if (validateEmail(email) && email !== account.email && emails.includes(email)) { 
+                                    } else if (validateEmail(email) && email !== account.email) { 
                                         this.setState({
                                             error: true,
                                             errorMessage: 'The email address that was entered is already in use.'
