@@ -11,10 +11,10 @@ import AccountContext from '../../../contexts/Account/AccountContext'
 const { PasswordInput } = TextInput
 
 const Wrapper = styled.div`
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 `
 
-class PasswordChangeForm extends Component {
+class ChangePasswordForm extends Component {
     static contextType = AccountContext
 
     constructor(props) {
@@ -39,7 +39,7 @@ class PasswordChangeForm extends Component {
                     <PasswordInput
                         id="passwordOne"
                         name="passwordOne"
-                        labelText="Password *"
+                        labelText="Password"
                         helperText="At least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length."
                         placeholder="***************"
                         hideLabel={false}
@@ -63,7 +63,7 @@ class PasswordChangeForm extends Component {
                     <PasswordInput
                         id="passwordTwo"
                         name="passwordTwo"
-                        labelText="Confirm your password *"
+                        labelText="Confirm your password"
                         placeholder="***************"
                         hideLabel={false}
                         onBlur={e => {
@@ -102,4 +102,4 @@ class PasswordChangeForm extends Component {
     }
 }
 
-export default withFirebase(PasswordChangeForm)
+export default withFirebase(ChangePasswordForm)

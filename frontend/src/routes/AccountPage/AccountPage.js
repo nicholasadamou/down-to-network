@@ -8,6 +8,8 @@ import MenuBar from '../../components/MenuBar'
 import ChangeProfilePictureForm from './components/ChangeProfilePictureForm'
 import ChangeEmailForm from './components/ChangeEmailForm'
 import ChangePasswordForm from './components/ChangePasswordForm'
+import ChangeRoleForm from './components/ChangeRoleForm'
+import ChangeMatchSettingsForm from './components/ChangeMatchSettingsForm'
 import SignOutButton from './components/SignOutButton'
 import CloseAccountButton from './components/CloseAccountButton'
 
@@ -15,7 +17,7 @@ import './index.scss'
 
 const Wrapper = styled.div`
 	padding: 20px;
-	margin-bottom: 40px;
+	margin-bottom: 50px;
 
 	width: 50%;
 
@@ -25,6 +27,8 @@ const Wrapper = styled.div`
 		width: 100%;
 
 		padding: 10px;
+
+		margin-bottom: 40px;
 
 		button {
 			max-width: 100%;
@@ -56,6 +60,8 @@ class AccountPage extends React.Component {
 					<ChangeProfilePictureForm />
 					<ChangeEmailForm />
 					<ChangePasswordForm />
+					<ChangeRoleForm />
+					<ChangeMatchSettingsForm />
 					<SignOutButton />
 					<CloseAccountButton />
 				</Wrapper>

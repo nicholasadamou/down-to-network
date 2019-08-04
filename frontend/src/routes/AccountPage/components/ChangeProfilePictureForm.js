@@ -56,7 +56,7 @@ class ChangeProfilePictureForm extends Component {
                                 <img src={avatar} alt="avatar" style={{ width: '25%' }} /> 
                     }
                     <FileUploader
-                        labelTitle="Profile Picture *"
+                        labelTitle="Profile Picture"
                         labelDescription="only .jpg, .jpeg files at 500MB or less."
                         buttonLabel="Choose a image"
                         name="avatar"

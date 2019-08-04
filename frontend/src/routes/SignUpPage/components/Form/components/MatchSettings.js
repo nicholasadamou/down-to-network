@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Form } from 'carbon-components-react'
 
-import MultiSelect from './MultiSelect/MultiSelect'
+import MultiSelect from '../../../../../components/MultiSelect/MultiSelect'
 
 import ActionBar from './ActionBar'
 

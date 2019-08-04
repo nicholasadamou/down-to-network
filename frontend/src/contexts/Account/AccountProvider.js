@@ -21,6 +21,8 @@ const INITIAL_ACCOUNT = {
 	passwordOne: '',
 	passwordTwo: '',
 	avatar: '',
+	role: '',
+	matchSettings: []
 }
 
 const INITIAL_STATE = {
@@ -45,11 +47,15 @@ class AccountProvider extends Component {
 		this.handlePasswordReset = this.handlePasswordReset.bind(this)
 		this.handlePasswordChange = this.handlePasswordChange.bind(this)
 		this.handleChangeProfilePicture = this.handleChangeProfilePicture.bind(this)
+		this.handleChangeRole = this.handleChangeRole.bind(this)
+		this.handleChangeMatchSettings = this.handleChangeMatchSettings.bind(this)
 		
 		this.setEmail = this.setEmail.bind(this)
 		this.setPassword = this.setPassword.bind(this)
 		this.setAvatar = this.setAvatar.bind(this)
 		this.removeAvatar = this.removeAvatar.bind(this)
+		this.setRole = this.setRole.bind(this)
+		this.setMatchSettings = this.setMatchSettings.bind(this)
 		this.setAccount = this.setAccount.bind(this)
 		this.removeAccountAttributeByKey = this.removeAccountAttributeByKey.bind(this)
 
@@ -105,6 +111,18 @@ class AccountProvider extends Component {
 		this.setState({
 			avatar: ''
 		})
+	}
+
+	setRole = role => {
+		this.setState({
+			role
+		}, () => console.log('role=', this.state.role))
+	}
+
+	setMatchSettings = matchSettings => {
+		this.setState({
+			matchSettings
+		}, () => console.log('matchSettings=', this.state.matchSettings))
 	}
 
 	setAccount = (id, e) => {
@@ -336,6 +354,66 @@ class AccountProvider extends Component {
 			})
 	}
 
+	handleChangeRole = e => {
+		e.preventDefault()
+
+		const { user, account, role } = this.state
+		const { firebase } = this.props
+
+		firebase
+			.ref(`users/${user.uid}`).child(user.uid).update({
+				role
+			})
+			.then(() => {
+				// Update account role
+				account.role = role
+
+				// Reset state
+				this.setState({
+					role: null,
+					error: null
+				})
+
+				// Redirect to account page
+				window.location.href = `${ROUTES.ACCOUNT}`
+			})
+			.catch(error => {
+				this.setState({
+					error
+				}, () => console.log('error=', error))
+			})
+	}
+
+	handleChangeMatchSettings = e => {
+		e.preventDefault()
+
+		const { user, account, matchSettings } = this.state
+		const { firebase } = this.props
+
+		firebase
+			.ref(`users/${user.uid}`).child(user.uid).update({
+				matchSettings
+			})
+			.then(() => {
+				// Update account match-settings
+				account.matchSettings = matchSettings
+
+				// Reset state
+				this.setState({
+					matchSettings: null,
+					error: null
+				})
+
+				// Redirect to account page
+				window.location.href = `${ROUTES.ACCOUNT}`
+			})
+			.catch(error => {
+				this.setState({
+					error
+				}, () => console.log('error=', error))
+			})
+	}
+
 	handleSignOut = e => {
 		e.preventDefault()
 
@@ -432,10 +510,14 @@ class AccountProvider extends Component {
 					handlePasswordReset: this.handlePasswordReset,
 					handlePasswordChange: this.handlePasswordChange,
 					handleChangeProfilePicture: this.handleChangeProfilePicture,
+					handleChangeRole: this.handleChangeRole,
+					handleChangeMatchSettings: this.handleChangeMatchSettings,
 					setEmail: this.setEmail,
 					setPassword: this.setPassword,
 					setAvatar: this.setAvatar,
 					removeAvatar: this.removeAvatar,
+					setRole: this.setRole,
+					setMatchSettings: this.setMatchSettings,
 					setAccount: this.setAccount,
 					removeAccountAttributeByKey: this.removeAccountAttributeByKey,
 					validateEmail: this.validateEmail,
