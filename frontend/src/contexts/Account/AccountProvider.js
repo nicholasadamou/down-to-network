@@ -20,7 +20,8 @@ const INITIAL_ACCOUNT = {
 	email: '',
 	passwordOne: '',
 	passwordTwo: '',
-	avatar: '',
+	profilePicture: '',
+	name: '',
 	role: '',
 	matchSettings: []
 }
@@ -52,8 +53,8 @@ class AccountProvider extends Component {
 		
 		this.setEmail = this.setEmail.bind(this)
 		this.setPassword = this.setPassword.bind(this)
-		this.setAvatar = this.setAvatar.bind(this)
-		this.removeAvatar = this.removeAvatar.bind(this)
+		this.setprofilePicture = this.setprofilePicture.bind(this)
+		this.removeprofilePicture = this.removeprofilePicture.bind(this)
 		this.setRole = this.setRole.bind(this)
 		this.setMatchSettings = this.setMatchSettings.bind(this)
 		this.setAccount = this.setAccount.bind(this)
@@ -63,6 +64,8 @@ class AccountProvider extends Component {
 		this.validateEmail = this.validateEmail.bind(this)
 		this.validatePassword = this.validatePassword.bind(this)
 		this.doesUserExist = this.doesUserExist.bind(this)
+		this.reauthenticate = this.reauthenticate.bind(this)
+		this.setError = this.setError.bind(this)
 	}
 
 	removeAccountAttributeByKey = (target) => {
@@ -93,7 +96,7 @@ class AccountProvider extends Component {
 		}
 	}
 
-	setAvatar = file => {
+	setprofilePicture = file => {
 		let reader = new FileReader()
 
 		if (file) {
@@ -102,14 +105,14 @@ class AccountProvider extends Component {
 
 		reader.addEventListener("load", () => {
 			this.setState({
-				avatar: reader.result
-			}, () => console.log('avatar=', this.state.avatar))
+				profilePicture: reader.result
+			}, () => console.log('profilePicture=', this.state.profilePicture))
 		}, false)
 	}
 
-	removeAvatar = () => {
+	removeprofilePicture = () => {
 		this.setState({
-			avatar: ''
+			profilePicture: ''
 		})
 	}
 
@@ -146,7 +149,7 @@ class AccountProvider extends Component {
 			account.email = cell.value
 		} else if (cell.id === 'password') {
 			account.password = cell.value
-		} else if (cell.id === 'avatar') {
+		} else if (cell.id === 'profilePicture') {
 			let reader = new FileReader()
 			let file = cell.value
 
@@ -155,12 +158,10 @@ class AccountProvider extends Component {
 			}
 
 			reader.addEventListener("load", () => {
-				account.avatar = reader.result
+				account.profilePicture = reader.result
 			}, false)
-		} else if (cell.id === 'first-name') {
-			account.firstName = cell.value
-		} else if (cell.id === 'last-name') {
-			account.lastName = cell.value
+		} else if (cell.id === 'name') {
+			account.name = cell.value
 		} else if (cell.id === 'role') {
 			account.role = cell.value
 		} else if (cell.id === 'match-settings') {
@@ -175,7 +176,7 @@ class AccountProvider extends Component {
 	isAccountValid = account => {
 		return account.email !== '' 
 				&& account.password !== '' 
-				&& account.avatar !== '' 
+				&& account.profilePicture !== '' 
 				&& account.firstName !== '' 
 				&& account.lastName !== '' 
 				&& account.role !== '' 
@@ -215,15 +216,13 @@ class AccountProvider extends Component {
 		const { account } = this.state
 		const { firebase } = this.props
 
-		const { avatar, firstName, lastName, role, matchSettings } = account
+		const { profilePicture, name, role, matchSettings } = account
 
 		firebase.doCreateUserWithEmailAndPassword(account.email, account.password).then(authUser => {
 			// Create a user in your Firebase real time database
 			return firebase.user(`${authUser.user.uid}`).set({
-				name: `${firstName} ${lastName}`,
-				firstName,
-				lastName,
-				avatar,
+				name,
+				profilePicture,
 				role,
 				matchSettings
 			})
@@ -326,20 +325,20 @@ class AccountProvider extends Component {
 	handleChangeProfilePicture = e => {
 		e.preventDefault()
 
-		const { user, account, avatar } = this.state
+		const { user, account, profilePicture } = this.state
 		const { firebase } = this.props
 
 		firebase
 			.ref(`users/${user.uid}`).child(user.uid).update({
-				avatar
+				profilePicture
 			})
 			.then(() => {
-				// Update account avatar
-				account.avatar = avatar
+				// Update account profilePicture
+				account.profilePicture = profilePicture
 
 				// Reset state
 				this.setState({
-					avatar: null,
+					profilePicture: null,
 					error: null
 				})
 
@@ -418,7 +417,7 @@ class AccountProvider extends Component {
 
 		const { firebase } = this.props
 
-		if (localStorage.getItem('authUser') !== undefined) {
+		if (this.doesUserExist()) {
 			// Sign out
 			firebase.doSignOut()
 
@@ -430,8 +429,8 @@ class AccountProvider extends Component {
 				...INITIAL_STATE
 			}, () => console.log('state=', this.state))
 
-			// Redirect to Sign In page
-			window.location.href = `${ROUTES.SIGN_IN}`
+			// Redirect to landing page
+			window.location.href = `${ROUTES.LANDING}`
 		}
 	}
 
@@ -442,9 +441,10 @@ class AccountProvider extends Component {
 		const { user } = this.state
 
 		if (window.confirm('Are you sure you want to close your account? This cannot be undone!')) {
-			if (localStorage.getItem('authUser') !== undefined) {
-				// Remove user from auth system
-				user
+			if (this.doesUserExist()) {
+				this.reauthenticate().then(() => {
+					// Remove user from auth system
+					user
 					.delete()
 					.then(() => {
 						// Remove user from real time database
@@ -458,20 +458,37 @@ class AccountProvider extends Component {
 							...INITIAL_STATE
 						}, () => console.log('state=', this.state))
 
-						// Redirect to Sign In page
-						window.location.href = `${ROUTES.SIGN_IN}`
+						// Redirect to landing page
+						window.location.href = `${ROUTES.LANDING}`
 					})
 					.catch(error => {
 						this.setState({
 							error
 						}, () => console.log('error=', error))
 					})
+				})
 			}
 		}
 	}
 
 	doesUserExist = () => {
-		return this.state.user && localStorage.getItem('authUser')
+		return this.state.user !== undefined && localStorage.getItem('authUser') !== undefined
+	}
+
+	reauthenticate = () => {
+		const { firebase } = this.props
+		const { user, account } = this.state
+
+		const credential = firebase.auth.EmailAuthProvider.credential(user.email, account.password)
+		
+		return user.reauthenticateWithCredential(credential)
+	}
+
+	setError = (error, errorMessage) => {
+		this.setState({
+			error,
+			errorMessage
+		}, () => console.log(error, errorMessage))
 	}
 
 	componentDidMount() {
@@ -487,7 +504,7 @@ class AccountProvider extends Component {
 					const dbUser = snapshot.val()
 
 					this.setState({
-						account: dbUser,
+						account: {...dbUser},
 						loading: false,
 					}, () => console.log('account=', this.state.account))
 				})
@@ -513,8 +530,8 @@ class AccountProvider extends Component {
 					handleChangeMatchSettings: this.handleChangeMatchSettings,
 					setEmail: this.setEmail,
 					setPassword: this.setPassword,
-					setAvatar: this.setAvatar,
-					removeAvatar: this.removeAvatar,
+					setprofilePicture: this.setprofilePicture,
+					removeprofilePicture: this.removeprofilePicture,
 					setRole: this.setRole,
 					setMatchSettings: this.setMatchSettings,
 					setAccount: this.setAccount,
@@ -522,6 +539,7 @@ class AccountProvider extends Component {
 					validateEmail: this.validateEmail,
 					validatePassword: this.validatePassword,
 					doesUserExist: this.doesUserExist,
+					setError: this.setError
 				}}
 			>
 				{ children }

@@ -25,7 +25,7 @@ class PersonalDetails extends Component {
     saveAndContinue = () => {
         const { account } = this.context
 
-        if (account.avatar !== undefined && account.firstName !== undefined && account.lastName !== undefined && account.role !== undefined) {
+        if (account.profilePicture !== undefined && account.name !== undefined && account.role !== undefined) {
             this.props.nextStep()
         } else {
             this.setState({
@@ -52,7 +52,7 @@ class PersonalDetails extends Component {
                     labelTitle="Profile Picture *"
                     labelDescription="only .jpg, .jpeg files at 500MB or less."
                     buttonLabel="Choose a image"
-                    name="avatar"
+                    name="profilePicture"
                     filenameStatus="complete"
                     accept={['.jpg', '.jpeg']}
                     ref={node => (fileUploader = node)}
@@ -62,7 +62,7 @@ class PersonalDetails extends Component {
                             removeImageBtnDisabled: false
                         })
 
-                        setAccount('avatar', e.target.files[0])
+                        setAccount('profilePicture', e.target.files[0])
                     }}
                 />
                 <Button
@@ -74,39 +74,24 @@ class PersonalDetails extends Component {
                         })
 
                         fileUploader.clearFiles()
-                        removeAccountAttributeByKey('avatar')
+                        removeAccountAttributeByKey('profilePicture')
                     }}
                 >
                     Remove image
                 </Button>
                 <TextInput
-                    id="first-name"
-                    name="first-name"
-                    labelText="First Name *"
+                    id="name"
+                    name="name"
+                    labelText="Name *"
                     type="text"
-                    placeholder="Stephen"
+                    placeholder="Stephen Alt"
                     hideLabel={false}
                     onBlur={e => {
                         this.setState({
                             error: false
                         })
 
-                        setAccount('first-name', e)
-                    }}
-                />
-                <TextInput
-                    id="last-name"
-                    name="last-name"
-                    labelText="Last Name *"
-                    type="text"
-                    placeholder="Alt"
-                    hideLabel={false}
-                    onBlur={e => {
-                        this.setState({
-                            error: false
-                        })
-
-                        setAccount('last-name', e)
+                        setAccount('name', e)
                     }}
                 />
                 <Select

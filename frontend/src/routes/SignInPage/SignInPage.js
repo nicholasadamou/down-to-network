@@ -79,7 +79,7 @@ const Wrapper = styled.div`
 const SignInPage = props => {
 	const { account, setAccount, validateEmail, handleLogin, error } = useContext(AccountContext)
 
-	const isValid = validateEmail(account.email) && (account.password !== undefined || account.password !== '')
+	const isValid = validateEmail(account.email) && account.password !== undefined
 
 	return (
 		<Layout>
@@ -107,7 +107,7 @@ const SignInPage = props => {
 						}}
 					/>
 					<PasswordInput
-						id="password1"
+						id="password"
 						labelText="Password *"
 						placeholder="***************"
 						className="signin__btn"

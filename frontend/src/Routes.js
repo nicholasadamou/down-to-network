@@ -19,6 +19,9 @@ const DashboardPage = lazy(() => import('./routes/DashboardPage/DashboardPage'))
 const ForgotPasswordPage = lazy(() => import('./routes/ForgotPasswordPage/ForgotPasswordPage'))
 const AccountPage = lazy(() => import('./routes/AccountPage/AccountPage'))
 
+const ChangeProfilePicturePage = lazy(() => import('./routes/AccountPage/routes/ChangeProfilePicturePage'))
+
+
 const Routes = () => {
 	const { doesUserExist } = useContext(AccountContext)
 
@@ -45,19 +48,15 @@ const Routes = () => {
 					}}
 				/>
 				<Route exact path={ROUTES.DASHBOARD} render={props => {
-						if (!doesUserExist()) {
-							return <Redirect to={ROUTES.SIGN_IN} />
-						} else {
-							return <DashboardPage {...props} />
-						}
+						return <DashboardPage {...props} />
 					}}
 				/>
 				<Route exact path={ROUTES.ACCOUNT} render={props => {
-						if (!doesUserExist()) {
-							return <Redirect to={ROUTES.SIGN_IN} />
-						} else {
-							return <AccountPage {...props} />
-						}
+						return <AccountPage {...props} />
+					}}
+				/>
+				<Route exact path={ROUTES.CHANGE_PROFILE_PICTURE} render={props => {
+						return <ChangeProfilePicturePage {...props} />
 					}}
 				/>
 			</Switch>

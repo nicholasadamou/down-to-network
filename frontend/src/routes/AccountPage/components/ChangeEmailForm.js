@@ -8,6 +8,8 @@ import { withFirebase } from '../../../contexts/Firebase'
 
 import AccountContext from '../../../contexts/Account/AccountContext'
 
+const { PasswordInput } = TextInput
+
 const Wrapper = styled.div`
     margin-bottom: 20px;
 `
@@ -18,22 +20,28 @@ class EmailChangeForm extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { 
-            error: null,
-            errorMessage: '',
-        }
+        this.state = {}
     }
 
     render() {
-        const { errorMessage } = this.state
-        const { validateEmail, handleEmailChange, setEmail, email, account } = this.context
+        const { validateEmail, handleEmailChange, setEmail, email, account, setAccount, setError } = this.context
 
-        const isValid = validateEmail(email) && email !== account.email
+        const isValid = validateEmail(email) && email !== account.email && account.password !== ''
 
         return (
             <Wrapper>
                 <h1>Change Account Email</h1>
                 <Form onSubmit={handleEmailChange}>
+                     <PasswordInput
+                        id="currentPassword"
+                        name="currentPassword"
+                        labelText="Current Password *"
+                        placeholder="***************"
+                        hideLabel={false}
+                        onBlur={e => {
+                            setAccount('password', e.target.value)
+                        }}
+                    />
                     <TextInput
                         id="email"
                         name="email"
@@ -45,38 +53,18 @@ class EmailChangeForm extends Component {
                             const email = e.target.value
 
                             if (validateEmail(email) && email !== account.email) {
-                                this.setState({
-                                    error: false
-                                })
+                                setError(false, '')
 
                                 setEmail(e, email)
                             } else if (validateEmail(email) && email === account.email) {
-                                this.setState({
-                                    error: true,
-                                    errorMessage: 'The email address that was entered is the same as the old one.'
-                                })
+                                setError(true, 'The email address that was entered is the same as the old one.')
                             } else if (validateEmail(email) && email !== account.email) { 
-                                this.setState({
-                                    error: true,
-                                    errorMessage: 'The email address that was entered is already in use.'
-                                })
+                                setError(true, 'The email address that was entered is already in use.')
                             } else {
-                                this.setState({
-                                    error: true,
-                                    errorMessage: 'The email address that was entered is invaild.'
-                                })
+                                setError(true, 'The email address that was entered is invaild.')
                             }
                         }}
                     />
-
-                    {this.state.error || this.context.error ? (
-                        <div style={{ lineHeight: 2, marginBottom: 20 }}>
-                            <span role="img" aria-label="warning">⚠️</span>  
-                            {(errorMessage && errorMessage) || (this.context.error.message && this.context.error.message)}
-                        </div>
-                    ) : (
-                        ''
-                    )}
 
                     <Button kind="primary" disabled={!isValid} type="submit">
                         Change My Email

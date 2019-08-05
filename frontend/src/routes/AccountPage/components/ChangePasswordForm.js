@@ -20,22 +20,28 @@ class ChangePasswordForm extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { 
-            error: null,
-            errorMessage: ''
-        }
+        this.state = {}
     }
 
     render() {
-        const { errorMessage } = this.state
-        const { passwordOne, passwordTwo, validatePassword, handleChangePassword, setPassword } = this.context
+        const { passwordOne, passwordTwo, validatePassword, handleChangePassword, setPassword, setAccount, account, setError } = this.context
 
-        const isValid = passwordOne === passwordTwo && passwordOne !== ''
+        const isValid = account.password !== '' && passwordOne === passwordTwo && passwordOne !== ''
 
         return (
             <Wrapper>
                 <h1>Change Account Password</h1>
                 <Form onSubmit={handleChangePassword}>
+                    <PasswordInput
+                        id="currentPassword"
+                        name="currentPassword"
+                        labelText="Current Password *"
+                        placeholder="***************"
+                        hideLabel={false}
+                        onBlur={e => {
+                            setAccount('password', e.target.value)
+                        }}
+                    />
                     <PasswordInput
                         id="passwordOne"
                         name="passwordOne"
@@ -47,16 +53,11 @@ class ChangePasswordForm extends Component {
                             const password = e.target.value
 
                             if (validatePassword(password)) {
-                                this.setState({
-                                    error: false
-                                })
+                                setError(false, '')
 
                                 setPassword('passwordOne', password)
                             } else {
-                                this.setState({
-                                    error: true,
-                                    errorMessage: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.'
-                                })
+                                setError(true, 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.')
                             }
                         }}
                     />
@@ -70,28 +71,14 @@ class ChangePasswordForm extends Component {
                            const password = e.target.value
 
                             if (validatePassword(password)) {
-                                this.setState({
-                                    error: false
-                                })
+                                setError(false, '')
 
                                 setPassword('passwordTwo', password)
                             } else {
-                                this.setState({
-                                    error: true,
-                                    errorMessage: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.'
-                                })
+                                setError(true, 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.')
                             }
                         }}
                     />
-                    
-                    {this.state.error || this.context.error ? (
-                        <div style={{ lineHeight: 2, marginBottom: 20 }}>
-                            <span role="img" aria-label="warning">⚠️</span>  
-                            {(errorMessage && errorMessage) || (this.context.error.message && this.context.error.message)}
-                        </div>
-                    ) : (
-                        ''
-                    )}
 
                     <Button kind="primary" disabled={!isValid} type="submit">
                         Change My Password

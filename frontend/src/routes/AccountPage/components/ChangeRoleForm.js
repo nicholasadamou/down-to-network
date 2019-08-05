@@ -9,7 +9,14 @@ import { withFirebase } from '../../../contexts/Firebase'
 import AccountContext from '../../../contexts/Account/AccountContext'
 
 const Wrapper = styled.div`
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+
+    width: 100%;
+
+    .bx--select-input, .bx--select {
+        width: 100%;
+        max-width: 100%;
+    }
 `
 
 class RoleChangeForm extends Component {
@@ -18,14 +25,10 @@ class RoleChangeForm extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { 
-            error: null,
-            errorMessage: ''
-        }
+        this.state = { }
     }
 
     render() {
-        const { errorMessage } = this.state
         const { handleChangeRole, setRole, role } = this.context
 
         const isValid = role !== '' && role !== 'placeholder-item'
@@ -38,13 +41,7 @@ class RoleChangeForm extends Component {
                     id="role"
                     labelText="Role / Domain"
                     defaultValue="placeholder-item"
-                    onBlur={e => {
-                        this.setState({
-                            error: false
-                        })
-                        
-                        setRole(e.target.value)
-                    }}
+                    onBlur={e => setRole(e.target.value)}
                 >
                     <SelectItem
                         value="placeholder-item"
@@ -67,16 +64,6 @@ class RoleChangeForm extends Component {
                         text="Manager"
                     />                    
                 </Select>
-
-                    
-                    {this.state.error || this.context.error ? (
-                        <div style={{ lineHeight: 2, marginBottom: 20 }}>
-                            <span role="img" aria-label="warning">⚠️</span>  
-                            {(errorMessage && errorMessage) || (this.context.error.message && this.context.error.message)}
-                        </div>
-                    ) : (
-                        ''
-                    )}
 
                     <Button kind="primary" disabled={!isValid} type="submit">
                         Change My Role

@@ -13,6 +13,8 @@ import MultiSelect from '../../../components/MultiSelect/MultiSelect'
 
 const Wrapper = styled.div`
     margin-bottom: 10px;
+
+    width: 100%;
 `
 
 class ChangeMatchSettingsForm extends Component {
@@ -21,14 +23,10 @@ class ChangeMatchSettingsForm extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { 
-            error: null,
-            errorMessage: ''
-        }
+        this.state = {}
     }
 
     render() {
-        const { errorMessage } = this.state
         const { handleChangeMatchSettings, setMatchSettings, matchSettings } = this.context
 
         const isValid = matchSettings.length !== 0
@@ -41,24 +39,8 @@ class ChangeMatchSettingsForm extends Component {
                         id="match-settings"
                         titleText="Who do you want to meet?"
                         label="Select all that apply"
-                        handleOnChange={e => {
-                            this.setState({
-                                error: false
-                            })
-
-                            setMatchSettings(e.selectedItems)
-                        }}
+                        handleOnChange={e =>  setMatchSettings(e.selectedItems)}
                     />
-                    
-                    {this.state.error || this.context.error ? (
-                        <div style={{ lineHeight: 2, marginBottom: 20 }}>
-                            <span role="img" aria-label="warning">⚠️</span>  
-                            {(errorMessage && errorMessage) || (this.context.error.message && this.context.error.message)}
-                        </div>
-                    ) : (
-                        ''
-                    )}
-
                     <Button kind="primary" disabled={!isValid} type="submit">
                         Change My Match Settings
                     </Button>

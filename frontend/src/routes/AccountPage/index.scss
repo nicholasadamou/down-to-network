@@ -1,7 +1,8 @@
-.bx--btn--primary, .bx--btn--danger {
+.bx--btn--primary, .bx--btn--secondary, .bx--btn--danger {
     display: block;
     
     width: 100%;
+    max-width: 100%;
 
     margin: 10px 0;
 }
