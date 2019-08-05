@@ -66,13 +66,38 @@ class ChangeProfilePicturePage extends Component {
         super(props)
 
         this.state = { 
+            profilePicture: '',
             removeImageBtnDisabled: true
         }
+
+        this.selectProfilePicture = this.selectProfilePicture.bind(this)
+        this.removeprofilePicture = this.removeprofilePicture.bind(this)
+    }
+
+    selectProfilePicture = e => {
+        let reader = new FileReader()
+        let file = e.target.files[0]
+
+        if (file) {
+            reader.readAsDataURL(file)
+        }
+
+        reader.addEventListener("load", () => {
+            this.setState({
+                profilePicture: reader.result
+            }, () => console.log('profilePicture=', this.state.profilePicture))
+        }, false)
+    }
+
+    removeprofilePicture = () => {
+        this.setState({
+            profilePicture: ''
+        }, () => console.log('profilePicture=', this.state.profilePicture))
     }
 
     render() {
-        const { removeImageBtnDisabled } = this.state
-        const { handleChangeProfilePicture, setprofilePicture, removeprofilePicture, profilePicture, account, loading, error } = this.context
+        const { profilePicture, removeImageBtnDisabled } = this.state
+        const { handleChangeProfilePicture, account, loading, error } = this.context
 
         const isValid = profilePicture !== '';
 
@@ -82,7 +107,7 @@ class ChangeProfilePicturePage extends Component {
             <Layout>
                 <Wrapper>
                     <h1>Change Account Profile Picture</h1>
-                    <Form onSubmit={handleChangeProfilePicture}>
+                    <Form onSubmit={e => handleChangeProfilePicture(e, profilePicture)}>
                         { loading
                             ?
                                 <SkeletonPlaceholder />
@@ -106,7 +131,7 @@ class ChangeProfilePicturePage extends Component {
                                     removeImageBtnDisabled: false
                                 })
 
-                                setprofilePicture(e.target.files[0])
+                                this.selectProfilePicture(e)
                             }}
                         />
                         <Button
@@ -118,7 +143,7 @@ class ChangeProfilePicturePage extends Component {
                                 })
 
                                 fileUploader.clearFiles()
-                                removeprofilePicture()
+                                this.removeprofilePicture()
                             }}
                         >
                             Remove image

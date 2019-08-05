@@ -20,7 +20,9 @@ const ForgotPasswordPage = lazy(() => import('./routes/ForgotPasswordPage/Forgot
 const AccountPage = lazy(() => import('./routes/AccountPage/AccountPage'))
 
 const ChangeProfilePicturePage = lazy(() => import('./routes/AccountPage/routes/ChangeProfilePicturePage'))
-
+const CloseAccountPage = lazy(() => import('./routes/AccountPage/routes/CloseAccountPage'))
+const ChangeEmailPage = lazy(() => import('./routes/AccountPage/routes/ChangeEmailPage'))
+const ChangePasswordPage = lazy(() => import('./routes/AccountPage/routes/ChangePasswordPage'))
 
 const Routes = () => {
 	const { doesUserExist } = useContext(AccountContext)
@@ -57,6 +59,18 @@ const Routes = () => {
 				/>
 				<Route exact path={ROUTES.CHANGE_PROFILE_PICTURE} render={props => {
 						return <ChangeProfilePicturePage {...props} />
+					}}
+				/>
+				<Route exact path={ROUTES.CHANGE_EMAIL} render={props => {
+						return <ChangeEmailPage {...props} />
+					}}
+				/>
+				<Route exact path={ROUTES.CLOSE_ACCOUNT} render={props => {
+						return <CloseAccountPage {...props} />
+					}}
+				/>
+				<Route exact path={ROUTES.CHANGE_PASSWORD} render={props => {
+						return <ChangePasswordPage {...props} />
 					}}
 				/>
 			</Switch>

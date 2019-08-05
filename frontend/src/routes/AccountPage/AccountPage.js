@@ -14,7 +14,6 @@ import MenuBar from '../../components/MenuBar'
 import ChangeRoleForm from './components/ChangeRoleForm'
 import ChangeMatchSettingsForm from './components/ChangeMatchSettingsForm'
 import SignOutButton from './components/SignOutButton'
-import CloseAccountButton from './components/CloseAccountButton'
 
 import './index.scss'
 
@@ -99,6 +98,8 @@ const ProfilePictureWrapper = styled.div`
 			font-size: small;
 			color: #0061ff;
 
+			border: none;
+
 			&:hover {
 				text-decoration: underline;
 
@@ -173,7 +174,14 @@ class AccountPage extends React.Component {
 						Change Password
 					</Button>
 					<SignOutButton />
-					<CloseAccountButton /> 
+					<Button 
+						kind="danger"
+						onClick={() => {
+							window.location.href = `${ROUTES.CLOSE_ACCOUNT}`
+						}}
+					>
+						Close my account?
+					</Button>
 				</Wrapper>
 				<MenuBar />
 			</Layout>

@@ -25,24 +25,39 @@ class RoleChangeForm extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { }
+        this.state = { 
+            role: ''
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange = e => {
+        this.setState({ 
+                [e.target.name]: e.target.value 
+            }
+        )
+
+        console.log(`${e.target.name}=`, e.target.value)
     }
 
     render() {
-        const { handleChangeRole, setRole, role } = this.context
+        const { role } = this.state
+        const { handleChangeRole } = this.context
 
         const isValid = role !== '' && role !== 'placeholder-item'
 
         return (
             <Wrapper>
                 <h1>Change Account Role</h1>
-                <Form onSubmit={handleChangeRole}>
+                <Form onSubmit={e => handleChangeRole(e, role)}>
                     <Select
-                    id="role"
-                    labelText="Role / Domain"
-                    defaultValue="placeholder-item"
-                    onBlur={e => setRole(e.target.value)}
-                >
+                        id="role"
+                        name="role"
+                        labelText="Role / Domain"
+                        defaultValue="placeholder-item"
+                        onBlur={e => this.handleChange(e)}
+                    >
                     <SelectItem
                         value="placeholder-item"
                         text="Choose an option"
