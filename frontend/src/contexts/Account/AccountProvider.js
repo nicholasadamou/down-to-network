@@ -482,7 +482,7 @@ class AccountProvider extends Component {
 
 		const credential = firebase.auth.EmailAuthProvider.credential(user.email, account.password)
 		
-		return user.reauthenticateWithCredential(credential)
+		return user.reauthenticateAndRetrieveDataWithCredential(credential)
 	}
 
 	setError = (error, errorMessage) => {

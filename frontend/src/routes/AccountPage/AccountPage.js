@@ -19,8 +19,8 @@ import CloseAccountButton from './components/CloseAccountButton'
 import './index.scss'
 
 // TODO: Implement ChangePasswordPage, ChangeEmailPage like ChangeProfilePicturePage
+// TODO: Closing Account requires a password, make a page like ChangeProfilePicturePage
 // TODO: Test overall account management
-// TODO: Closing Account requires a password
 
 const Wrapper = styled.div`
 	display: flex;
