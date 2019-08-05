@@ -17,8 +17,6 @@ import SignOutButton from './components/SignOutButton'
 
 import './index.scss'
 
-// TODO: Implement ChangePasswordPage, ChangeEmailPage like ChangeProfilePicturePage
-// TODO: Closing Account requires a password, make a page like ChangeProfilePicturePage
 // TODO: Test overall account management
 
 const Wrapper = styled.div`
