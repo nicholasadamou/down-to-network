@@ -442,6 +442,7 @@ class AccountProvider extends Component {
 
 		if (window.confirm('Are you sure you want to close your account? This cannot be undone!')) {
 			if (this.doesUserExist()) {
+				// Reauthenticate user before proceeding
 				this.reauthenticate().then(() => {
 					// Remove user from auth system
 					user
