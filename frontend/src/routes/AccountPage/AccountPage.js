@@ -97,6 +97,7 @@ const ProfilePictureWrapper = styled.div`
 			color: #0061ff;
 
 			border: none;
+			outline: none;
 
 			&:hover {
 				text-decoration: underline;
