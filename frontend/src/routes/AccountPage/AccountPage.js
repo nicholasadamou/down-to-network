@@ -6,11 +6,15 @@ import { Button, SkeletonPlaceholder, SkeletonText } from 'carbon-components-rea
 
 import * as ROUTES from '../../constants/routes'
 
+import { isMobile } from '../../lib/utils'
+
 import AccountContext from '../../contexts/Account/AccountContext'
 
+import ToggleContent from '../../components/Modal/ToggleContent'
 import Layout from '../../components/Layout/Layout'
 import MenuBar from '../../components/MenuBar'
 
+import ChangeProfilePictureModal from './components/ChangeProfilePictureModal'
 import ChangeRoleForm from './components/ChangeRoleForm'
 import ChangeMatchSettingsForm from './components/ChangeMatchSettingsForm'
 import SignOutButton from './components/SignOutButton'
@@ -37,7 +41,7 @@ const Wrapper = styled.div`
 
 		margin-bottom: 40px;
 
-		button {
+		.manage_account_button {
 			max-width: 100%;
 			width: 100%;
 
@@ -51,12 +55,35 @@ const Wrapper = styled.div`
 		font-weight: bold;
 		font-size: medium;
 	}
+
+	.bx--modal-container {
+		width: 400px;
+    	max-width: 400px;
+
+		.bx--modal-content {
+			padding: 0;
+			margin: 10px auto;
+			margin-bottom: 30px;
+
+			form {
+				text-align: center;
+
+				p {
+					font-size: inherit;
+				}
+
+				.bx--file__selected-file {
+					background: #e5e5e5;
+				}
+			}
+		}
+	}
 `
 
 const ProfilePictureWrapper = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 
 	margin-bottom: 20px;
 
@@ -72,38 +99,40 @@ const ProfilePictureWrapper = styled.div`
 		width: 100px;
 		border-radius: 100%;
 	}
+`
 
-	div {
-		display: flex;
-		align-items: flex-start;
-		flex-direction: column;
+const Container = styled.div`
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
 
-		margin-left: 10px;
+	margin-left: 10px;
 
-		p {
-			margin: 10px;
-			margin-left: 0;
+	p {
+		margin: 10px;
+		margin-left: 0;
 
-			font-size: larger;
-			font-weight: bold;
-		}
+		font-size: larger;
+		font-weight: bold;
+	}
 
-		button {
-			padding: 0;
-    		margin: 0;
+	.manage_account_button {
+		padding: 0;
+		margin: 0;
 
-			font-weight: bold;
-			font-size: small;
-			color: #0061ff;
+		font-weight: bold;
+		font-size: small;
+		color: #0061ff;
 
-			border: none;
-			outline: none;
+		border: none;
+		outline: none;
 
-			&:hover {
-				text-decoration: underline;
+		background: none;
 
-				cursor: pointer;
-			}
+		&:hover {
+			text-decoration: underline;
+
+			cursor: pointer;
 		}
 	}
 `
@@ -137,7 +166,7 @@ class AccountPage extends React.Component {
 								:
 									''
 						}
-						<div>
+						<Container>
 							{
 								loading
 									?
@@ -145,19 +174,39 @@ class AccountPage extends React.Component {
 									:
 										<p>{account.name}</p>
 							}
-							<button 
-								onClick={() => {
-									window.location.href = `${ROUTES.CHANGE_PROFILE_PICTURE}`
-								}}
-							>
-								Change Profile Picture
-							</button>
-						</div>
+							{ 
+								!isMobile.any()
+									?
+										<ToggleContent
+											toggle={show => (
+												<button 
+													className="manage_account_button"
+													onClick={show}
+												>
+													Change Profile Picture
+												</button>
+											)}
+											content={hide => (
+												<ChangeProfilePictureModal hide={hide} />
+											)}
+										/>
+									:
+										<button
+											className="manage_account_button" 
+											onClick={() => {
+												window.location.href = `${ROUTES.CHANGE_PROFILE_PICTURE}`
+											}}
+										>
+											Change Profile Picture
+										</button>
+							}
+						</Container>
 					</ProfilePictureWrapper>
 					<ChangeMatchSettingsForm />
 					<ChangeRoleForm />
 					<Button 
 						kind="secondary"
+						className="manage_account_button"
 						onClick={() => {
 							window.location.href = `${ROUTES.CHANGE_EMAIL}`
 						}}
@@ -166,6 +215,7 @@ class AccountPage extends React.Component {
 					</Button>
 					<Button 
 						kind="secondary"
+						className="manage_account_button"
 						onClick={() => {
 							window.location.href = `${ROUTES.CHANGE_PASSWORD}`
 						}}
@@ -175,6 +225,7 @@ class AccountPage extends React.Component {
 					<SignOutButton />
 					<Button 
 						kind="danger"
+						className="manage_account_button"
 						onClick={() => {
 							window.location.href = `${ROUTES.CLOSE_ACCOUNT}`
 						}}
