@@ -68,7 +68,11 @@ const Wrapper = styled.div`
 			form {
 				text-align: center;
 
-				p {
+				.bx--label-description {
+					font-size: small;
+				}
+
+				.bx--file-filename {
 					font-size: inherit;
 				}
 
