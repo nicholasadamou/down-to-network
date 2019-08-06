@@ -24,12 +24,15 @@ const CloseAccountPage = lazy(() => import('./routes/AccountPage/routes/CloseAcc
 const ChangeEmailPage = lazy(() => import('./routes/AccountPage/routes/ChangeEmailPage'))
 const ChangePasswordPage = lazy(() => import('./routes/AccountPage/routes/ChangePasswordPage'))
 
+const NotFoundPage = lazy(() => import('./routes/NotFoundPage/NotFoundPage'))
+
 const Routes = () => {
 	const { doesUserExist } = useContext(AccountContext)
 
 	return (
 		<Suspense fallback={<Loading />}>
 			<Switch>
+				{/* main pages */}
 				<Route exact path={ROUTES.LANDING} render={() => {
 					if (!doesUserExist()) {
 						return <Redirect to={ROUTES.SIGN_IN} />
@@ -37,6 +40,16 @@ const Routes = () => {
 						return <Redirect to={ROUTES.DASHBOARD} />
 					}
 				}} />
+				<Route exact path={ROUTES.DASHBOARD} render={props => {
+						return <DashboardPage {...props} />
+					}}
+				/>
+				<Route exact path={ROUTES.ACCOUNT} render={props => {
+						return <AccountPage {...props} />
+					}}
+				/>
+
+				{/* auth pages */}
 				<Route exact path={ROUTES.SIGN_IN} render={props => {
 						return <SignInPage {...props} />
 					}}
@@ -49,14 +62,8 @@ const Routes = () => {
 						return <SignUpPage {...props} />
 					}}
 				/>
-				<Route exact path={ROUTES.DASHBOARD} render={props => {
-						return <DashboardPage {...props} />
-					}}
-				/>
-				<Route exact path={ROUTES.ACCOUNT} render={props => {
-						return <AccountPage {...props} />
-					}}
-				/>
+
+				{/* account pages */}
 				<Route exact path={ROUTES.CHANGE_PROFILE_PICTURE} render={props => {
 						return <ChangeProfilePicturePage {...props} />
 					}}
@@ -73,6 +80,10 @@ const Routes = () => {
 						return <ChangePasswordPage {...props} />
 					}}
 				/>
+
+				{/* 404 page */}
+				<Route path={ROUTES.NOT_FOUND} component={NotFoundPage} />
+				<Redirect from='*' to={ROUTES.NOT_FOUND} />
 			</Switch>
 		</Suspense>
 	)

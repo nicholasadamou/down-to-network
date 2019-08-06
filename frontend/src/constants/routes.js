@@ -9,3 +9,5 @@ export const CHANGE_PROFILE_PICTURE = `${ACCOUNT}/profile-picture`
 export const CHANGE_EMAIL = `${ACCOUNT}/email`
 export const CHANGE_PASSWORD = `${ACCOUNT}/password`
 export const CLOSE_ACCOUNT = `${ACCOUNT}/close-account`
+
+export const NOT_FOUND = `/page-not-found`
