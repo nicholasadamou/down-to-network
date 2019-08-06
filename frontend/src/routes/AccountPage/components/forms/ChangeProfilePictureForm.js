@@ -10,8 +10,6 @@ import { withFirebase } from '../../../../contexts/Firebase'
 
 import AccountContext from '../../../../contexts/Account/AccountContext'
 
-// TODO: Move errors to state in individual form
-
 const Wrapper = styled.div`
     display: flex;
     align-items: center;
