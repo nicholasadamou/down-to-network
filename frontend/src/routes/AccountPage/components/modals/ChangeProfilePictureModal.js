@@ -2,10 +2,10 @@ import React from 'react'
 
 import { ModalHeader, ModalBody } from 'carbon-components-react'
 
-import Modal from '../../../components/Modal/Modal'
-import ChangeProfilePictureForm from '../components/ChangeProfilePictureForm'
+import Modal from '../../../../components/Modal/Modal'
+import ChangeProfilePictureForm from '../forms/ChangeProfilePictureForm'
 
-const ChangeProfilePicturePage = props => (
+const ChangeProfilePictureModal = props => (
     <Modal hide={props.hide}>
         <ModalHeader />
         <ModalBody>
@@ -14,4 +14,4 @@ const ChangeProfilePicturePage = props => (
     </Modal>
 )
 
-export default ChangeProfilePicturePage
+export default ChangeProfilePictureModal

@@ -4,9 +4,13 @@ import styled from 'styled-components'
 
 import { Form, Button, FileUploader, SkeletonPlaceholder } from 'carbon-components-react'
 
-import { withFirebase } from '../../../contexts/Firebase'
+import * as ROUTES from '../../../../constants/routes'
 
-import AccountContext from '../../../contexts/Account/AccountContext'
+import { withFirebase } from '../../../../contexts/Firebase'
+
+import AccountContext from '../../../../contexts/Account/AccountContext'
+
+// TODO: Move errors to state in individual form
 
 const Wrapper = styled.div`
     display: flex;
@@ -17,6 +21,8 @@ const Wrapper = styled.div`
     width: 100%;
 
 	padding: 10px;
+
+    overflow-x: hidden;
 
     img {
         width: 100px;
@@ -56,6 +62,11 @@ const Wrapper = styled.div`
 	}
 `
 
+const INITIAL_ERROR_STATE = {
+    error: false,
+    message: ''
+}
+
 class ChangeProfilePictureForm extends Component {
     static contextType = AccountContext
 
@@ -64,11 +75,15 @@ class ChangeProfilePictureForm extends Component {
 
         this.state = { 
             profilePicture: '',
+            error: {
+                ...INITIAL_ERROR_STATE
+            },
             removeImageBtnDisabled: true
         }
 
         this.selectProfilePicture = this.selectProfilePicture.bind(this)
         this.removeprofilePicture = this.removeprofilePicture.bind(this)
+        this.handleChangeProfilePicture = this.handleChangeProfilePicture.bind(this)
     }
 
     selectProfilePicture = e => {
@@ -92,9 +107,36 @@ class ChangeProfilePictureForm extends Component {
         }, () => console.log('profilePicture=', this.state.profilePicture))
     }
 
+    handleChangeProfilePicture = (e, profilePicture) => {
+		e.preventDefault()
+
+		const { firebase } = this.props
+		const { user, account } = this.context
+
+		firebase
+			.ref(`users/${user.uid}`).child(user.uid).update({
+				profilePicture
+			})
+			.then(() => {
+				// Update account profilePicture
+				account.profilePicture = profilePicture
+
+				// Redirect to account page
+				window.location.href = `${ROUTES.ACCOUNT}`
+			})
+			.catch(error => {
+				this.setState({
+					error: {
+                        error: true,
+                        message: error.message
+                    }
+				}, () => console.log('error=', this.state.error))
+			})
+	}
+
     render() {
-        const { profilePicture, removeImageBtnDisabled } = this.state
-        const { handleChangeProfilePicture, account, loading, error } = this.context
+        const { profilePicture, removeImageBtnDisabled, error } = this.state
+        const { account, loading } = this.context
 
         const isValid = profilePicture !== '';
 
@@ -103,7 +145,7 @@ class ChangeProfilePictureForm extends Component {
         return (
             <Wrapper>
                 <h1>Change Account Profile Picture</h1>
-                <Form onSubmit={e => handleChangeProfilePicture(e, profilePicture)}>
+                <Form onSubmit={e => this.handleChangeProfilePicture(e, profilePicture)}>
                     { loading
                         ?
                             <SkeletonPlaceholder />
@@ -145,7 +187,7 @@ class ChangeProfilePictureForm extends Component {
                         Remove image
                     </Button>
 
-                    {error ? (
+                    {error.error ? (
                         <div style={{ lineHeight: 2, marginBottom: 20 }}>
                             <span role="img" aria-label="warning">⚠️</span>  
                             {error.message}

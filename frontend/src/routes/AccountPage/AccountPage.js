@@ -14,14 +14,17 @@ import ToggleContent from '../../components/Modal/ToggleContent'
 import Layout from '../../components/Layout/Layout'
 import MenuBar from '../../components/MenuBar'
 
-import ChangeProfilePictureModal from './components/ChangeProfilePictureModal'
-import ChangeRoleForm from './components/ChangeRoleForm'
-import ChangeMatchSettingsForm from './components/ChangeMatchSettingsForm'
-import SignOutButton from './components/SignOutButton'
+import ChangeProfilePictureModal from './components/modals/ChangeProfilePictureModal'
+import ChangeEmailModal from './components/modals/ChangeEmailModal'
+import ChangePasswordModal from './components/modals/ChangePasswordModal'
+import CloseAccountModal from './components/modals/CloseAccountModal'
+
+import ChangeRoleForm from './components/forms/ChangeRoleForm'
+import ChangeMatchSettingsForm from './components/forms/ChangeMatchSettingsForm'
+
+import SignOutButton from './components/buttons/SignOutButton'
 
 import './index.scss'
-
-// TODO: Test overall account management
 
 const Wrapper = styled.div`
 	display: flex;
@@ -183,59 +186,118 @@ class AccountPage extends React.Component {
 									?
 										<ToggleContent
 											toggle={show => (
-												<button 
+												<Button 
+													kind="secondary"
 													className="manage_account_button"
 													onClick={show}
 												>
 													Change Profile Picture
-												</button>
+												</Button>
 											)}
 											content={hide => (
 												<ChangeProfilePictureModal hide={hide} />
 											)}
 										/>
 									:
-										<button
+										<Button
+											kind="secondary"
 											className="manage_account_button" 
 											onClick={() => {
 												window.location.href = `${ROUTES.CHANGE_PROFILE_PICTURE}`
 											}}
 										>
 											Change Profile Picture
-										</button>
+										</Button>
 							}
 						</Container>
 					</ProfilePictureWrapper>
 					<ChangeMatchSettingsForm />
 					<ChangeRoleForm />
-					<Button 
-						kind="secondary"
-						className="manage_account_button"
-						onClick={() => {
-							window.location.href = `${ROUTES.CHANGE_EMAIL}`
-						}}
-					>
-						Change Email
-					</Button>
-					<Button 
-						kind="secondary"
-						className="manage_account_button"
-						onClick={() => {
-							window.location.href = `${ROUTES.CHANGE_PASSWORD}`
-						}}
-					>
-						Change Password
-					</Button>
+					{ 
+						!isMobile.any()
+							?
+								<ToggleContent
+									toggle={show => (
+										<Button
+											kind="secondary"
+											className="manage_account_button"
+											onClick={show}
+										>
+											Change Email
+										</Button>
+									)}
+									content={hide => (
+										<ChangeEmailModal hide={hide} />
+									)}
+								/>
+							:
+								<Button
+									kind="secondary"
+									className="manage_account_button" 
+									onClick={() => {
+										window.location.href = `${ROUTES.CHANGE_EMAIL}`
+									}}
+								>
+									Change Email
+								</Button>
+					}
+					{ 
+						!isMobile.any()
+							?
+								<ToggleContent
+									toggle={show => (
+										<Button 
+											kind="secondary"
+											className="manage_account_button"
+											onClick={show}
+										>
+											Change Password
+										</Button>
+									)}
+									content={hide => (
+										<ChangePasswordModal hide={hide} />
+									)}
+								/>
+							:
+								<Button
+									kind="secondary"
+									className="manage_account_button" 
+									onClick={() => {
+										window.location.href = `${ROUTES.CHANGE_PASSWORD}`
+									}}
+								>
+									Change Password
+								</Button>
+					}
 					<SignOutButton />
-					<Button 
-						kind="danger"
-						className="manage_account_button"
-						onClick={() => {
-							window.location.href = `${ROUTES.CLOSE_ACCOUNT}`
-						}}
-					>
-						Close my account?
-					</Button>
+					{ 
+						!isMobile.any()
+							?
+								<ToggleContent
+									toggle={show => (
+										<Button 
+											kind="danger"
+											className="manage_account_button"
+											onClick={show}
+										>
+											Close account?
+										</Button>
+									)}
+									content={hide => (
+										<CloseAccountModal hide={hide} />
+									)}
+								/>
+							:
+								<Button
+									kind="danger"
+									className="manage_account_button" 
+									onClick={() => {
+										window.location.href = `${ROUTES.CLOSE_ACCOUNT}`
+									}}
+								>
+									Close account?
+								</Button>
+					}
 				</Wrapper>
 				<MenuBar />
 			</Layout>

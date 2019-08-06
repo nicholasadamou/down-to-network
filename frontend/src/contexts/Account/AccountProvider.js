@@ -16,11 +16,18 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   on your personal account page.
 `
 
+const INITIAL_ERROR_STATE = {
+    error: false,
+    message: ''
+}
+
 const INITIAL_STATE = {
 	user: {},
 	account: {},
 	loading: true,
-	error: ''
+	error: {
+		...INITIAL_ERROR_STATE
+	}
 }
 
 class AccountProvider extends Component {
@@ -32,14 +39,8 @@ class AccountProvider extends Component {
 		this.handleLogin = this.handleLogin.bind(this)
 		this.handleSignUp = this.handleSignUp.bind(this)
 		this.handleSignOut = this.handleSignOut.bind(this)
-		this.handleCloseAccount = this.handleCloseAccount.bind(this)
-		this.handleEmailChange = this.handleEmailChange.bind(this)
 		this.handlePasswordReset = this.handlePasswordReset.bind(this)
-		this.handlePasswordChange = this.handlePasswordChange.bind(this)
-		this.handleChangeProfilePicture = this.handleChangeProfilePicture.bind(this)
-		this.handleChangeRole = this.handleChangeRole.bind(this)
-		this.handleChangeMatchSettings = this.handleChangeMatchSettings.bind(this)
-		
+
 		this.setAccount = this.setAccount.bind(this)
 		this.removeAccountAttributeByKey = this.removeAccountAttributeByKey.bind(this)
 
@@ -48,6 +49,13 @@ class AccountProvider extends Component {
 		this.validatePassword = this.validatePassword.bind(this)
 		this.doesUserExist = this.doesUserExist.bind(this)
 		this.reauthenticate = this.reauthenticate.bind(this)
+		this.reset = this.reset.bind(this)
+	}
+
+	reset = () => {
+		this.setState({
+			...INITIAL_STATE
+		}, () => console.log('state=', this.state))
 	}
 
 	removeAccountAttributeByKey = (target) => {
@@ -135,8 +143,11 @@ class AccountProvider extends Component {
 			window.location.href = `${ROUTES.DASHBOARD}`
 		}).catch(error => {
 			this.setState({
-				error
-			}, () => console.log('error=', error))
+				error: {
+					error: true,
+					message: error.message
+				}
+			}, () => console.log('error=', this.state.error))
 		})
 
 		console.log('AccountProvider.handleLogin=', account)
@@ -171,45 +182,15 @@ class AccountProvider extends Component {
 			}
 
 			this.setState({ 
-				error
-			}, () => console.log('error=', error))
+				error: {
+					error: true,
+					message: error.message
+				}
+			}, () => console.log('error=', this.state.error))
 		})
 
 
 		console.log('AccountProvider.handleSignUp=', account)
-	}
-
-	handleEmailChange = (e, email, password) => {
-		e.preventDefault()
-
-		const { firebase } = this.props
-		const { user, account } = this.state
-
-		// Reauthenticate user before proceeding
-		this.reauthenticate(password)
-			.then(() => {
-				user
-					.updateEmail(email)
-					.then(() => {
-						return firebase.doSendEmailVerification()
-					})
-					.then(() => {
-						// Update account email
-						account.email = email
-
-						// Redirect to account page
-						window.location.href = `${ROUTES.ACCOUNT}`
-					})
-					.catch(error => {
-						this.setState({
-							error
-						}, () => console.log('error=', error))
-					})
-			}).catch(error => {
-				this.setState({
-					error
-				}, () => console.log('error=', error))
-			})
 	}
 
 	handlePasswordReset = e => {
@@ -220,114 +201,14 @@ class AccountProvider extends Component {
 
 		firebase.doPasswordReset(account.email).catch(error => {
 			this.setState({
-				error
-			}, () => console.log('error=', error))
+				error: {
+					error: true,
+					message: error.message
+				}
+			}, () => console.log('error=', this.state.error))
 		})
 
 		window.location.href = `${ROUTES.LANDING}`
-	}
-
-	handlePasswordChange = (e, newPassword, currentPassword) => {
-		e.preventDefault()
-
-		const { firebase } = this.props
-		const { account } = this.state
-
-		// Reauthenticate user before proceeding
-		this.reauthenticate(currentPassword)
-			.then(() => {
-				firebase
-					.doPasswordUpdate(newPassword)
-					.then(() => {
-						// Update account password
-						account.password = newPassword
-
-						// Redirect to account page
-						window.location.href = `${ROUTES.ACCOUNT}`				
-					})
-					.catch(error => {
-						this.setState({
-							error
-						}, () => console.log('error=', error))
-					})
-			})
-			.catch(error => {
-				this.setState({
-					error
-				}, () => console.log('error=', error))
-			})
-	}
-
-	handleChangeProfilePicture = (e, profilePicture) => {
-		e.preventDefault()
-
-		const { firebase } = this.props
-		const { user, account } = this.state
-
-		firebase
-			.ref(`users/${user.uid}`).child(user.uid).update({
-				profilePicture
-			})
-			.then(() => {
-				// Update account profilePicture
-				account.profilePicture = profilePicture
-
-				// Redirect to account page
-				window.location.href = `${ROUTES.ACCOUNT}`
-			})
-			.catch(error => {
-				this.setState({
-					error
-				}, () => console.log('error=', error))
-			})
-	}
-
-	handleChangeRole = (e, role) => {
-		e.preventDefault()
-		
-		const { firebase } = this.props
-		const { user, account } = this.state
-
-		firebase
-			.ref(`users/${user.uid}`).child(user.uid).update({
-				role
-			})
-			.then(() => {
-				// Update account role
-				account.role = role
-
-				// Redirect to account page
-				window.location.href = `${ROUTES.ACCOUNT}`
-			})
-			.catch(error => {
-				this.setState({
-					error
-				}, () => console.log('error=', error))
-			})
-	}
-
-	handleChangeMatchSettings = (e, matchSettings) => {
-		e.preventDefault()
-
-		const { firebase } = this.props
-		const { user, account } = this.state
-
-		firebase
-			.ref(`users/${user.uid}`).child(user.uid).update({
-				matchSettings
-			})
-			.then(() => {
-				// Update account match-settings
-				account.matchSettings = matchSettings
-
-				// Redirect to account page
-				window.location.href = `${ROUTES.ACCOUNT}`
-			})
-			.catch(error => {
-				this.setState({
-					error
-				}, () => console.log('error=', error))
-			})
 	}
 
 	handleSignOut = e => {
@@ -343,50 +224,10 @@ class AccountProvider extends Component {
 			localStorage.removeItem('authUser')
 
 			// Reset state
-			this.setState({
-				...INITIAL_STATE
-			}, () => console.log('state=', this.state))
+			this.reset()
 
 			// Redirect to landing page
 			window.location.href = `${ROUTES.LANDING}`
-		}
-	}
-
-	handleCloseAccount = (e, password) => {
-		e.preventDefault()
-
-		const { firebase } = this.props
-		const { user } = this.state
-
-		if (window.confirm('Are you sure you want to close your account? This cannot be undone!')) {
-			if (this.doesUserExist()) {
-				// Reauthenticate user before proceeding
-				this.reauthenticate(password).then(() => {
-					// Remove user from auth system
-					user
-					.delete()
-					.then(() => {
-						// Remove user from real time database
-						firebase.ref(`users/${user.uid}`).remove()
-
-						// Remove auth token
-						localStorage.removeItem('authUser')
-
-						// Reset state
-						this.setState({
-							...INITIAL_STATE
-						}, () => console.log('state=', this.state))
-
-						// Redirect to landing page
-						window.location.href = `${ROUTES.LANDING}`
-					})
-					.catch(error => {
-						this.setState({
-							error
-						}, () => console.log('error=', error))
-					})
-				})
-			}
 		}
 	}
 
@@ -433,18 +274,13 @@ class AccountProvider extends Component {
 					handleLogin: this.handleLogin,
 					handleSignUp: this.handleSignUp,
 					handleSignOut: this.handleSignOut,
-					handleCloseAccount: this.handleCloseAccount,
-					handleEmailChange: this.handleEmailChange,
 					handlePasswordReset: this.handlePasswordReset,
-					handlePasswordChange: this.handlePasswordChange,
-					handleChangeProfilePicture: this.handleChangeProfilePicture,
-					handleChangeRole: this.handleChangeRole,
-					handleChangeMatchSettings: this.handleChangeMatchSettings,
 					setAccount: this.setAccount,
 					removeAccountAttributeByKey: this.removeAccountAttributeByKey,
 					validateEmail: this.validateEmail,
 					validatePassword: this.validatePassword,
 					doesUserExist: this.doesUserExist,
+					reset: this.reset
 				}}
 			>
 				{ children }
