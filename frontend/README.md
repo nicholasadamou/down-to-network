@@ -56,7 +56,7 @@ yarn start
 
 ## Modify `.env.example`
 
-⚠️ Don't forget to modify the contents of `.env`! Take `.env.example` fill out its contents and rename it to `.env`.
+⚠️ Don't forget to modify the contents of `.env`! Take `.env.example` and fill out its contents and rename it to `.env`.
 
 ## License
 
