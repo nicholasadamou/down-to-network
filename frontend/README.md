@@ -54,9 +54,9 @@ yarn copy-scss
 yarn start
 ```
 
-## `.env.example`
+## Modify `.env.example`
 
-Don't forget to modify the contents of `.env`! Take `.env.example` fill out its contents and rename it from `.env.example` -> `.env`.
+⚠️ Don't forget to modify the contents of `.env`! Take `.env.example` fill out its contents and rename it to `.env`.
 
 ## License
 
