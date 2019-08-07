@@ -54,6 +54,10 @@ yarn copy-scss
 yarn start
 ```
 
+## `.env.example`
+
+Don't forget to modify the contents of `.env`! Take `.env.example` fill out its contents and rename it from `.env.example` -> `.env`.
+
 ## License
 
 DownToNetwork is © 2019, Nicholas Adamou, Edward Lovely, Stephen Alt, Diana Bank, & Julia Lauer.
