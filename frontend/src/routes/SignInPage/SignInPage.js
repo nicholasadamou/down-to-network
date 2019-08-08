@@ -77,69 +77,69 @@ const Wrapper = styled.div`
 `
 
 const SignInPage = props => {
-	const { account, setAccount, validateEmail, handleLogin, error } = useContext(AccountContext)
+  const { account, setAccount, validateEmail, handleLogin, error } = useContext(AccountContext)
 
-	const isValid = validateEmail(account.email) && account.password !== undefined
+  const isValid = validateEmail(account.email) && account.password !== undefined
 
-	return (
-		<Layout>
-			<ImageLogo src={logo} alt="logo" />
-			<Wrapper>
-				<Form onSubmit={handleLogin}>
-					<h1>Sign In</h1>
-					{
-						error && (
-							<span style={{ lineHeight: 2 }}>
-								<span role="img" aria-label="warning">⚠️</span>
-								{error.message}
-							</span>
-						)
-					}
-					<TextInput
-						id="email"
-						labelText="Email *"
-						placeholder="Stephen.Alt@ibm.com"
-						className="signin__btn"
-						onBlur={e => {
-							if (validateEmail(e.target.value)) {
-								setAccount('email', e)
-							}
-						}}
-					/>
-					<PasswordInput
-						id="password"
-						labelText="Password *"
-						placeholder="***************"
-						className="signin__btn"
-						onBlur={e => {
-							if (e.target.value !== '' && !/\s+/g.test(e.target.value)) {
-								setAccount('password', e)
-							}
-						}}
-					/>
-					<Button kind="primary" type="submit" disabled={!isValid}>Sign in</Button>
-					<Button 
-						kind="secondary"
-						style={{ marginTop: 10 }} 
-						onClick={() => {
-							window.location.href = `${ROUTES.PASSWORD_FORGET}`
-						}}
-					>
+  return (
+    <Layout>
+      <ImageLogo src={logo} alt="logo" />
+      <Wrapper>
+        <Form onSubmit={handleLogin}>
+          <h1>Sign In</h1>
+          {
+            error && (
+              <span style={{ lineHeight: 2 }}>
+                <span role="img" aria-label="warning">⚠️</span>
+                {error.message}
+              </span>
+            )
+          }
+          <TextInput
+            id="email"
+            labelText="Email *"
+            placeholder="Stephen.Alt@ibm.com"
+            className="signin__btn"
+            onBlur={e => {
+              if (validateEmail(e.target.value)) {
+                setAccount('email', e)
+              }
+            }}
+          />
+          <PasswordInput
+            id="password"
+            labelText="Password *"
+            placeholder="***************"
+            className="signin__btn"
+            onBlur={e => {
+              if (e.target.value !== '' && !/\s+/g.test(e.target.value)) {
+                setAccount('password', e)
+              }
+            }}
+          />
+          <Button kind="primary" type="submit" disabled={!isValid}>Sign in</Button>
+          <Button
+            kind="secondary"
+            style={{ marginTop: 10 }}
+            onClick={() => {
+              window.location.href = `${ROUTES.PASSWORD_FORGET}`
+            }}
+          >
 					Forgot your password?
-					</Button>
-					<Button 
-						kind="secondary"
-						style={{ marginTop: 10 }} 
-						onClick={() => {
-							window.location.href = `${ROUTES.SIGN_UP}`
-						}}
-					>
+          </Button>
+          <Button
+            kind="secondary"
+            style={{ marginTop: 10 }}
+            onClick={() => {
+              window.location.href = `${ROUTES.SIGN_UP}`
+            }}
+          >
 					Don't have an Account? Sign Up!
-					</Button>
-				</Form>
-			</Wrapper>
-		</Layout>
-	)
+          </Button>
+        </Form>
+      </Wrapper>
+    </Layout>
+  )
 }
 
 export default SignInPage

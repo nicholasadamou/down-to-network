@@ -116,7 +116,6 @@ const Container = styled.div`
 	margin-left: 10px;
 
 	p {
-		margin: 10px;
 		margin-left: 0;
 
 		font-size: larger;
@@ -169,7 +168,7 @@ class AccountPage extends React.Component {
 							:
 								account.profilePicture !== ''
 								?
-									<img src={account.profilePicture} alt="profilePicture" /> 
+									<img src={account.profilePicture} alt="profilePicture" />
 								:
 									''
 						}
@@ -181,12 +180,12 @@ class AccountPage extends React.Component {
 									:
 										<p>{account.name}</p>
 							}
-							{ 
+							{
 								!isMobile.any()
 									?
 										<ToggleContent
 											toggle={show => (
-												<Button 
+												<Button
 													kind="secondary"
 													className="manage_account_button"
 													onClick={show}
@@ -201,7 +200,7 @@ class AccountPage extends React.Component {
 									:
 										<Button
 											kind="secondary"
-											className="manage_account_button" 
+											className="manage_account_button"
 											onClick={() => {
 												window.location.href = `${ROUTES.CHANGE_PROFILE_PICTURE}`
 											}}
@@ -213,7 +212,7 @@ class AccountPage extends React.Component {
 					</ProfilePictureWrapper>
 					<ChangeMatchSettingsForm />
 					<ChangeRoleForm />
-					{ 
+					{
 						!isMobile.any()
 							?
 								<ToggleContent
@@ -233,7 +232,7 @@ class AccountPage extends React.Component {
 							:
 								<Button
 									kind="secondary"
-									className="manage_account_button" 
+									className="manage_account_button"
 									onClick={() => {
 										window.location.href = `${ROUTES.CHANGE_EMAIL}`
 									}}
@@ -241,12 +240,12 @@ class AccountPage extends React.Component {
 									Change Email
 								</Button>
 					}
-					{ 
+					{
 						!isMobile.any()
 							?
 								<ToggleContent
 									toggle={show => (
-										<Button 
+										<Button
 											kind="secondary"
 											className="manage_account_button"
 											onClick={show}
@@ -261,7 +260,7 @@ class AccountPage extends React.Component {
 							:
 								<Button
 									kind="secondary"
-									className="manage_account_button" 
+									className="manage_account_button"
 									onClick={() => {
 										window.location.href = `${ROUTES.CHANGE_PASSWORD}`
 									}}
@@ -270,12 +269,12 @@ class AccountPage extends React.Component {
 								</Button>
 					}
 					<SignOutButton />
-					{ 
+					{
 						!isMobile.any()
 							?
 								<ToggleContent
 									toggle={show => (
-										<Button 
+										<Button
 											kind="danger"
 											className="manage_account_button"
 											onClick={show}
@@ -290,7 +289,7 @@ class AccountPage extends React.Component {
 							:
 								<Button
 									kind="danger"
-									className="manage_account_button" 
+									className="manage_account_button"
 									onClick={() => {
 										window.location.href = `${ROUTES.CLOSE_ACCOUNT}`
 									}}

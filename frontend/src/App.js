@@ -9,14 +9,13 @@ import AccountProvider from './contexts/Account/AccountProvider'
 import Routes from './Routes'
 
 const App = () => {
-	return (
-		<AccountProvider>
-			<Router>
-				<Routes />
-			</Router>
-		</AccountProvider>
-	)
+  return (
+    <AccountProvider>
+      <Router>
+        <Routes />
+      </Router>
+    </AccountProvider>
+  )
 }
-
 
 export default withAuthentication(App)
