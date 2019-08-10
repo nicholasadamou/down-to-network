@@ -123,8 +123,8 @@ class ChangeEmailForm extends Component {
 						// Update account email
 						account.email = email
 
-						// Redirect to email verification page
-						window.location.href = `${ROUTES.VERIFY_EMAIL}`
+						// Redirect to account page
+						window.location.href = `${ROUTES.ACCOUNT}`
 					})
 					.catch(error => {
 						this.setState({

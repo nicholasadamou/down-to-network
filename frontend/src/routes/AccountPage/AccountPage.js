@@ -4,6 +4,9 @@ import styled from 'styled-components'
 
 import { Button, SkeletonPlaceholder, SkeletonText } from 'carbon-components-react'
 
+import { compose } from 'recompose'
+
+import { withEmailVerification, withAuthorization } from '../../contexts/Session'
 import AccountContext from '../../contexts/Account/AccountContext'
 
 import ToggleContent from '../../components/Modal/ToggleContent'
@@ -244,4 +247,7 @@ class AccountPage extends React.Component {
 	}
 }
 
-export default AccountPage
+export default compose(
+	withEmailVerification,
+	withAuthorization(authUser => !!authUser)
+  )(AccountPage)

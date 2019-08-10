@@ -18,7 +18,6 @@ const SignUpPage = lazy(() => import('./routes/SignUpPage/SignUpPage'))
 const DashboardPage = lazy(() => import('./routes/DashboardPage/DashboardPage'))
 const ForgotPasswordPage = lazy(() => import('./routes/ForgotPasswordPage/ForgotPasswordPage'))
 const AccountPage = lazy(() => import('./routes/AccountPage/AccountPage'))
-const EmailVerificationPage = lazy(() => import('./routes/EmailVerificationPage/EmailVerificationPage'))
 const NotFoundPage = lazy(() => import('./routes/NotFoundPage/NotFoundPage'))
 
 const Routes = () => {
@@ -63,10 +62,6 @@ const Routes = () => {
 						return !isAuthenticated()
 							? <SignUpPage {...props} />
 							: <Redirect to={ROUTES.LANDING} />
-					}}
-				/>
-				<Route exact path={ROUTES.VERIFY_EMAIL} render={props => {
-						return <EmailVerificationPage {...props} />
 					}}
 				/>
 

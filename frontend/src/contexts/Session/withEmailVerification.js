@@ -106,13 +106,24 @@ const withEmailVerification = Component => {
 									</>
 								)}
 
-								<Button
-									kind="primary"
-									onClick={this.onSendEmailVerification}
-									disabled={this.state.isSent}
-								>
-									Send confirmation E-Mail
-								</Button>
+								{
+									this.state.isSent ? (
+										<Button
+											kind="primary"
+											onClick={this.onSendEmailVerification}
+										>
+											Resend Confirmation E-Mail
+										</Button>
+									) : (
+										<Button
+											kind="primary"
+											onClick={this.onSendEmailVerification}
+											disabled={this.state.isSent}
+										>
+											Send confirmation E-Mail
+										</Button>
+									)
+								}
 							</Wrapper>
 						) : (
 						<Component {...this.props} />

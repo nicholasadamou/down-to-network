@@ -4,5 +4,4 @@ export const SIGN_UP = '/signup'
 export const DASHBOARD = '/dashboard'
 export const PASSWORD_FORGET = '/pw-forget'
 export const ACCOUNT = '/account/edit'
-export const VERIFY_EMAIL = `/account/verify-email`
 export const NOT_FOUND = `/page-not-found`
