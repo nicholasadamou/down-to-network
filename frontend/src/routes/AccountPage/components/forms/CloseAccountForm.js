@@ -76,8 +76,8 @@ class CloseAccountForm extends Component {
     }
 
     handleChange = e => {
-        this.setState({ 
-                [e.target.name]: e.target.value 
+        this.setState({
+                [e.target.name]: e.target.value
             }
         )
 
@@ -91,7 +91,7 @@ class CloseAccountForm extends Component {
 		const { user, reset } = this.context
 
 		if (window.confirm('Are you sure you want to close your account? This cannot be undone!')) {
-			if (this.doesUserExist()) {
+			if (this.isAuthenticated()) {
 				// Reauthenticate user before proceeding
 				this.reauthenticate(password).then(() => {
 					// Remove user from auth system
@@ -146,15 +146,15 @@ class CloseAccountForm extends Component {
 
                     {error.error ? (
                             <div style={{ lineHeight: 2, marginBottom: 20 }}>
-                                <span role="img" aria-label="warning">⚠️</span>  
+                                <span role="img" aria-label="warning">⚠️</span>
                                 {error.message}
                             </div>
                         ) : (
                             ''
                     )}
 
-                    <Button 
-                        kind="danger" 
+                    <Button
+                        kind="danger"
                         disabled={!isValid}
                         type="submit"
                         style={{ display: 'block', margin: 0, marginTop: 10 }}

@@ -47,7 +47,7 @@ class AccountProvider extends Component {
 		this.isAccountValid = this.isAccountValid.bind(this)
 		this.validateEmail = this.validateEmail.bind(this)
 		this.validatePassword = this.validatePassword.bind(this)
-		this.doesUserExist = this.doesUserExist.bind(this)
+		this.isAuthenticated = this.isAuthenticated.bind(this)
 		this.reauthenticate = this.reauthenticate.bind(this)
 		this.reset = this.reset.bind(this)
 	}
@@ -114,12 +114,12 @@ class AccountProvider extends Component {
 	}
 
 	isAccountValid = account => {
-		return account.email !== '' 
-				&& account.password !== '' 
-				&& account.profilePicture !== '' 
-				&& account.firstName !== '' 
-				&& account.lastName !== '' 
-				&& account.role !== '' 
+		return account.email !== ''
+				&& account.password !== ''
+				&& account.profilePicture !== ''
+				&& account.firstName !== ''
+				&& account.lastName !== ''
+				&& account.role !== ''
 				&& account.matchSettings !== undefined
 	}
 
@@ -155,7 +155,7 @@ class AccountProvider extends Component {
 
 	handleSignUp = e => {
 		e.preventDefault()
-	
+
 		const { firebase } = this.props
 		const { account } = this.state
 
@@ -181,7 +181,7 @@ class AccountProvider extends Component {
 				error.message = ERROR_MSG_ACCOUNT_EXISTS
 			}
 
-			this.setState({ 
+			this.setState({
 				error: {
 					error: true,
 					message: error.message
@@ -216,7 +216,7 @@ class AccountProvider extends Component {
 
 		const { firebase } = this.props
 
-		if (this.doesUserExist()) {
+		if (this.isAuthenticated()) {
 			// Sign out
 			firebase.doSignOut()
 
@@ -231,7 +231,7 @@ class AccountProvider extends Component {
 		}
 	}
 
-	doesUserExist = () => {
+	isAuthenticated = () => {
 		return this.state.user !== undefined && localStorage.getItem('authUser') !== undefined
 	}
 
@@ -240,7 +240,7 @@ class AccountProvider extends Component {
 		const { user } = this.state
 
 		const credential = firebase.auth.EmailAuthProvider.credential(user.email, password)
-		
+
 		return user.reauthenticateAndRetrieveDataWithCredential(credential)
 	}
 
@@ -279,7 +279,7 @@ class AccountProvider extends Component {
 					removeAccountAttributeByKey: this.removeAccountAttributeByKey,
 					validateEmail: this.validateEmail,
 					validatePassword: this.validatePassword,
-					doesUserExist: this.doesUserExist,
+					isAuthenticated: this.isAuthenticated,
 					reset: this.reset
 				}}
 			>
