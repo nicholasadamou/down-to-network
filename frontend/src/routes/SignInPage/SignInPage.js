@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-tabs */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useContext } from 'react'
 

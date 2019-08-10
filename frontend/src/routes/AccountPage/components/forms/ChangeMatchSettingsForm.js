@@ -92,7 +92,7 @@ class ChangeMatchSettingsForm extends Component {
 
                     {error.error ? (
                             <div style={{ lineHeight: 2, marginBottom: 20 }}>
-                                <span role="img" aria-label="warning">⚠️</span>  
+                                <span role="img" aria-label="warning">⚠️</span>
                                 {error.message}
                             </div>
                         ) : (

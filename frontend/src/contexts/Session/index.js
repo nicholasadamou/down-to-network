@@ -7,5 +7,5 @@ export {
   AuthUserContext,
   withAuthentication,
   withAuthorization,
-  withEmailVerification,
+  withEmailVerification
 }

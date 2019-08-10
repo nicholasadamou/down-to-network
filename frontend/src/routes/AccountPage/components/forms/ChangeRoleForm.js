@@ -32,7 +32,7 @@ class RoleChangeForm extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { 
+        this.state = {
             role: '',
             error: {
                 ...INITIAL_ERROR_STATE
@@ -44,8 +44,8 @@ class RoleChangeForm extends Component {
     }
 
     handleChange = e => {
-        this.setState({ 
-                [e.target.name]: e.target.value 
+        this.setState({
+                [e.target.name]: e.target.value
             }
         )
 
@@ -54,7 +54,7 @@ class RoleChangeForm extends Component {
 
     handleChangeRole = (e, role) => {
 		e.preventDefault()
-		
+
 		const { firebase } = this.props
 		const { user, account } = this.context
 
@@ -114,12 +114,12 @@ class RoleChangeForm extends Component {
                         <SelectItem
                             value="Manager"
                             text="Manager"
-                        />                    
+                        />
                     </Select>
 
                     {error.error ? (
                             <div style={{ lineHeight: 2, marginBottom: 20 }}>
-                                <span role="img" aria-label="warning">⚠️</span>  
+                                <span role="img" aria-label="warning">⚠️</span>
                                 {error.message}
                             </div>
                         ) : (

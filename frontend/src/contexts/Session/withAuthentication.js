@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import AuthUserContext from './AuthUserContext'
@@ -5,15 +6,15 @@ import { withFirebase } from '../Firebase'
 
 const withAuthentication = Component => {
   class WithAuthentication extends React.Component {
-    constructor(props) {
+    constructor (props) {
       super(props)
 
       this.state = {
-        authUser: JSON.parse(localStorage.getItem('authUser')),
+        authUser: JSON.parse(localStorage.getItem('authUser'))
       }
     }
 
-    componentDidMount() {
+    componentDidMount () {
       this.listener = this.props.firebase.onAuthUserListener(
         authUser => {
           localStorage.setItem('authUser', JSON.stringify(authUser))
@@ -22,15 +23,15 @@ const withAuthentication = Component => {
         () => {
           localStorage.removeItem('authUser')
           this.setState({ authUser: null })
-        },
+        }
       )
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
       this.listener()
     }
 
-    render() {
+    render () {
       return (
         <AuthUserContext.Provider value={this.state.authUser}>
           <Component {...this.props} />

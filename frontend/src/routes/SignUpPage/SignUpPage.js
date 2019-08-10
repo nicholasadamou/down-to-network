@@ -1,3 +1,5 @@
+/* eslint-disable no-tabs */
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import { withRouter } from 'react-router-dom'
@@ -27,13 +29,13 @@ const Wrapper = styled.div`
 `
 
 const SignUpPage = props => {
-	return (
-		<Layout>
-			<Wrapper>
-				<Form />
-			</Wrapper>
-		</Layout>
-	)
+  return (
+    <Layout>
+      <Wrapper>
+        <Form />
+      </Wrapper>
+    </Layout>
+  )
 }
 
 export default withRouter(SignUpPage)

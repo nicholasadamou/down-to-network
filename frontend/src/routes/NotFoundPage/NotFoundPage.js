@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-tabs */
 import React from 'react'
 
 import styled from 'styled-components'
 
 import { Button } from 'carbon-components-react'
 
-import * as ROUTES from '../../constants/routes';
+import * as ROUTES from '../../constants/routes'
 
 const Wrapper = styled.div`
     display: flex;
@@ -54,23 +56,23 @@ const Wrapper = styled.div`
 `
 
 const NotFoundPage = () => (
-    <Wrapper>
-        <strong>
+  <Wrapper>
+    <strong>
             404 Page Not Found
-        </strong>
-        <p>
+    </strong>
+    <p>
             Whoops! <span role="img" aria-label="tired face">😫</span> Looks like the page you are looking for doesn't exist!
-        </p>
+    </p>
 
-        <Button
-            kind="primary"
-            onClick={() => {
-                window.location.href = `${ROUTES.LANDING}`
-            }}
-        >
+    <Button
+      kind="primary"
+      onClick={() => {
+        window.location.href = `${ROUTES.LANDING}`
+      }}
+    >
             Go back to landing page?
-        </Button>
-    </Wrapper>
+    </Button>
+  </Wrapper>
 )
 
 export default NotFoundPage

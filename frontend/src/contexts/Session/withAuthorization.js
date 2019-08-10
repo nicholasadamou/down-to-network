@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'recompose'
@@ -8,22 +9,22 @@ import * as ROUTES from '../../constants/routes'
 
 const withAuthorization = condition => Component => {
   class WithAuthorization extends React.Component {
-    componentDidMount() {
+    componentDidMount () {
       this.listener = this.props.firebase.onAuthUserListener(
         authUser => {
           if (!condition(authUser)) {
             this.props.history.push(ROUTES.SIGN_IN)
           }
         },
-        () => this.props.history.push(ROUTES.SIGN_IN),
+        () => this.props.history.push(ROUTES.SIGN_IN)
       )
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
       this.listener()
     }
 
-    render() {
+    render () {
       return (
         <AuthUserContext.Consumer>
           {authUser =>
@@ -36,7 +37,7 @@ const withAuthorization = condition => Component => {
 
   return compose(
     withRouter,
-    withFirebase,
+    withFirebase
   )(WithAuthorization)
 }
 

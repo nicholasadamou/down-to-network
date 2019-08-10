@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-tabs */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useContext } from 'react'
 
@@ -13,7 +15,7 @@ import AccountContext from '../../contexts/Account/AccountContext'
 
 import './index.scss'
 
-const Wrapper = styled.div` 
+const Wrapper = styled.div`
     width: 100%;
     height: 100%;
 
@@ -62,44 +64,44 @@ const Wrapper = styled.div`
 `
 
 const ForgotPasswordPage = props => {
-	const { account, setAccount, validateEmail, handlePasswordReset, error } = useContext(AccountContext)
+  const { account, setAccount, validateEmail, handlePasswordReset, error } = useContext(AccountContext)
 
-	const isValid = validateEmail(account.email)
+  const isValid = validateEmail(account.email)
 
-	return (
-		<Layout>
-			<Wrapper>
-				<Form onSubmit={handlePasswordReset}>
-                    <h1>Reset your Password</h1>
-					{
-						error && (
-							<span style={{ lineHeight: 2 }}>
-								<span role="img" aria-label="warning">⚠️</span>
-								{error.message}
-							</span>
-						)
-					}
-					<TextInput
-						id="email"
-						labelText="Email *"
-						placeholder="Stephen.Alt@ibm.com"
-						className="signin__btn"
-						onBlur={e => setAccount('email', e)}
-					/>
-					<Button kind="primary" type="submit" disabled={!isValid}>Reset Password</Button>
-					<Button 
-						kind="secondary"
-						style={{ marginTop: 10 }} 
-						onClick={() => {
-							window.location.href = `${ROUTES.LANDING}`
-						}}
-					>
-						Back
-					</Button>
-				</Form>
-			</Wrapper>
-		</Layout>
-	)
+  return (
+    <Layout>
+      <Wrapper>
+        <Form onSubmit={handlePasswordReset}>
+          <h1>Reset your Password</h1>
+          {
+            error && (
+              <span style={{ lineHeight: 2 }}>
+                <span role="img" aria-label="warning">⚠️</span>
+                {error.message}
+              </span>
+            )
+          }
+          <TextInput
+            id="email"
+            labelText="Email *"
+            placeholder="Stephen.Alt@ibm.com"
+            className="signin__btn"
+            onBlur={e => setAccount('email', e)}
+          />
+          <Button kind="primary" type="submit" disabled={!isValid}>Reset Password</Button>
+          <Button
+            kind="secondary"
+            style={{ marginTop: 10 }}
+            onClick={() => {
+              window.location.href = `${ROUTES.LANDING}`
+            }}
+          >
+			sBack
+          </Button>
+        </Form>
+      </Wrapper>
+    </Layout>
+  )
 }
 
 export default ForgotPasswordPage

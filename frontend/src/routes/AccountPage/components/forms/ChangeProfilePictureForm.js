@@ -30,7 +30,7 @@ const Wrapper = styled.div`
     @media (max-width: 375px) {
         .bx--form {
             text-align: center;
-            
+
             width: 100%;
 
             .bx--skeleton__placeholder {
@@ -71,7 +71,7 @@ class ChangeProfilePictureForm extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { 
+        this.state = {
             profilePicture: '',
             error: {
                 ...INITIAL_ERROR_STATE
@@ -150,9 +150,9 @@ class ChangeProfilePictureForm extends Component {
                         :
                             account.profilePicture !== '' && profilePicture === ''
                             ?
-                                <img src={account.profilePicture} alt="profilePicture" /> 
+                                <img src={account.profilePicture} alt="profilePicture" />
                             :
-                                <img src={profilePicture} alt="profilePicture" /> 
+                                <img src={profilePicture} alt="profilePicture" />
                     }
                     <FileUploader
                         labelTitle="Profile Picture"
@@ -187,15 +187,15 @@ class ChangeProfilePictureForm extends Component {
 
                     {error.error ? (
                         <div style={{ lineHeight: 2, marginBottom: 20 }}>
-                            <span role="img" aria-label="warning">⚠️</span>  
+                            <span role="img" aria-label="warning">⚠️</span>
                             {error.message}
                         </div>
                     ) : (
                         ''
                     )}
 
-                    <Button 
-                        kind="primary" 
+                    <Button
+                        kind="primary"
                         disabled={!isValid}
                         type="submit"
                         style={{ display: 'block', margin: 0, marginTop: 10 }}

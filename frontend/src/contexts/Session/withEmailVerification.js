@@ -101,7 +101,7 @@ const withEmailVerification = Component => {
 							Verify your E-Mail. <span role="img" aria-label="warning">⚠️</span>
 						</strong>
 						<p>
-							Check your E-Mail (Spam folder included) for a confirmation E-Mail or send another confirmation E-Mail.	
+							Check your E-Mail (Spam folder included) for a confirmation E-Mail or send another confirmation E-Mail.
 						</p>
 					</>
 				)}

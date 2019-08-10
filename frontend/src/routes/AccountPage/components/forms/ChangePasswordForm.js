@@ -78,8 +78,8 @@ class ChangePasswordForm extends Component {
     }
 
     handleChange = e => {
-        this.setState({ 
-                [e.target.name]: e.target.value 
+        this.setState({
+                [e.target.name]: e.target.value
             }
         )
 
@@ -102,7 +102,7 @@ class ChangePasswordForm extends Component {
 						account.password = newPassword
 
 						// Redirect to account page
-						window.location.href = `${ROUTES.ACCOUNT}`				
+						window.location.href = `${ROUTES.ACCOUNT}`
 					})
 					.catch(error => {
 						this.setState({
@@ -203,7 +203,7 @@ class ChangePasswordForm extends Component {
 
                     {error.error ? (
                             <div style={{ lineHeight: 2, marginBottom: 20 }}>
-                                <span role="img" aria-label="warning">⚠️</span>  
+                                <span role="img" aria-label="warning">⚠️</span>
                                 {error.message}
                             </div>
                         ) : (

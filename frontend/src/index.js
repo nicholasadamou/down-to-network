@@ -1,18 +1,19 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.scss'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
-import Firebase, { FirebaseContext } from './contexts/Firebase';
+import Firebase, { FirebaseContext } from './contexts/Firebase'
 
 require('dotenv').config()
 
 ReactDOM.render(
-    <FirebaseContext.Provider value={new Firebase()}>
-        <App />
-    </FirebaseContext.Provider>,
-    document.getElementById('root')
+  <FirebaseContext.Provider value={new Firebase()}>
+    <App />
+  </FirebaseContext.Provider>,
+  document.getElementById('root')
 )
 
 // If you want your app to work offline and load faster, you can change
