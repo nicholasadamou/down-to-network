@@ -54,7 +54,7 @@ class ChangeMatchSettingsForm extends Component {
 		const { user, account } = this.context
 
 		firebase
-			.ref(`users/${user.uid}`).child(user.uid).update({
+			.ref(`users/${user.uid}`).update({
 				matchSettings
 			})
 			.then(() => {
