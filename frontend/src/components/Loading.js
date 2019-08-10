@@ -1,3 +1,5 @@
+/* eslint-disable no-tabs */
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import styled from 'styled-components'
@@ -13,9 +15,9 @@ const ProgressWrapper = styled.div`
 `
 
 const Loading = () => (
-	<ProgressWrapper>
-		<CircularProgress style={{color: '#0061ff' }} />
-	</ProgressWrapper>
+  <ProgressWrapper>
+    <CircularProgress style={{ color: '#0061ff' }} />
+  </ProgressWrapper>
 )
 
 export default Loading
