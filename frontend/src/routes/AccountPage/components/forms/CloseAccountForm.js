@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 
     overflow-x: hidden;
 
-     h1 {
+    h1 {
 		margin-bottom: 20px;
 
 		font-size: larger;
@@ -88,12 +88,12 @@ class CloseAccountForm extends Component {
 		e.preventDefault()
 
 		const { firebase } = this.props
-		const { user, reset } = this.context
+		const { isAuthenticated, reauthenticate, user, reset } = this.context
 
 		if (window.confirm('Are you sure you want to close your account? This cannot be undone!')) {
-			if (this.isAuthenticated()) {
-				// Reauthenticate user before proceeding
-				this.reauthenticate(password).then(() => {
+			if (isAuthenticated()) {
+				// Re-authenticate user before proceeding
+				reauthenticate(password).then(() => {
 					// Remove user from auth system
 					user
 					.delete()
@@ -139,13 +139,11 @@ class CloseAccountForm extends Component {
                         labelText="Current Password *"
                         placeholder="***************"
                         hideLabel={false}
-                        onBlur={e => {
-                            this.handleChange(e)
-                        }}
+                        onChange={e => this.handleChange(e)}
                     />
 
                     {error.error ? (
-                            <div style={{ lineHeight: 2, marginBottom: 20 }}>
+                            <div style={{ textAlign: 'left', marginBottom: 20, lineHeight: 2 }}>
                                 <span role="img" aria-label="warning">⚠️</span>
                                 {error.message}
                             </div>

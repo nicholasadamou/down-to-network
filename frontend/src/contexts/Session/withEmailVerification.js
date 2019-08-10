@@ -66,7 +66,7 @@ const withEmailVerification = Component => {
 		constructor(props) {
 			super(props)
 
-			this.state = { isSent: false }
+			this.state = { isSent: true }
 
 			this.onSendEmailVerification = this.onSendEmailVerification.bind(this)
 		}

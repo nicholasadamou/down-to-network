@@ -17,7 +17,6 @@ import './index.scss'
 
 const Wrapper = styled.div`
     width: 100%;
-    height: 100%;
 
     padding: 10px;
 
@@ -63,7 +62,7 @@ const Wrapper = styled.div`
 	}
 `
 
-const ForgotPasswordPage = props => {
+const ForgotPasswordPage = () => {
   const { account, setAccount, validateEmail, handlePasswordReset, error } = useContext(AccountContext)
 
   const isValid = validateEmail(account.email)
@@ -74,7 +73,7 @@ const ForgotPasswordPage = props => {
         <Form onSubmit={handlePasswordReset}>
           <h1>Reset your Password</h1>
           {
-            error && (
+            error.error && (
               <span style={{ lineHeight: 2 }}>
                 <span role="img" aria-label="warning">⚠️</span>
                 {error.message}
@@ -96,7 +95,7 @@ const ForgotPasswordPage = props => {
               window.location.href = `${ROUTES.LANDING}`
             }}
           >
-			sBack
+						Back
           </Button>
         </Form>
       </Wrapper>

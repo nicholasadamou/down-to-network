@@ -8,6 +8,11 @@ import ActionBar from './ActionBar'
 
 import AccountContext from '../../../../../contexts/Account/AccountContext'
 
+const INITIAL_ERROR_STATE = {
+	error: false,
+	message: ''
+}
+
 class MatchSettings extends Component {
     static contextType = AccountContext
 
@@ -15,8 +20,9 @@ class MatchSettings extends Component {
         super(props)
 
         this.state = {
-            error: false,
-            errorMessage: ''
+            error: {
+				...INITIAL_ERROR_STATE
+			}
         }
 
         this.saveAndContinue = this.saveAndContinue.bind(this)
@@ -30,8 +36,10 @@ class MatchSettings extends Component {
             this.props.nextStep()
         } else {
             this.setState({
-                error: true,
-                errorMessage: 'Match settings is required to finish the Sign Up process.'
+                error: {
+					error: true,
+                	message: 'Match settings is required to finish the Sign Up process.'
+				}
             })
         }
     }
@@ -42,7 +50,6 @@ class MatchSettings extends Component {
 
     render() {
         const { setAccount, handleSignUp } = this.context
-        const { errorMessage } = this.state
 
         return (
             <Form style={{ height: '100%' }}>
@@ -65,10 +72,10 @@ class MatchSettings extends Component {
                     backTextLabel="Back"
                     nextTextLabel="Sign Up"
                 />
-                {this.state.error || this.context.error ? (
+                {this.state.error.error || this.context.error.error ? (
                     <span style={{ lineHeight: 2 }}>
                         <span role="img" aria-label="warning">⚠️</span>
-                        {(errorMessage && errorMessage) || (this.context.error.message && this.context.error.message)}
+                        {this.state.error.message || this.context.error.message}
                     </span>
                 ) : (
                     ''

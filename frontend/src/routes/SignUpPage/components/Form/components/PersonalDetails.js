@@ -6,6 +6,11 @@ import AccountContext from '../../../../../contexts/Account/AccountContext'
 
 import ActionBar from './ActionBar'
 
+const INITIAL_ERROR_STATE = {
+	error: false,
+	message: ''
+}
+
 class PersonalDetails extends Component {
     static contextType = AccountContext
 
@@ -13,13 +18,38 @@ class PersonalDetails extends Component {
         super(props)
 
         this.state = {
-            error: false,
-            errorMessage: '',
+			profilePicture: '',
+            error: {
+				...INITIAL_ERROR_STATE
+			},
             removeImageBtnDisabled: true
         }
 
+		this.selectProfilePicture = this.selectProfilePicture.bind(this)
+		this.removeprofilePicture = this.removeprofilePicture.bind(this)
         this.saveAndContinue = this.saveAndContinue.bind(this)
         this.back = this.back.bind(this)
+	}
+
+	selectProfilePicture = e => {
+        let reader = new FileReader()
+        let file = e.target.files[0]
+
+        if (file) {
+            reader.readAsDataURL(file)
+        }
+
+        reader.addEventListener("load", () => {
+            this.setState({
+                profilePicture: reader.result
+            }, () => console.log('profilePicture=', this.state.profilePicture))
+        }, false)
+	}
+
+	removeprofilePicture = () => {
+        this.setState({
+            profilePicture: ''
+        }, () => console.log('profilePicture=', this.state.profilePicture))
     }
 
     saveAndContinue = () => {
@@ -29,8 +59,10 @@ class PersonalDetails extends Component {
             this.props.nextStep()
         } else {
             this.setState({
-                error: true,
-                errorMessage: 'Fields, profile-picture, first-name, last-name, and role are required to continue.'
+                error: {
+					error: true,
+                	message: 'Fields, profile-picture, first-name, last-name, and role are required to continue.'
+				}
             })
         }
     }
@@ -41,16 +73,25 @@ class PersonalDetails extends Component {
 
     render() {
         const { setAccount, removeAccountAttributeByKey } = this.context
-        const { removeImageBtnDisabled, error, errorMessage } = this.state
+        const { profilePicture, removeImageBtnDisabled, error } = this.state
 
         let fileUploader;
 
         return(
             <Form>
                 <h1>Build your Profile</h1>
+				{
+					profilePicture && (
+						<img
+							src={profilePicture}
+							alt="profilePicture"
+							style={{ width: '100px', borderRadius: 100 }}
+						/>
+					)
+				}
                 <FileUploader
                     labelTitle="Profile Picture *"
-                    labelDescription="only .jpg, .jpeg files at 500MB or less."
+                    labelDescription="only .jpg, .jpeg files."
                     buttonLabel="Choose a image"
                     name="profilePicture"
                     filenameStatus="complete"
@@ -58,10 +99,13 @@ class PersonalDetails extends Component {
                     ref={node => (fileUploader = node)}
                     onChange={e => {
                         this.setState({
-                            error: false,
+                            error: {
+								...INITIAL_ERROR_STATE
+							},
                             removeImageBtnDisabled: false
                         })
 
+						this.selectProfilePicture(e)
                         setAccount('profilePicture', e.target.files[0])
                     }}
                 />
@@ -73,7 +117,8 @@ class PersonalDetails extends Component {
                             removeImageBtnDisabled: true
                         })
 
-                        fileUploader.clearFiles()
+						fileUploader.clearFiles()
+						this.removeprofilePicture()
                         removeAccountAttributeByKey('profilePicture')
                     }}
                 >
@@ -88,7 +133,9 @@ class PersonalDetails extends Component {
                     hideLabel={false}
                     onBlur={e => {
                         this.setState({
-                            error: false
+                            error: {
+								...INITIAL_ERROR_STATE
+							}
                         })
 
                         setAccount('name', e)
@@ -100,9 +147,11 @@ class PersonalDetails extends Component {
                     defaultValue="placeholder-item"
                     onBlur={e => {
                         this.setState({
-                            error: false
+                            error: {
+								...INITIAL_ERROR_STATE
+							}
                         })
-                        
+
                         setAccount('role', e)
                     }}
                 >
@@ -127,7 +176,7 @@ class PersonalDetails extends Component {
                     <SelectItem
                         value="Manager"
                         text="Manager"
-                    />                    
+                    />
                 </Select>
                 <ActionBar
                     back={this.back}
@@ -136,10 +185,10 @@ class PersonalDetails extends Component {
                     nextTextLabel="Next"
                 />
 
-                {error ? (
+                {error.error ? (
                     <span style={{ lineHeight: 2 }}>
                         <span role="img" aria-label="warning">⚠️</span>
-                        {errorMessage}
+                        {error.message}
                     </span>
                 ) : (
                     ''

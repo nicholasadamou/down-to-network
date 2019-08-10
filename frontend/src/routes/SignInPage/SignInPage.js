@@ -32,7 +32,6 @@ const ImageLogo = styled.img`
 
 const Wrapper = styled.div`
 	width: 100%;
-	height: 100%;
 
 	padding: 10px;
 
@@ -78,7 +77,7 @@ const Wrapper = styled.div`
 	}
 `
 
-const SignInPage = props => {
+const SignInPage = () => {
   const { account, setAccount, validateEmail, handleLogin, error } = useContext(AccountContext)
 
   const isValid = validateEmail(account.email) && account.password !== undefined
@@ -90,7 +89,7 @@ const SignInPage = props => {
         <Form onSubmit={handleLogin}>
           <h1>Sign In</h1>
           {
-            error && (
+            error.error && (
               <span style={{ lineHeight: 2 }}>
                 <span role="img" aria-label="warning">⚠️</span>
                 {error.message}

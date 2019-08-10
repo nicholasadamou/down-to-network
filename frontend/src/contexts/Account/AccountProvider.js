@@ -232,7 +232,9 @@ class AccountProvider extends Component {
 	}
 
 	isAuthenticated = () => {
-		return this.state.user !== undefined && localStorage.getItem('authUser') !== undefined
+		return this.state.user !== undefined &&
+			localStorage.getItem('authUser') !== undefined &&
+			localStorage.getItem('authUser') !== null
 	}
 
 	reauthenticate = password => {

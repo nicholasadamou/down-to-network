@@ -10,6 +10,11 @@ import * as ROUTES from '../../../../../constants/routes'
 
 const { PasswordInput } = TextInput
 
+const INITIAL_ERROR_STATE = {
+	error: false,
+	message: ''
+}
+
 class UserDetails extends Component {
     static contextType = AccountContext
 
@@ -17,8 +22,11 @@ class UserDetails extends Component {
         super(props)
 
         this.state = {
-            error: false,
-            errorMessage: ''
+			error: {
+				...INITIAL_ERROR_STATE
+			},
+			passwordInvalid: false,
+			emailInvalid: false,
         }
 
         this.saveAndContinue = this.saveAndContinue.bind(this)
@@ -34,19 +42,29 @@ class UserDetails extends Component {
         } else {
             if (!validateEmail(account.email) && !validatePassword(account.password)) {
                 this.setState({
-                    error: true,
-                    errorMessage: 'Both, email & password fields are required to continue.'
+                    error: {
+						error: true,
+                    	message: 'Both, email & password fields are required to continue.'
+					},
+					emailInvalid: true,
+					passwordInvalid: true
                 })
             } else {
                 if (!validateEmail(account.email)) {
                     this.setState({
-                        error: true,
-                        errorMessage: 'The email address that was entered is invaild.'
+                        error: {
+							error: true,
+                        	message: 'The email address that was entered is invaild.'
+						},
+						emailInvalid: true
                     })
                 } else if (!validatePassword(account.password)) {
                     this.setState({
-                        error: true,
-                        errorMessage: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.'
+                        error: {
+							error: true,
+                        	message: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.'
+						},
+						passwordInvalid: true
                     })
                 }
             }
@@ -59,7 +77,7 @@ class UserDetails extends Component {
 
     render() {
         const { setAccount, validateEmail, validatePassword } = this.context
-        const { error, errorMessage } = this.state
+        const { error, emailInvalid, passwordInvalid } = this.state
 
         return(
             <Form>
@@ -70,18 +88,27 @@ class UserDetails extends Component {
                     labelText="Email *"
                     type="email"
                     placeholder="Stephen.Alt@ibm.com"
-                    hideLabel={false}
+					hideLabel={false}
+					invalid={emailInvalid}
                     onBlur={e => {
-                        if (validateEmail(e.target.value)) {
+						const email = e.target.value
+
+                        if (validateEmail(email)) {
                             this.setState({
-                                error: false
+                                error: {
+									...INITIAL_ERROR_STATE
+								},
+								emailInvalid: false
                             })
-                            
+
                             setAccount('email', e)
                         } else {
                             this.setState({
-                                error: true,
-                                errorMessage: 'The email address that was entered is invaild.'
+                                error: {
+									error: true,
+                                	message: 'The email address that was entered is invaild.'
+								},
+								emailInvalid: true
                             })
                         }
                     }}
@@ -92,18 +119,27 @@ class UserDetails extends Component {
                     labelText="Password *"
                     helperText="At least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length."
                     placeholder="***************"
-                    hideLabel={false}
+					hideLabel={false}
+					invalid={passwordInvalid}
                     onBlur={e => {
-                        if (validatePassword(e.target.value)) {
+						const password = e.target.value
+
+                        if (validatePassword(password)) {
                             this.setState({
-                                error: false
+                                error: {
+									...INITIAL_ERROR_STATE
+								},
+								passwordInvalid: false
                             })
 
                             setAccount('password', e)
                         } else {
                             this.setState({
-                                error: true,
-                                errorMessage: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.'
+                                error: {
+									error: true,
+                                	message: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.'
+								},
+								passwordInvalid: true
                             })
                         }
                     }}
@@ -115,10 +151,10 @@ class UserDetails extends Component {
                     nextTextLabel="Next"
                 />
 
-                {error ? (
+                {error.error ? (
                     <span style={{ lineHeight: 2 }}>
                         <span role="img" aria-label="warning">⚠️</span>
-                        {errorMessage}
+                        {error.message}
                     </span>
                 ) : (
                     ''
