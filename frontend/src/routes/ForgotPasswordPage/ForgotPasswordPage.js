@@ -16,9 +16,9 @@ import AccountContext from '../../contexts/Account/AccountContext'
 import './index.scss'
 
 const Wrapper = styled.div`
-    width: 100%;
+	width: 100%;
 
-    padding: 10px;
+	padding: 10px;
 
 	overflow: hidden;
 
@@ -31,29 +31,29 @@ const Wrapper = styled.div`
 	}
 
 	form {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 
-        width: 50%;
+		width: 50%;
 
-        overflow: hidden;
+		overflow: hidden;
 
-        @media (max-width: 375px) {
-            top: initial;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+		@media (max-width: 375px) {
+				top: initial;
+				bottom: 10px;
+				left: 50%;
+				transform: translateX(-50%);
 
-            width: 90%;
-        }
+				width: 90%;
+		}
 
-        h1 {
-            font-size: larger;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
+		h1 {
+				font-size: larger;
+				font-weight: bold;
+				margin-bottom: 20px;
+		}
 
 		button {
 			max-width: 100%;

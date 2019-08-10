@@ -14,7 +14,7 @@ import './index.scss'
 const Wrapper = styled.div`
 	padding: 10px;
 
-	height: 100%;
+	height: 80%;
 
 	overflow-x: hidden;
 
@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 	}
 `
 
-const SignUpPage = props => {
+const SignUpPage = () => {
   return (
     <Layout>
       <Wrapper>

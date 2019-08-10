@@ -37,26 +37,26 @@ class FormBase extends Component {
         })
     }
 
-	render() { 
+	render() {
 		const { step } = this.state
 
 		switch(step) {
-				case 1: 
+				case 1:
 					return (
 						<UserDetails
-							nextStep={this.nextStep} 
+							nextStep={this.nextStep}
 						/>
 					)
 				case 2:
 					return (
-						<PersonalDetails 
+						<PersonalDetails
 							nextStep={this.nextStep}
 							prevStep={this.prevStep}
 						/>
 					)
-				case 3:	
+				case 3:
 					return (
-						<MatchSettings 
+						<MatchSettings
 							nextStep={this.nextStep}
 							prevStep={this.prevStep}
 						/>
@@ -66,7 +66,7 @@ class FormBase extends Component {
 			}
 	}
 }
- 
+
 const Form = compose(withRouter(FormBase));
 
 export default Form

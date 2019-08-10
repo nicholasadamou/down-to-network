@@ -38,7 +38,7 @@ class MatchSettings extends Component {
             this.setState({
                 error: {
 					error: true,
-                	message: 'Match settings is required to finish the Sign Up process.'
+					message: 'Match settings is required to finish the Sign Up process.'
 				}
             })
         }
@@ -52,7 +52,7 @@ class MatchSettings extends Component {
         const { setAccount, handleSignUp } = this.context
 
         return (
-            <Form style={{ height: '100%' }}>
+            <Form>
                 <h1>Choose your Settings</h1>
                 <MultiSelect
                     id="match-settings"
