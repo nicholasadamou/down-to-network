@@ -4,10 +4,6 @@ import styled from 'styled-components'
 
 import { Button, SkeletonPlaceholder, SkeletonText } from 'carbon-components-react'
 
-import * as ROUTES from '../../constants/routes'
-
-import { isMobile } from '../../lib/utils'
-
 import AccountContext from '../../contexts/Account/AccountContext'
 
 import ToggleContent from '../../components/Modal/ToggleContent'
@@ -180,123 +176,67 @@ class AccountPage extends React.Component {
 									:
 										<p>{account.name}</p>
 							}
-							{
-								!isMobile.any()
-									?
-										<ToggleContent
-											toggle={show => (
-												<Button
-													kind="secondary"
-													className="manage_account_button"
-													onClick={show}
-												>
-													Change Profile Picture
-												</Button>
-											)}
-											content={hide => (
-												<ChangeProfilePictureModal hide={hide} />
-											)}
-										/>
-									:
-										<Button
-											kind="secondary"
-											className="manage_account_button"
-											onClick={() => {
-												window.location.href = `${ROUTES.CHANGE_PROFILE_PICTURE}`
-											}}
-										>
-											Change Profile Picture
-										</Button>
-							}
+							<ToggleContent
+								toggle={show => (
+									<Button
+										kind="secondary"
+										className="manage_account_button"
+										onClick={show}
+									>
+										Change Profile Picture
+									</Button>
+								)}
+								content={hide => (
+									<ChangeProfilePictureModal hide={hide} />
+								)}
+							/>
 						</Container>
 					</ProfilePictureWrapper>
 					<ChangeMatchSettingsForm />
 					<ChangeRoleForm />
-					{
-						!isMobile.any()
-							?
-								<ToggleContent
-									toggle={show => (
-										<Button
-											kind="secondary"
-											className="manage_account_button"
-											onClick={show}
-										>
-											Change Email
-										</Button>
-									)}
-									content={hide => (
-										<ChangeEmailModal hide={hide} />
-									)}
-								/>
-							:
-								<Button
-									kind="secondary"
-									className="manage_account_button"
-									onClick={() => {
-										window.location.href = `${ROUTES.CHANGE_EMAIL}`
-									}}
-								>
-									Change Email
-								</Button>
-					}
-					{
-						!isMobile.any()
-							?
-								<ToggleContent
-									toggle={show => (
-										<Button
-											kind="secondary"
-											className="manage_account_button"
-											onClick={show}
-										>
-											Change Password
-										</Button>
-									)}
-									content={hide => (
-										<ChangePasswordModal hide={hide} />
-									)}
-								/>
-							:
-								<Button
-									kind="secondary"
-									className="manage_account_button"
-									onClick={() => {
-										window.location.href = `${ROUTES.CHANGE_PASSWORD}`
-									}}
-								>
-									Change Password
-								</Button>
-					}
+					<ToggleContent
+						toggle={show => (
+							<Button
+								kind="secondary"
+								className="manage_account_button"
+								onClick={show}
+							>
+								Change Email
+							</Button>
+						)}
+						content={hide => (
+							<ChangeEmailModal hide={hide} />
+						)}
+					/>
+					<ToggleContent
+						toggle={show => (
+							<Button
+								kind="secondary"
+								className="manage_account_button"
+								onClick={show}
+							>
+								Change Password
+							</Button>
+						)}
+						content={hide => (
+							<ChangePasswordModal hide={hide} />
+						)}
+					/>
 					<SignOutButton />
-					{
-						!isMobile.any()
-							?
-								<ToggleContent
-									toggle={show => (
-										<Button
-											kind="danger"
-											className="manage_account_button"
-											onClick={show}
-										>
-											Close account?
-										</Button>
-									)}
-									content={hide => (
-										<CloseAccountModal hide={hide} />
-									)}
-								/>
-							:
-								<Button
-									kind="danger"
-									className="manage_account_button"
-									onClick={() => {
-										window.location.href = `${ROUTES.CLOSE_ACCOUNT}`
-									}}
-								>
-									Close account?
-								</Button>
-					}
+					<ToggleContent
+						toggle={show => (
+							<Button
+								kind="danger"
+								className="manage_account_button"
+								onClick={show}
+							>
+								Close Account
+							</Button>
+						)}
+						content={hide => (
+							<CloseAccountModal hide={hide} />
+						)}
+					/>
 				</Wrapper>
 				<MenuBar />
 			</Layout>

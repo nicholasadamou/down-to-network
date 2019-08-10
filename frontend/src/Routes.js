@@ -6,8 +6,6 @@ import {
 	Redirect
 } from 'react-router-dom'
 
-import { isMobile } from './lib/utils'
-
 import * as ROUTES from './constants/routes';
 
 import { withFirebase } from './contexts/Firebase'
@@ -20,12 +18,6 @@ const SignUpPage = lazy(() => import('./routes/SignUpPage/SignUpPage'))
 const DashboardPage = lazy(() => import('./routes/DashboardPage/DashboardPage'))
 const ForgotPasswordPage = lazy(() => import('./routes/ForgotPasswordPage/ForgotPasswordPage'))
 const AccountPage = lazy(() => import('./routes/AccountPage/AccountPage'))
-
-const ChangeProfilePicturePage = lazy(() => import('./routes/AccountPage/routes/ChangeProfilePicturePage'))
-const CloseAccountPage = lazy(() => import('./routes/AccountPage/routes/CloseAccountPage'))
-const ChangeEmailPage = lazy(() => import('./routes/AccountPage/routes/ChangeEmailPage'))
-const ChangePasswordPage = lazy(() => import('./routes/AccountPage/routes/ChangePasswordPage'))
-
 const NotFoundPage = lazy(() => import('./routes/NotFoundPage/NotFoundPage'))
 
 const Routes = () => {
@@ -41,13 +33,13 @@ const Routes = () => {
 						: <Redirect to={ROUTES.DASHBOARD} />
 				}} />
 				<Route exact path={ROUTES.DASHBOARD} render={props => {
-						return isAuthenticated
+						return isAuthenticated()
 							? <DashboardPage {...props} />
 							: <Redirect to={ROUTES.LANDING} />
 					}}
 				/>
 				<Route exact path={ROUTES.ACCOUNT} render={props => {
-						return isAuthenticated
+						return isAuthenticated()
 							? <AccountPage {...props} />
 							: <Redirect to={ROUTES.LANDING} />
 					}}
@@ -55,47 +47,21 @@ const Routes = () => {
 
 				{/* auth pages */}
 				<Route exact path={ROUTES.SIGN_IN} render={props => {
-						return !isAuthenticated
+						return !isAuthenticated()
 							? <SignInPage {...props} />
 							: <Redirect to={ROUTES.LANDING} />
 					}}
 				/>
 				<Route exact path={ROUTES.PASSWORD_FORGET} render={props => {
-						return !isAuthenticated
+						return !isAuthenticated()
 							? <ForgotPasswordPage {...props} />
 							: <Redirect to={ROUTES.LANDING} />
 					}}
 				/>
 				<Route exact path={ROUTES.SIGN_UP} render={props => {
-						return !isAuthenticated
+						return !isAuthenticated()
 							? <SignUpPage {...props} />
 							: <Redirect to={ROUTES.LANDING} />
-					}}
-				/>
-
-				{/* account pages */}
-				<Route exact path={ROUTES.CHANGE_PROFILE_PICTURE} render={props => {
-						return isMobile.any()
-							? <ChangeProfilePicturePage {...props} />
-							: <Redirect from='*' to={ROUTES.NOT_FOUND} />
-					}}
-				/>
-				<Route exact path={ROUTES.CHANGE_EMAIL} render={props => {
-						return isMobile.any()
-							? <ChangeEmailPage {...props} />
-							: <Redirect from='*' to={ROUTES.NOT_FOUND} />
-					}}
-				/>
-				<Route exact path={ROUTES.CLOSE_ACCOUNT} render={props => {
-						return isMobile.any()
-							? <CloseAccountPage {...props} />
-							: <Redirect from='*' to={ROUTES.NOT_FOUND} />
-					}}
-				/>
-				<Route exact path={ROUTES.CHANGE_PASSWORD} render={props => {
-						return isMobile.any()
-							? <ChangePasswordPage {...props} />
-							: <Redirect from='*' to={ROUTES.NOT_FOUND} />
 					}}
 				/>
 
