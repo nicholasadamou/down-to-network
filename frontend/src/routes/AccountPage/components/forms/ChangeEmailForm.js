@@ -6,9 +6,8 @@ import { Form, Button, TextInput } from 'carbon-components-react'
 
 import * as ROUTES from '../../../../constants/routes'
 
-import { withFirebase } from '../../../../contexts/Firebase'
-
 import AccountContext from '../../../../contexts/Account/AccountContext'
+import { withFirebase } from '../../../../contexts/Firebase';
 
 const { PasswordInput } = TextInput
 
@@ -24,7 +23,7 @@ const Wrapper = styled.div`
 
     overflow-x: hidden;
 
-     h1 {
+	h1 {
 		margin-bottom: 20px;
 
 		font-size: larger;
@@ -46,7 +45,11 @@ const Wrapper = styled.div`
         .bx--text-input--password__visibility {
             width: initial;
         }
-    }
+	}
+
+	.bx--form-requirement {
+		text-align: left;
+	}
 `
 
 const INITIAL_ERROR_STATE = {
@@ -65,11 +68,14 @@ class ChangeEmailForm extends Component {
             email: '',
             error: {
                 ...INITIAL_ERROR_STATE
-            }
+			},
+			emailInvalid: false,
+			emailInvalidText: ''
         }
 
-        this.handleChange = this.handleChange.bind(this)
-        this.handleEmailChange = this.handleEmailChange.bind(this)
+		this.handleChange = this.handleChange.bind(this)
+		this.validateEmail = this.validateEmail.bind(this)
+		this.handleEmailChange = this.handleEmailChange.bind(this)
     }
 
     handleChange = e => {
@@ -79,16 +85,34 @@ class ChangeEmailForm extends Component {
         )
 
         console.log(`${e.target.name}=`, e.target.value)
-    }
+	}
+
+	validateEmail = e => {
+		const { validateEmail } = this.context
+
+		const email = e.target.value
+
+		if (!validateEmail(email)) {
+			this.setState({
+				emailInvalid: true,
+				emailInvalidText: 'The email address that was entered is invaild.'
+			})
+		} else {
+			this.setState({
+				emailInvalid: false,
+				emailInvalidText: ''
+			})
+		}
+	}
 
     handleEmailChange = (e, email, password) => {
 		e.preventDefault()
 
 		const { firebase } = this.props
-		const { user, account } = this.context
+		const { user, account, reauthenticate } = this.context
 
-		// Reauthenticate user before proceeding
-		this.reauthenticate(password)
+		// Re-authenticate user before proceeding
+		reauthenticate(password)
 			.then(() => {
 				user
 					.updateEmail(email)
@@ -99,8 +123,8 @@ class ChangeEmailForm extends Component {
 						// Update account email
 						account.email = email
 
-						// Redirect to account page
-						window.location.href = `${ROUTES.ACCOUNT}`
+						// Redirect to email verification page
+						window.location.href = `${ROUTES.VERIFY_EMAIL}`
 					})
 					.catch(error => {
 						this.setState({
@@ -121,7 +145,8 @@ class ChangeEmailForm extends Component {
 	}
 
     render() {
-        const { password, email, error } = this.state
+		const { password, email, error } = this.state
+		const { emailInvalid, emailInvalidText } = this.state
         const { validateEmail, account } = this.context
 
         const isValid = validateEmail(email) && email !== account.email && password !== ''
@@ -136,9 +161,7 @@ class ChangeEmailForm extends Component {
                             labelText="Current Password *"
                             placeholder="***************"
                             hideLabel={false}
-                            onBlur={e => {
-                                this.handleChange(e)
-                            }}
+                            onChange={e => this.handleChange(e)}
                         />
                         <TextInput
                             id="email"
@@ -146,39 +169,15 @@ class ChangeEmailForm extends Component {
                             labelText="New Email *"
                             type="email"
                             placeholder="Stephen.Alt@ibm.com"
-                            hideLabel={false}
-                            onBlur={e => {
-                                const email = e.target.value
-
-                                if (validateEmail(email) && email !== account.email) {
-                                    this.setState({
-                                        error: {
-                                            error: false,
-                                            message: ''
-                                        }
-                                    })
-
-                                    this.handleChange(e)
-                                } else if (validateEmail(email) && email === account.email) {
-                                    this.setState({
-                                        error: {
-                                            error: true,
-                                            message: 'The email address that was entered is the same as the old one.'
-                                        }
-                                    })
-                                } else {
-                                    this.setState({
-                                        error: {
-                                            error: false,
-                                            message: 'The email address that was entered is invaild.'
-                                        }
-                                    })
-                                }
-                            }}
+							hideLabel={false}
+							invalid={emailInvalid}
+							invalidText={emailInvalidText}
+							onChange={e => this.handleChange(e)}
+                            onBlur={e => this.validateEmail(e)}
                         />
 
                         {error.error ? (
-                                <div style={{ lineHeight: 2, marginBottom: 20 }}>
+                                <div style={{ textAlign: 'left', marginBottom: 20, lineHeight: 2 }}>
                                     <span role="img" aria-label="warning">⚠️</span>
                                     {error.message}
                                 </div>

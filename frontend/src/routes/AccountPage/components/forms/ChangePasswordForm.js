@@ -22,9 +22,9 @@ const Wrapper = styled.div`
 
 	padding: 10px;
 
-    overflow-x: hidden;
+	overflow-x: hidden;
 
-     h1 {
+    h1 {
 		margin-bottom: 20px;
 
 		font-size: larger;
@@ -50,7 +50,11 @@ const Wrapper = styled.div`
         .bx--text-input--password__visibility {
             width: initial;
         }
-    }
+	}
+
+	.bx--form-requirement {
+		text-align: left;
+	}
 `
 
 const INITIAL_ERROR_STATE = {
@@ -70,11 +74,16 @@ class ChangePasswordForm extends Component {
             passwordTwo: '',
             error: {
                 ...INITIAL_ERROR_STATE
-            }
+			},
+			passwordOneInvalidText: '',
+			passwordTwoInvalidText: '',
+			passwordOneInvalid: false,
+			passwordTwoInvalid: false,
         }
 
         this.handleChange = this.handleChange.bind(this)
-        this.handlePasswordChange = this.handlePasswordChange.bind(this)
+		this.validatePassword = this.validatePassword.bind(this)
+		this.handlePasswordChange = this.handlePasswordChange.bind(this)
     }
 
     handleChange = e => {
@@ -84,16 +93,50 @@ class ChangePasswordForm extends Component {
         )
 
         console.log(`${e.target.name}=`, e.target.value)
-    }
+	}
+
+	validatePassword = (e, password) => {
+		const { validatePassword } = this.context
+
+		const cell = {
+			name: e.target.name,
+			password: e.target.value
+		}
+
+		const target = {
+			name: (e.target.name === 'passwordOne') ? 'passwordTwo' : 'passwordOne',
+			password
+		}
+
+		if (!validatePassword(cell.password)) {
+			this.setState({
+				[`${cell.name}Invalid`]: true,
+				[`${cell.name}InvalidText`]:
+					'At least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length.',
+			})
+		} else {
+			if (cell.password !== target.password) {
+				this.setState({
+					[`${cell.name}Invalid`]: true,
+					[`${cell.name}InvalidText`]: `Both passwords do not match!`,
+				})
+			} else {
+				this.setState({
+					[`${cell.name}Invalid`]: false,
+					[`${target.name}Invalid`]: false,
+				})
+			}
+		}
+	}
 
     handlePasswordChange = (e, newPassword, currentPassword) => {
 		e.preventDefault()
 
 		const { firebase } = this.props
-		const { account } = this.context
+		const { account, reauthenticate } = this.context
 
-		// Reauthenticate user before proceeding
-		this.reauthenticate(currentPassword)
+		// Re-authenticate user before proceeding
+		reauthenticate(currentPassword)
 			.then(() => {
 				firebase
 					.doPasswordUpdate(newPassword)
@@ -124,8 +167,8 @@ class ChangePasswordForm extends Component {
 	}
 
     render() {
-        const { password, passwordOne, passwordTwo, error } = this.state
-        const { validatePassword } = this.context
+		const { password, passwordOne, passwordTwo } = this.state
+		const { error, passwordOneInvalid, passwordOneInvalidText, passwordTwoInvalid, passwordTwoInvalidText } = this.state
 
         const isValid = password !== '' && passwordOne === passwordTwo && passwordOne !== ''
 
@@ -138,10 +181,8 @@ class ChangePasswordForm extends Component {
                         name="password"
                         labelText="Current Password *"
                         placeholder="***************"
-                        hideLabel={false}
-                        onBlur={e => {
-                            this.handleChange(e)
-                        }}
+						hideLabel={false}
+						onChange={e => this.handleChange(e)}
                     />
                     <PasswordInput
                         id="passwordOne"
@@ -149,60 +190,26 @@ class ChangePasswordForm extends Component {
                         labelText="Password *"
                         helperText="At least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length."
                         placeholder="***************"
-                        hideLabel={false}
-                        onBlur={e => {
-                            const password = e.target.value
-
-                            if (validatePassword(password)) {
-                                this.setState({
-                                    error: {
-                                        error: false,
-                                        message: ''
-                                    }
-                                })
-
-                                this.handleChange(e)
-                            } else {
-                            this.setState({
-                                    error: {
-                                        error: true,
-                                        message: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.'
-                                    }
-                                })
-                            }
-                        }}
+						hideLabel={false}
+						invalid={passwordOneInvalid}
+						invalidText={passwordOneInvalidText}
+                        onChange={e => this.handleChange(e)}
+						onBlur={e => this.validatePassword(e, passwordTwo)}
                     />
                     <PasswordInput
                         id="passwordTwo"
                         name="passwordTwo"
                         labelText="Confirm your password *"
                         placeholder="***************"
-                        hideLabel={false}
-                        onBlur={e => {
-                        const password = e.target.value
-
-                            if (validatePassword(password)) {
-                                this.setState({
-                                    error: {
-                                        error: false,
-                                        message: ''
-                                    }
-                                })
-
-                                this.handleChange(e)
-                            } else {
-                                this.setState({
-                                    error: {
-                                        error: true,
-                                        message: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.'
-                                    }
-                                })
-                            }
-                        }}
+						hideLabel={false}
+						invalid={passwordTwoInvalid}
+						invalidText={passwordTwoInvalidText}
+                        onChange={e => this.handleChange(e)}
+						onBlur={e => this.validatePassword(e, passwordOne)}
                     />
 
                     {error.error ? (
-                            <div style={{ lineHeight: 2, marginBottom: 20 }}>
+                            <div style={{ textAlign: 'left', marginBottom: 20, lineHeight: 2 }}>
                                 <span role="img" aria-label="warning">⚠️</span>
                                 {error.message}
                             </div>

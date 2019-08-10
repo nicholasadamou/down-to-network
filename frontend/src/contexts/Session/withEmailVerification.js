@@ -8,7 +8,7 @@ import AuthUserContext from './AuthUserContext'
 import { withFirebase } from '../Firebase'
 
 const Wrapper = styled.div`
-  display: flex;
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
@@ -55,75 +55,75 @@ const Wrapper = styled.div`
 `
 
 const needsEmailVerification = authUser =>
-  authUser &&
-  !authUser.emailVerified &&
-  authUser.providerData
-	.map(provider => provider.providerId)
-	.includes('password')
+	authUser &&
+	!authUser.emailVerified &&
+	authUser.providerData
+		.map(provider => provider.providerId)
+		.includes('password')
 
 const withEmailVerification = Component => {
-  class WithEmailVerification extends React.Component {
-	constructor(props) {
-	  super(props)
+	class WithEmailVerification extends React.Component {
+		constructor(props) {
+			super(props)
 
-	  this.state = { isSent: false }
+			this.state = { isSent: false }
 
-		this.onSendEmailVerification = this.onSendEmailVerification.bind(this)
-	}
+			this.onSendEmailVerification = this.onSendEmailVerification.bind(this)
+		}
 
-	onSendEmailVerification = () => {
-	  this.props.firebase
-		.doSendEmailVerification()
-		.then(() => this.setState({ isSent: true }))
-	}
+		onSendEmailVerification = () => {
+			this.props.firebase
+				.doSendEmailVerification()
+				.then(() => this.setState({ isSent: true }))
+		}
 
-	render() {
-	  return (
-		<AuthUserContext.Consumer>
-		  {authUser =>
-			needsEmailVerification(authUser) ? (
-			  <Wrapper>
-				{this.state.isSent ? (
-					<>
-						<strong>
-							E-Mail confirmation sent! <span role="img" aria-label="checkmark">✅</span>
-						</strong>
-						<p>
-							Check your E-Mail (Spam folder included) for a confirmation E-Mail.
-						</p>
-						<em>
-							Refresh this page once you confirmed your E-Mail.
-						</em>
-					</>
-				) : (
-					<>
-						<strong>
-							Verify your E-Mail. <span role="img" aria-label="warning">⚠️</span>
-						</strong>
-						<p>
-							Check your E-Mail (Spam folder included) for a confirmation E-Mail or send another confirmation E-Mail.
-						</p>
-					</>
-				)}
+		render() {
+			return (
+				<AuthUserContext.Consumer>
+					{authUser =>
+						needsEmailVerification(authUser) ? (
+							<Wrapper>
+								{this.state.isSent ? (
+									<>
+										<strong>
+											E-Mail confirmation sent! <span role="img" aria-label="checkmark">✅</span>
+										</strong>
+										<p>
+											Check your E-Mail (Spam folder included) for a confirmation E-Mail.
+										</p>
+										<em>
+											Refresh this page once you confirmed your E-Mail.
+										</em>
+									</>
+								) : (
+									<>
+										<strong>
+											Verify your E-Mail. <span role="img" aria-label="warning">⚠️</span>
+										</strong>
+										<p>
+											Check your E-Mail (Spam folder included) for a confirmation E-Mail or send another confirmation E-Mail.
+										</p>
+									</>
+								)}
 
-				<Button
-				  kind="primary"
-				  onClick={this.onSendEmailVerification}
-				  disabled={this.state.isSent}
-				>
-				  Send confirmation E-Mail
-				</Button>
-			  </Wrapper>
-			) : (
-			  <Component {...this.props} />
+								<Button
+									kind="primary"
+									onClick={this.onSendEmailVerification}
+									disabled={this.state.isSent}
+								>
+									Send confirmation E-Mail
+								</Button>
+							</Wrapper>
+						) : (
+						<Component {...this.props} />
+						)
+					}
+				</AuthUserContext.Consumer>
 			)
-		  }
-		</AuthUserContext.Consumer>
-	  )
+		}
 	}
-  }
 
-  return withFirebase(WithEmailVerification)
+	return withFirebase(WithEmailVerification)
 }
 
 export default withEmailVerification

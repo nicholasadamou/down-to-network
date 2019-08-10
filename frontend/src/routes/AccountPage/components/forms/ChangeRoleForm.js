@@ -118,7 +118,7 @@ class RoleChangeForm extends Component {
                     </Select>
 
                     {error.error ? (
-                            <div style={{ lineHeight: 2, marginBottom: 20 }}>
+                            <div style={{ marginBottom: 20, lineHeight: 2 }}>
                                 <span role="img" aria-label="warning">⚠️</span>
                                 {error.message}
                             </div>

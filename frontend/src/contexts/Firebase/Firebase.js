@@ -2,7 +2,7 @@ import firebase from 'firebase'
 import app from 'firebase/app'
 import 'firebase/auth'
 
-import { filter, map } from 'lodash' 
+import { filter, map } from 'lodash'
 
 const config = {
 	apiKey: process.env.REACT_APP_API_KEY,
@@ -22,13 +22,13 @@ class Firebase {
 
 		/* Helper */
 
-		this.serverValue = app.database.ServerValue;
-		this.emailAuthProvider = app.auth.EmailAuthProvider;
+		this.serverValue = app.database.ServerValue
+		this.emailAuthProvider = app.auth.EmailAuthProvider
 
 		/* Firebase APIs */
 
-		this.auth = app.auth();
-		this.database = app.database();
+		this.auth = app.auth()
+		this.database = app.database()
 	}
 
 	// *** Auth API ***
@@ -50,7 +50,7 @@ class Firebase {
 		this.auth.currentUser.sendEmailVerification({
 			url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT,
 		})
-	
+
 	// *** Merge Auth and DB User API *** //
 
 	onAuthUserListener = (next, fallback) =>

@@ -9,11 +9,11 @@ import { withFirebase } from '../../contexts/Firebase'
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use'
 
 const ERROR_MSG_ACCOUNT_EXISTS = `
-  An account with this E-Mail address already exists.
-  Try to login with this account instead. If you think the
-  account is already used from one of the social logins, try
-  to sign in with one of them. Afterward, associate your accounts
-  on your personal account page.
+	An account with this E-Mail address already exists.
+	Try to login with this account instead. If you think the
+	account is already used from one of the social logins, try
+	to sign in with one of them. Afterward, associate your accounts
+	on your personal account page.
 `
 
 const INITIAL_ERROR_STATE = {
@@ -239,9 +239,9 @@ class AccountProvider extends Component {
 		const { firebase } = this.props
 		const { user } = this.state
 
-		const credential = firebase.auth.EmailAuthProvider.credential(user.email, password)
+		const credential = firebase.app.auth.EmailAuthProvider.credential(user.email, password)
 
-		return user.reauthenticateAndRetrieveDataWithCredential(credential)
+		return user.reauthenticateWithCredential(credential)
 	}
 
 	componentDidMount() {
@@ -280,6 +280,7 @@ class AccountProvider extends Component {
 					validateEmail: this.validateEmail,
 					validatePassword: this.validatePassword,
 					isAuthenticated: this.isAuthenticated,
+					reauthenticate: this.reauthenticate,
 					reset: this.reset
 				}}
 			>
