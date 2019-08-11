@@ -16,13 +16,16 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
 	on your personal account page.
 `
 
+const user = JSON.parse(localStorage.getItem('authUser'))
+
 const INITIAL_ERROR_STATE = {
     error: false,
     message: ''
 }
 
 const INITIAL_STATE = {
-	user: {},
+	authUser: undefined,
+	user,
 	account: {},
 	loading: true,
 	error: {
@@ -232,39 +235,40 @@ class AccountProvider extends Component {
 	}
 
 	isAuthenticated = () => {
-		return this.state.user !== undefined &&
-			localStorage.getItem('authUser') !== undefined &&
+		return localStorage.getItem('authUser') !== undefined &&
 			localStorage.getItem('authUser') !== null
 	}
 
 	reauthenticate = password => {
 		const { firebase } = this.props
-		const { user } = this.state
+		const { authUser } = this.state
 
-		const credential = firebase.app.auth.EmailAuthProvider.credential(user.email, password)
+		const credential = firebase.app.auth.EmailAuthProvider.credential(authUser.email, password)
 
-		return user.reauthenticateWithCredential(credential)
+		return authUser.reauthenticateWithCredential(credential)
 	}
 
-	componentDidMount() {
+	componentWillMount() {
+		const { user } = this.state
 		const { firebase } = this.props
 
         firebase.auth.onAuthStateChanged(authUser => {
             if (authUser) {
 				this.setState({
-					user: authUser
-				}, () => console.log('user=', this.state.user))
-
-                firebase.getValue(`users/${authUser.uid}`).then(snapshot => {
-					const dbUser = snapshot.val()
-
-					this.setState({
-						account: {...dbUser},
-						loading: false,
-					}, () => console.log('account=', this.state.account))
-				})
+					authUser,
+					loading: false
+				}, () => console.log('authUser=', this.state.authUser))
             }
-        })
+		})
+
+		this.setState({
+			account: {
+				name: user.name,
+				profilePicture: user.profilePicture,
+				role: user.role,
+				matchSettings: user.matchSettings
+			}
+		}, () => console.log('account=', this.state.account))
 	}
 
 	render() {

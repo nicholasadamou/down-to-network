@@ -1,19 +1,32 @@
-import React from 'react';
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-tabs */
+/* eslint-disable no-unused-vars */
+import React, { useContext } from 'react'
 
-// import  { FirebaseContext } from '../Firebase';
+import AccountContext from '../../contexts/Account/AccountContext'
+
+import Loading from '../Loading'
 
 import Header from './components/Header'
 
 const Layout = props => {
-	const { children } = props
-	// const { firebase } = useContext(FirebaseContext)
+  const { children } = props
+  const { loading } = useContext(AccountContext)
 
-	return (
+  return (
 		<>
-			<Header />
-			{ children }
+			{ loading
+			  ?	(
+			    <Loading />
+			  ) : (
+				<>
+					<Header />
+					{ children }
+				</>
+			  )
+			}
 		</>
-	);
-};
+  )
+}
 
-export default Layout;
+export default Layout

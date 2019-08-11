@@ -2,7 +2,7 @@ import firebase from 'firebase'
 import app from 'firebase/app'
 import 'firebase/auth'
 
-import { filter, map } from 'lodash'
+import { map } from 'lodash'
 
 const config = {
 	apiKey: process.env.REACT_APP_API_KEY,
@@ -36,14 +36,14 @@ class Firebase {
 	doCreateUserWithEmailAndPassword = (email, password) =>
 		this.auth.createUserWithEmailAndPassword(email, password)
 
-  	doSignInWithEmailAndPassword = (email, password) =>
+	doSignInWithEmailAndPassword = (email, password) =>
 		this.auth.signInWithEmailAndPassword(email, password)
 
 	doSignOut = () => this.auth.signOut()
 
 	doPasswordReset = email => this.auth.sendPasswordResetEmail(email)
 
-  	doPasswordUpdate = password =>
+	doPasswordUpdate = password =>
 		this.auth.currentUser.updatePassword(password)
 
 	doSendEmailVerification = () =>
@@ -91,9 +91,17 @@ class Firebase {
 
 	users = () => this.getEntities('users')
 
-	// *** Matching API ***
+	getUserByRole = (users, role) => {
+		let target = []
 
-	matches = criteria => this.users.then(users => filter(users, { matchSettings: criteria }))
+		users.forEach(user => {
+			if (user.role === role) {
+				target = user
+			}
+		})
+
+		return target
+	}
 }
 
 export default Firebase
