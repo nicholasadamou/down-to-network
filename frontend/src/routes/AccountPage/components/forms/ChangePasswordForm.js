@@ -95,6 +95,25 @@ class ChangePasswordForm extends Component {
         console.log(`${e.target.name}=`, e.target.value)
 	}
 
+	validateCurrentPassword = e => {
+		const currentPassword = e.target.value
+
+		if (currentPassword === '') {
+			this.setState({
+				error: {
+					error: true,
+					message: 'Current Password field must not be empty.'
+				}
+			})
+		} else {
+			this.setState({
+				error: {
+					...INITIAL_ERROR_STATE
+				}
+			})
+		}
+	}
+
 	validatePassword = (e, password) => {
 		const { validatePassword } = this.context
 
@@ -114,13 +133,40 @@ class ChangePasswordForm extends Component {
 				[`${cell.name}InvalidText`]:
 					'At least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length.',
 			})
+
+			if (this.state.password === '') {
+				this.setState({
+					error: {
+						error: true,
+						message: 'Current Password field must not be empty.'
+					}
+				})
+			}
 		} else {
 			if (cell.password !== target.password) {
 				this.setState({
 					[`${cell.name}Invalid`]: true,
 					[`${cell.name}InvalidText`]: `Both passwords do not match!`,
 				})
+
+				if (this.state.password === '') {
+					this.setState({
+						error: {
+							error: true,
+							message: 'Current Password field must not be empty.'
+						}
+					})
+				}
 			} else {
+				if (this.state.password === '') {
+					this.setState({
+						error: {
+							error: true,
+							message: 'Current Password field must not be empty.'
+						}
+					})
+				}
+
 				this.setState({
 					[`${cell.name}Invalid`]: false,
 					[`${target.name}Invalid`]: false,
@@ -183,6 +229,7 @@ class ChangePasswordForm extends Component {
                         placeholder="***************"
 						hideLabel={false}
 						onChange={e => this.handleChange(e)}
+						onBlur={e => this.validateCurrentPassword(e)}
                     />
                     <PasswordInput
                         id="passwordOne"
