@@ -81,7 +81,8 @@ class ChangePasswordForm extends Component {
 			passwordTwoInvalid: false,
         }
 
-        this.handleChange = this.handleChange.bind(this)
+		this.handleChange = this.handleChange.bind(this)
+		this.validateCurrentPassword = this.validateCurrentPassword.bind(this)
 		this.validatePassword = this.validatePassword.bind(this)
 		this.handlePasswordChange = this.handlePasswordChange.bind(this)
     }

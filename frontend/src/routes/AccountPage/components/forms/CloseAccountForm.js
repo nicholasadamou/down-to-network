@@ -71,7 +71,8 @@ class CloseAccountForm extends Component {
             }
         }
 
-        this.handleChange = this.handleChange.bind(this)
+		this.handleChange = this.handleChange.bind(this)
+		this.validateCurrentPassword = this.validateCurrentPassword.bind(this)
         this.handleCloseAccount = this.handleCloseAccount.bind(this)
     }
 
@@ -82,7 +83,26 @@ class CloseAccountForm extends Component {
         )
 
         console.log(`${e.target.name}=`, e.target.value)
-    }
+	}
+
+	validateCurrentPassword = e => {
+		const currentPassword = e.target.value
+
+		if (currentPassword === '') {
+			this.setState({
+				error: {
+					error: true,
+					message: 'Current Password field must not be empty.'
+				}
+			})
+		} else {
+			this.setState({
+				error: {
+					...INITIAL_ERROR_STATE
+				}
+			})
+		}
+	}
 
     handleCloseAccount = (e, password) => {
 		e.preventDefault()
@@ -139,7 +159,8 @@ class CloseAccountForm extends Component {
                         labelText="Current Password *"
                         placeholder="***************"
                         hideLabel={false}
-                        onChange={e => this.handleChange(e)}
+						onChange={e => this.handleChange(e)}
+						onBlur={e => this.validateCurrentPassword(e)}
                     />
 
                     {error.error ? (

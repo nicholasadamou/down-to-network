@@ -74,6 +74,7 @@ class ChangeEmailForm extends Component {
         }
 
 		this.handleChange = this.handleChange.bind(this)
+		this.validateCurrentPassword = this.validateCurrentPassword.bind(this)
 		this.validateEmail = this.validateEmail.bind(this)
 		this.handleEmailChange = this.handleEmailChange.bind(this)
     }
@@ -87,6 +88,25 @@ class ChangeEmailForm extends Component {
         console.log(`${e.target.name}=`, e.target.value)
 	}
 
+	validateCurrentPassword = e => {
+		const currentPassword = e.target.value
+
+		if (currentPassword === '') {
+			this.setState({
+				error: {
+					error: true,
+					message: 'Current Password field must not be empty.'
+				}
+			})
+		} else {
+			this.setState({
+				error: {
+					...INITIAL_ERROR_STATE
+				}
+			})
+		}
+	}
+
 	validateEmail = e => {
 		const { validateEmail } = this.context
 
@@ -97,7 +117,25 @@ class ChangeEmailForm extends Component {
 				emailInvalid: true,
 				emailInvalidText: 'The email address that was entered is invaild.'
 			})
+
+			if (this.state.password === '') {
+				this.setState({
+					error: {
+						error: true,
+						message: 'Current Password field must not be empty.'
+					}
+				})
+			}
 		} else {
+			if (this.state.password === '') {
+				this.setState({
+					error: {
+						error: true,
+						message: 'Current Password field must not be empty.'
+					}
+				})
+			}
+
 			this.setState({
 				emailInvalid: false,
 				emailInvalidText: ''
@@ -161,7 +199,8 @@ class ChangeEmailForm extends Component {
                             labelText="Current Password *"
                             placeholder="***************"
                             hideLabel={false}
-                            onChange={e => this.handleChange(e)}
+							onChange={e => this.handleChange(e)}
+							onBlur={e => this.validateCurrentPassword(e)}
                         />
                         <TextInput
                             id="email"
