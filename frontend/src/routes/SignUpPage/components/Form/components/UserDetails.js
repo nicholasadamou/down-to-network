@@ -26,7 +26,9 @@ class UserDetails extends Component {
 				...INITIAL_ERROR_STATE
 			},
 			passwordInvalid: false,
+			passwordInvalidText: '',
 			emailInvalid: false,
+			emailInvalidText: ''
         }
 
         this.saveAndContinue = this.saveAndContinue.bind(this)
@@ -44,7 +46,7 @@ class UserDetails extends Component {
                 this.setState({
                     error: {
 						error: true,
-                    	message: 'Both, email & password fields are required to continue.'
+						message: 'Both, email & password fields are required to continue.'
 					},
 					emailInvalid: true,
 					passwordInvalid: true
@@ -54,7 +56,7 @@ class UserDetails extends Component {
                     this.setState({
                         error: {
 							error: true,
-                        	message: 'The email address that was entered is invaild.'
+							message: 'The email address that was entered is invaild.'
 						},
 						emailInvalid: true
                     })
@@ -62,7 +64,7 @@ class UserDetails extends Component {
                     this.setState({
                         error: {
 							error: true,
-                        	message: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.'
+							message: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.'
 						},
 						passwordInvalid: true
                     })
@@ -77,7 +79,7 @@ class UserDetails extends Component {
 
     render() {
         const { setAccount, validateEmail, validatePassword } = this.context
-        const { error, emailInvalid, passwordInvalid } = this.state
+        const { error, emailInvalid, emailInvalidText, passwordInvalid, passwordInvalidText } = this.state
 
         return(
             <Form>
@@ -90,26 +92,29 @@ class UserDetails extends Component {
                     placeholder="Stephen.Alt@ibm.com"
 					hideLabel={false}
 					invalid={emailInvalid}
+					invalidText={emailInvalidText}
                     onBlur={e => {
 						const email = e.target.value
 
                         if (validateEmail(email)) {
                             this.setState({
-                                error: {
-									...INITIAL_ERROR_STATE
-								},
+                                emailInvalidText: '',
 								emailInvalid: false
                             })
 
                             setAccount('email', e)
                         } else {
-                            this.setState({
-                                error: {
-									error: true,
-                                	message: 'The email address that was entered is invaild.'
-								},
-								emailInvalid: true
-                            })
+							if (email === '') {
+								this.setState({
+									emailInvalidText: 'The Email Address field must not empty.',
+									emailInvalid: true
+								})
+							} else {
+								this.setState({
+									emailInvalidText: 'The email address that was entered is invaild.',
+									emailInvalid: true
+								})
+							}
                         }
                     }}
                 />
@@ -121,26 +126,29 @@ class UserDetails extends Component {
                     placeholder="***************"
 					hideLabel={false}
 					invalid={passwordInvalid}
+					invalidText={passwordInvalidText}
                     onBlur={e => {
 						const password = e.target.value
 
                         if (validatePassword(password)) {
                             this.setState({
-                                error: {
-									...INITIAL_ERROR_STATE
-								},
+                                passwordInvalidText: '',
 								passwordInvalid: false
                             })
 
                             setAccount('password', e)
                         } else {
-                            this.setState({
-                                error: {
-									error: true,
-                                	message: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.'
-								},
-								passwordInvalid: true
-                            })
+							if (password === '') {
+								this.setState({
+									passwordInvalidText: 'The Password field must not empty.',
+									passwordInvalid: true
+								})
+							} else {
+								this.setState({
+									passwordInvalidText: 'The password field requires at least one upper case and one lower case English character, at least one digit, at least one special character, and be at least 8 characters in length to be valid.',
+									passwordInvalid: true
+								})
+							}
                         }
                     }}
                 />

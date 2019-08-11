@@ -22,6 +22,10 @@ class PersonalDetails extends Component {
             error: {
 				...INITIAL_ERROR_STATE
 			},
+			nameInvalid: false,
+			nameInvalidText: '',
+			roleInvalid: false,
+			roleInvalidText: '',
             removeImageBtnDisabled: true
         }
 
@@ -73,7 +77,7 @@ class PersonalDetails extends Component {
 
     render() {
         const { setAccount, removeAccountAttributeByKey } = this.context
-        const { profilePicture, removeImageBtnDisabled, error } = this.state
+        const { profilePicture, removeImageBtnDisabled, nameInvalid, nameInvalidText, roleInvalid, roleInvalidText, error } = this.state
 
         let fileUploader;
 
@@ -130,29 +134,49 @@ class PersonalDetails extends Component {
                     labelText="Name *"
                     type="text"
                     placeholder="Stephen Alt"
-                    hideLabel={false}
+					hideLabel={false}
+					invalid={nameInvalid}
+					invalidText={nameInvalidText}
                     onBlur={e => {
-                        this.setState({
-                            error: {
-								...INITIAL_ERROR_STATE
-							}
-                        })
+						const name = e.target.value
 
-                        setAccount('name', e)
+						if (name !== '') {
+							this.setState({
+								nameInvalid: false,
+								nameInvalidText: ''
+							})
+
+							setAccount('name', e)
+						} else {
+							this.setState({
+								nameInvalid: true,
+								nameInvalidText: 'Name field must not be empty.'
+							})
+						}
                     }}
                 />
                 <Select
                     id="role"
                     labelText="Role / Domain *"
-                    defaultValue="placeholder-item"
+					defaultValue="placeholder-item"
+					invalid={roleInvalid}
+					invalidText={roleInvalidText}
                     onBlur={e => {
-                        this.setState({
-                            error: {
-								...INITIAL_ERROR_STATE
-							}
-                        })
+                        const role = e.target.value
 
-                        setAccount('role', e)
+						if (role !== 'placeholder-item') {
+							this.setState({
+								roleInvalid: false,
+								roleInvalidText: ''
+							})
+
+							setAccount('role', e)
+						} else {
+							this.setState({
+								roleInvalid: true,
+								roleInvalidText: 'Role field must not be empty.'
+							})
+						}
                     }}
                 >
                     <SelectItem
