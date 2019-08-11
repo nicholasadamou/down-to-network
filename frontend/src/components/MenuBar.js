@@ -10,6 +10,7 @@ import * as ROUTES from '../constants/routes'
 
 import Home20 from '@carbon/icons-react/es/home/20'
 import User20 from '@carbon/icons-react/es/user/20'
+import Checkmark20 from '@carbon/icons-react/es/checkmark/20'
 
 const Wrapper = styled.div`
 	position: fixed;
@@ -40,6 +41,9 @@ const Wrapper = styled.div`
 			line-height: 0;
 
 			svg {
+				width: 20px;
+				height: 20px;
+
 				fill: white;
 			}
 
@@ -59,6 +63,11 @@ const MenuBar = () => {
         <li>
           <Link to={ROUTES.DASHBOARD}>
             <Home20 />
+          </Link>
+        </li>
+        <li>
+          <Link to={ROUTES.MATCHES}>
+            <Checkmark20 />
           </Link>
         </li>
         <li>

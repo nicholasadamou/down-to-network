@@ -16,6 +16,7 @@ import Loading from './components/Loading'
 const SignInPage = lazy(() => import('./routes/SignInPage/SignInPage'))
 const SignUpPage = lazy(() => import('./routes/SignUpPage/SignUpPage'))
 const DashboardPage = lazy(() => import('./routes/DashboardPage/DashboardPage'))
+const MatchesPage = lazy(() => import('./routes/MatchesPage/MatchesPage'))
 const ForgotPasswordPage = lazy(() => import('./routes/ForgotPasswordPage/ForgotPasswordPage'))
 const AccountPage = lazy(() => import('./routes/AccountPage/AccountPage'))
 const NotFoundPage = lazy(() => import('./routes/NotFoundPage/NotFoundPage'))
@@ -35,6 +36,12 @@ const Routes = () => {
 				<Route exact path={ROUTES.DASHBOARD} render={props => {
 						return isAuthenticated()
 							? <DashboardPage {...props} />
+							: <Redirect to={ROUTES.LANDING} />
+					}}
+				/>
+				<Route exact path={ROUTES.MATCHES} render={props => {
+						return isAuthenticated()
+							? <MatchesPage {...props} />
 							: <Redirect to={ROUTES.LANDING} />
 					}}
 				/>
