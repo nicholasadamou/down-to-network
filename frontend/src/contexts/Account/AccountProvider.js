@@ -235,7 +235,8 @@ class AccountProvider extends Component {
 	}
 
 	isAuthenticated = () => {
-		return localStorage.getItem('authUser') !== undefined &&
+		return this.state.authUser !== undefined &&
+			localStorage.getItem('authUser') !== undefined &&
 			localStorage.getItem('authUser') !== null
 	}
 

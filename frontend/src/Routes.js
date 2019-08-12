@@ -28,27 +28,27 @@ const Routes = () => {
 		<Suspense fallback={<Loading />}>
 			<Switch>
 				{/* main pages */}
-				<Route exact path={ROUTES.LANDING} render={() => {
+				<Route exact path={ROUTES.LANDING} render={props => {
 					return !isAuthenticated()
 						? <Redirect to={ROUTES.SIGN_IN} />
-						: <Redirect to={ROUTES.DASHBOARD} />
+						: <DashboardPage {...props} />
 				}} />
 				<Route exact path={ROUTES.DASHBOARD} render={props => {
 						return isAuthenticated()
 							? <DashboardPage {...props} />
-							: <Redirect to={ROUTES.LANDING} />
+							: <SignInPage {...props} />
 					}}
 				/>
 				<Route exact path={ROUTES.MATCHES} render={props => {
 						return isAuthenticated()
 							? <MatchesPage {...props} />
-							: <Redirect to={ROUTES.LANDING} />
+							: <SignInPage {...props} />
 					}}
 				/>
 				<Route exact path={ROUTES.ACCOUNT} render={props => {
 						return isAuthenticated()
 							? <AccountPage {...props} />
-							: <Redirect to={ROUTES.LANDING} />
+							: <SignInPage {...props} />
 					}}
 				/>
 
@@ -56,19 +56,19 @@ const Routes = () => {
 				<Route exact path={ROUTES.SIGN_IN} render={props => {
 						return !isAuthenticated()
 							? <SignInPage {...props} />
-							: <Redirect to={ROUTES.LANDING} />
+							: <DashboardPage {...props} />
 					}}
 				/>
 				<Route exact path={ROUTES.PASSWORD_FORGET} render={props => {
 						return !isAuthenticated()
 							? <ForgotPasswordPage {...props} />
-							: <Redirect to={ROUTES.LANDING} />
+							: <DashboardPage {...props} />
 					}}
 				/>
 				<Route exact path={ROUTES.SIGN_UP} render={props => {
 						return !isAuthenticated()
 							? <SignUpPage {...props} />
-							: <Redirect to={ROUTES.LANDING} />
+							: <DashboardPage {...props} />
 					}}
 				/>
 
