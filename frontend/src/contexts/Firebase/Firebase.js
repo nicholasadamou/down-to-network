@@ -91,16 +91,18 @@ class Firebase {
 
 	users = () => this.getEntities('users')
 
-	getUserByRole = (users, role) => {
-		let target = []
+	// *** Match API ***
+
+	getUsersByMatchSettings = (users, matchSettings) => {
+		let matches = []
 
 		users.forEach(user => {
-			if (user.role === role) {
-				target = user
+			if (matchSettings.includes(user.role)) {
+				matches.push(user)
 			}
 		})
 
-		return target
+		return matches
 	}
 }
 

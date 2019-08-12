@@ -29,11 +29,13 @@ class DashboardPage extends Component {
 		firebase.users().then(response => {
 			// Filter current user out of users
 			const users = response.filter(user => user.id !== this.context.user.uid)
-			// const users = response
 			console.log('users=', users)
 
-			const target = firebase.getUserByRole(users, user.role)
-			console.log('target=', target)
+			// Get list of users whose role matches the
+			// currently authenticated user's list of
+			// networking preferences
+			const matches = firebase.getUsersByMatchSettings(users, user.matchSettings)
+			console.log('matches=', matches)
 		})
   }
 
