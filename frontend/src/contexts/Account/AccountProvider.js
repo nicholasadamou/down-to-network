@@ -265,6 +265,7 @@ class AccountProvider extends Component {
 		this.setState({
 			account: {
 				name: user.name,
+				email: user.email,
 				profilePicture: user.profilePicture,
 				role: user.role,
 				matchSettings: user.matchSettings
