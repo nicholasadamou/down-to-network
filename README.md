@@ -9,6 +9,7 @@
 <h4 align="center">The mono repo that holds the <a href="frontend">frontend/</a> and the <a href="design">design/</a> of <em>DownToNetwork</em>.</h4>
 
 <p align="center">
+	<img src="https://img.shields.io/badge/hackathon-Intern%20HackCIO%202019-orange" alt="Intern HackCIO 2019">
   <a href="https://github.com/nicholasadamou/DownToNetwork/blob/master/LICENSE.txt">
       <img src="https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square" alt="License">
   </a>
@@ -41,14 +42,14 @@ This project uses the following technologies:
 
 **The Front-End**:
 
--   [**React.js**](https://reactjs.org/) - For building the interface along with:
-    -   [**React Router**](https://reacttraining.com/react-router/) - for declarative routing for React.
-    -   [**React Context API**](https://reactjs.org/docs/context.html) - Context provides a way to pass data through the component tree without having to pass props down manually at every level.
-    -   [**Styled-Components**](https://www.styled-components.com/) - for styling.
+- [**React.js**](https://reactjs.org/) - For building the interface along with:
+  - [**React Router**](https://reacttraining.com/react-router/) - for declarative routing for React.
+  - [**React Context API**](https://reactjs.org/docs/context.html) - Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+  - [**Styled-Components**](https://www.styled-components.com/) - for styling.
 
 **The Back-End**:
 
--   [**Firebase**](https://firebase.google.com/) - Google's mobile platform that helps you quickly develop high-quality apps and grow your business.
+- [**Firebase**](https://firebase.google.com/) - Google's mobile platform that helps you quickly develop high-quality apps and grow your business.
 
 ## 📚 The Design Stack
 
