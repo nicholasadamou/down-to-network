@@ -61,7 +61,7 @@ class NameChangeForm extends Component {
 		if (name === '') {
 			this.setState({
 				nameInvalid: true,
-				nameInvalidText: 'Name field must not be empty'
+				nameInvalidText: 'Name field must not be empty.'
 			})
 		}
 
