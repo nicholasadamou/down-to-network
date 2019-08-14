@@ -36,6 +36,25 @@ This project was created for the Summer IBM HackCIO event, where fellow IBM inte
 
 DownToNetwork is a dynamic web / mobile app optimized to connect new fellow IBMers to experienced IBMers through the power of matching.
 
+## 🧐 Problem Statement
+
+Many of my co-workers at IBM have mentioned how difficult it is to meet talented individuals outside of their respective teams.
+
+## 💡 Idea / Solution
+
+We designed the app to have a "tinder-like" feel where you sign up and create an account and tell the application about yourself and your intentions. The application uses an algorithm designed to connect users based on their role at IBM (Intern, manager, etc) and the types of people that they would like to meet. Once a user is signed up, they are presented with the home page where they are able to swipe right or left on each individual that the app deems you'd find interesting enough to network with. Once you 'match' with an individual, the application rightfully says, for example, 'Ginni is Down To Network!' and presents a match screen where you can email the individual.
+
+## ⛓️ Dependencies / Limitations
+
+Since the app does not integrate with IBM w3, the application requires already on-boarded IBMer's to sign up though the app itself. If the application utilized w3 we could have integrated an already on-boarded IBMer into the application itself.
+
+## 🚀 Future Scope
+
+The application can continue to evolve in the following ways:
+
+    - Add a calendar feature that allows user's to block time on a calendar to meet those who they have matched with through the app.
+    - A messaging feature that allows matched users to chat with others they matched with.
+
 ## 📚 The Tech. Stack
 
 This project uses the following technologies:
@@ -47,17 +66,37 @@ This project uses the following technologies:
     -   [**React Context API**](https://reactjs.org/docs/context.html) - Context provides a way to pass data through the component tree without having to pass props down manually at every level.
     -   [**Styled-Components**](https://www.styled-components.com/) - for styling.
 
-## How To Use
+## 🏁 Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+-   [Node.js](https://nodejs.org/en/)
+-   [yarn](https://yarnpkg.com/en/)
+
+### Installing
+
+First, clone the repository, then run
 
 ```bash
 yarn install # alteratively, 'npm' can be used
-yarn copy-scss
+```
+
+followed by
+
+```bash
 yarn start
 ```
 
-## Modify `.env.example`
+### Modify `.env.example`
 
 ⚠️ Don't forget to modify the contents of `.env`! Take `.env.example` and fill out its contents and rename it to `.env`.
+
+## 🎉 Acknowledgments
+
+    - Thank you to our mentor's.
+    - A big thank you to IBM and the organizers of HackCIO!
 
 ## License
 

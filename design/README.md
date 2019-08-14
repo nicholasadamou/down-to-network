@@ -36,6 +36,25 @@ This project was created for the Summer IBM HackCIO event, where fellow IBM inte
 
 DownToNetwork is a dynamic web / mobile app optimized to connect new fellow IBMers to experienced IBMers through the power of matching.
 
+## 🧐 Problem Statement
+
+Many of my co-workers at IBM have mentioned how difficult it is to meet talented individuals outside of their respective teams.
+
+## 💡 Idea / Solution
+
+We designed the app to have a "tinder-like" feel where you sign up and create an account and tell the application about yourself and your intentions. The application uses an algorithm designed to connect users based on their role at IBM (Intern, manager, etc) and the types of people that they would like to meet. Once a user is signed up, they are presented with the home page where they are able to swipe right or left on each individual that the app deems you'd find interesting enough to network with. Once you 'match' with an individual, the application rightfully says, for example, 'Ginni is Down To Network!' and presents a match screen where you can email the individual.
+
+## ⛓️ Dependencies / Limitations
+
+Since the app does not integrate with IBM w3, the application requires already on-boarded IBMer's to sign up though the app itself. If the application utilized w3 we could have integrated an already on-boarded IBMer into the application itself.
+
+## 🚀 Future Scope
+
+The application can continue to evolve in the following ways:
+
+    - Add a calendar feature that allows user's to block time on a calendar to meet those who they have matched with through the app.
+    - A messaging feature that allows matched users to chat with others they matched with.
+
 ## 📚 The Design Stack
 
 This project uses the following technologies:
@@ -44,6 +63,11 @@ This project uses the following technologies:
 - [**Sketch**](https://www.sketch.com/) - Create, prototype, collaborate and turn your ideas into incredible products with the definitive platform for digital design.
 - [**Abstract**](https://www.abstract.com/) - Use Abstract to manage, collaborate and version your Sketch files. Our version control for designers supports a modern design workflow.
 - [**Invision**](https://www.invisionapp.com/) - InVision is the digital product design platform used to make the world's best customer experiences.
+
+## 🎉 Acknowledgments
+
+    - Thank you to our mentor's.
+    - A big thank you to IBM and the organizers of HackCIO!
 
 ## License
 
