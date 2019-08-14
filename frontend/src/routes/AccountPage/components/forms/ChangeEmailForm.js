@@ -155,6 +155,14 @@ class ChangeEmailForm extends Component {
 				user
 					.updateEmail(email)
 					.then(() => {
+						// Update the user's email in the real time database
+						return firebase.user(`${user.uid}`).set({
+							email
+						})
+					})
+					.then(() => {
+						// Send a email verification in order to
+						// verify the user's new email address
 						return firebase.doSendEmailVerification()
 					})
 					.then(() => {

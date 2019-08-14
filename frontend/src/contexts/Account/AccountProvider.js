@@ -168,12 +168,15 @@ class AccountProvider extends Component {
 			// Create a user in your Firebase real time database
 			return firebase.user(`${authUser.user.uid}`).set({
 				name,
+				email: account.email,
 				profilePicture,
 				role,
 				matchSettings
 			})
 		})
 		.then(() => {
+			// Send a email verification in order to
+			// verify the user's email address
 			return firebase.doSendEmailVerification()
 		})
 		.then(() => {
