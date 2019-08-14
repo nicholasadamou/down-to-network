@@ -112,7 +112,7 @@ class ChangeProfilePictureForm extends Component {
 		const { user, account } = this.context
 
 		firebase
-			.ref(`users/${user.uid}`).update({
+			.user(`${user.uid}`).update({
 				profilePicture
 			})
 			.then(() => {

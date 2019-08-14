@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import styled from 'styled-components'
 
-import { Form, Button, Select, SelectItem } from 'carbon-components-react'
+import { Form, Button, TextInput } from 'carbon-components-react'
 
 import * as ROUTES from '../../../../constants/routes'
 
@@ -26,21 +26,24 @@ const INITIAL_ERROR_STATE = {
     message: ''
 }
 
-class RoleChangeForm extends Component {
+class NameChangeForm extends Component {
     static contextType = AccountContext
 
     constructor(props) {
         super(props)
 
         this.state = {
-            role: '',
+            name: '',
             error: {
                 ...INITIAL_ERROR_STATE
-            }
+			},
+			nameInvalid: false,
+			nameInvalidText: ''
         }
 
-        this.handleChange = this.handleChange.bind(this)
-        this.handleChangeRole = this.handleChangeRole.bind(this)
+		this.handleChange = this.handleChange.bind(this)
+		this.validateName = this.validateName.bind(this)
+        this.handleChangeName = this.handleChangeName.bind(this)
     }
 
     handleChange = e => {
@@ -50,9 +53,25 @@ class RoleChangeForm extends Component {
         )
 
         console.log(`${e.target.name}=`, e.target.value)
-    }
+	}
 
-    handleChangeRole = (e, role) => {
+	validateName = e => {
+		const name = e.target.value
+
+		if (name === '') {
+			this.setState({
+				nameInvalid: true,
+				nameInvalidText: 'Name field must not be empty'
+			})
+		}
+
+		this.setState({
+			nameInvalid: false,
+			nameInvalidText: ''
+		})
+	}
+
+    handleChangeName = (e, name) => {
 		e.preventDefault()
 
 		const { firebase } = this.props
@@ -60,11 +79,11 @@ class RoleChangeForm extends Component {
 
 		firebase
 			.user(`${user.uid}`).update({
-				role
+				name
 			})
 			.then(() => {
-				// Update account role
-				account.role = role
+				// Update account name
+				account.name = name
 
 				// Redirect to account page
 				window.location.href = `${ROUTES.ACCOUNT}`
@@ -80,42 +99,26 @@ class RoleChangeForm extends Component {
 	}
 
     render() {
-        const { role, error } = this.state
+        const { name, nameInvalid, nameInvalidText, error } = this.state
 
-        const isValid = role !== '' && role !== 'placeholder-item'
+        const isValid = name !== ''
 
         return (
             <Wrapper>
-                <h1>Change Account Role</h1>
-                <Form onSubmit={e => this.handleChangeRole(e, role)}>
-                    <Select
-                        id="role"
-                        name="role"
-                        labelText="Role / Domain"
-                        defaultValue="placeholder-item"
-                        onBlur={e => this.handleChange(e)}
-                    >
-                        <SelectItem
-                            value="placeholder-item"
-                            text="Choose an option"
-                        />
-                        <SelectItem
-                            value="New Hire"
-                            text="New Hires"
-                        />
-                        <SelectItem
-                            value="Interns"
-                            text="Interns"
-                        />
-                        <SelectItem
-                            value="Full Time IBMer"
-                            text="Full Time IBMer"
-                        />
-                        <SelectItem
-                            value="Manager"
-                            text="Manager"
-                        />
-                    </Select>
+                <h1>Change Account Name</h1>
+                <Form onSubmit={e => this.handleChangeName(e, name)}>
+					<TextInput
+						id="name"
+						name="name"
+						labelText="New Name *"
+						type="text"
+						placeholder="Stephen Alt"
+						hideLabel={false}
+						invalid={nameInvalid}
+						invalidText={nameInvalidText}
+						onChange={e => this.handleChange(e)}
+						onBlur={e => this.validateName(e)}
+					/>
 
                     {error.error ? (
                             <div style={{ marginBottom: 20, lineHeight: 2 }}>
@@ -127,7 +130,7 @@ class RoleChangeForm extends Component {
                     )}
 
                     <Button kind="primary" disabled={!isValid} type="submit">
-                        Change My Role
+                        Change My Name
                     </Button>
                 </Form>
             </Wrapper>
@@ -135,4 +138,4 @@ class RoleChangeForm extends Component {
     }
 }
 
-export default withFirebase(RoleChangeForm)
+export default withFirebase(NameChangeForm)

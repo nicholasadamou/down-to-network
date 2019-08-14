@@ -18,8 +18,9 @@ import ChangeEmailModal from './components/modals/ChangeEmailModal'
 import ChangePasswordModal from './components/modals/ChangePasswordModal'
 import CloseAccountModal from './components/modals/CloseAccountModal'
 
-import ChangeRoleForm from './components/forms/ChangeRoleForm'
+import ChangeNameForm from './components/forms/ChangeNameForm'
 import ChangeMatchSettingsForm from './components/forms/ChangeMatchSettingsForm'
+import ChangeRoleForm from './components/forms/ChangeRoleForm'
 
 import SignOutButton from './components/buttons/SignOutButton'
 
@@ -195,6 +196,7 @@ class AccountPage extends React.Component {
 							/>
 						</Container>
 					</ProfilePictureWrapper>
+					<ChangeNameForm />
 					<ChangeMatchSettingsForm />
 					<ChangeRoleForm />
 					<ToggleContent
