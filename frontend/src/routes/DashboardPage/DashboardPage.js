@@ -31,6 +31,8 @@ class DashboardPage extends Component {
 			const users = response.filter(user => user.id !== this.context.user.uid)
 			console.log('users=', users)
 
+			// TODO: Filter previously matched users out of users
+
 			// Get list of users whose role matches the
 			// currently authenticated user's list of
 			// networking preferences
