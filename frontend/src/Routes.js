@@ -36,19 +36,19 @@ const Routes = () => {
 				<Route exact path={ROUTES.DASHBOARD} render={props => {
 						return isAuthenticated()
 							? <DashboardPage {...props} />
-							: <SignInPage {...props} />
+							: <Redirect to={ROUTES.LANDING} />
 					}}
 				/>
 				<Route exact path={ROUTES.MATCHES} render={props => {
 						return isAuthenticated()
 							? <MatchesPage {...props} />
-							: <SignInPage {...props} />
+							: <Redirect to={ROUTES.LANDING} />
 					}}
 				/>
 				<Route exact path={ROUTES.ACCOUNT} render={props => {
 						return isAuthenticated()
 							? <AccountPage {...props} />
-							: <SignInPage {...props} />
+							: <Redirect to={ROUTES.LANDING} />
 					}}
 				/>
 
@@ -56,19 +56,19 @@ const Routes = () => {
 				<Route exact path={ROUTES.SIGN_IN} render={props => {
 						return !isAuthenticated()
 							? <SignInPage {...props} />
-							: <DashboardPage {...props} />
+							: <Redirect to={ROUTES.LANDING} />
 					}}
 				/>
 				<Route exact path={ROUTES.PASSWORD_FORGET} render={props => {
 						return !isAuthenticated()
 							? <ForgotPasswordPage {...props} />
-							: <DashboardPage {...props} />
+							: <Redirect to={ROUTES.LANDING} />
 					}}
 				/>
 				<Route exact path={ROUTES.SIGN_UP} render={props => {
 						return !isAuthenticated()
 							? <SignUpPage {...props} />
-							: <DashboardPage {...props} />
+							: <Redirect to={ROUTES.LANDING} />
 					}}
 				/>
 
