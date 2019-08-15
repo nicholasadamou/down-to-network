@@ -9,7 +9,7 @@
 <h4 align="center">The directory contains everything required to interact with the frontend of <em>DownToNetwork</em>.</h4>
 
 <p align="center">
-	<img src="https://img.shields.io/badge/hackathon-Intern%20HackCIO%202019-orange" alt="Intern HackCIO 2019">
+	<img src="https://img.shields.io/badge/hackathon-Intern%20HackCIO%202019-blue" alt="Intern HackCIO 2019">
   <a href="https://github.com/nicholasadamou/DownToNetwork/blob/master/LICENSE.txt">
       <img src="https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square" alt="License">
   </a>
