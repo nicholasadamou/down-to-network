@@ -279,8 +279,6 @@ class AccountProvider extends Component {
 		let { user } = this.state
 		const { firebase } = this.props
 
-		// TODO: Fix issue where account attributes are null after initial sign in.
-
 		if (user) {
 			firebase.auth.onAuthStateChanged(authUser => {
 				if (authUser) {
