@@ -144,25 +144,25 @@ class AccountProvider extends Component {
 		}, () => console.log('loading=', this.state.loading))
 
 		firebase.doSignInWithEmailAndPassword(account.email, account.password).then(() => {
-			firebase.auth.onAuthStateChanged(authUser => {
+			firebase.onAuthUserListener(authUser => {
 				if (authUser) {
 					localStorage.setItem('authUser', JSON.stringify(authUser))
-
-					const user = JSON.parse(JSON.stringify(authUser))
-
-					console.log(user)
 
 					this.setState({
 						authUser,
 						account: {
-							name: user.name,
-							email: user.email,
-							profilePicture: user.profilePicture,
-							role: user.role,
-							matchSettings: user.matchSettings,
+							name: authUser.name,
+							email: authUser.email,
+							profilePicture: authUser.profilePicture,
+							role: authUser.role,
+							matchSettings: authUser.matchSettings,
 						},
 						loading: false
 					}, () => {
+						console.log('authUser=', this.state.authUser)
+						console.log('account=', this.state.account)
+						console.log('loading=', this.state.loading)
+
 						window.location.href = `${ROUTES.DASHBOARD}`
 					})
 				}
@@ -278,6 +278,8 @@ class AccountProvider extends Component {
 	componentWillMount() {
 		let { user } = this.state
 		const { firebase } = this.props
+
+		// TODO: Fix issue where account attributes are null after initial sign in.
 
 		if (user) {
 			firebase.auth.onAuthStateChanged(authUser => {
