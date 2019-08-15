@@ -96,6 +96,8 @@ First, clone the repository, then run
 yarn install-dependencies # alteratively, 'npm' can be used
 ```
 
+Then, visit the [frontend/README](frontend/README.md) of this project to learn how to bring up the frontend of Down To Network. 
+
 ## 🎉 Acknowledgments
 
     - Thank you to our mentor's.
