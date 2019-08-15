@@ -5,6 +5,9 @@ import { compose } from 'recompose'
 
 // import styled from 'styled-components'
 
+import Cards from '../../components/SwipeableCards'
+import Card from '../../components/SwipeableCards'
+
 import { withAuthorization, withEmailVerification } from '../../contexts/Session'
 
 import Layout from '../../components/Layout/Layout'
@@ -52,6 +55,17 @@ class DashboardPage extends Component {
 
 		return (
 			<Layout>
+				<Cards onEnd={() => console.log('end')} className='master-root'>
+					{matches.map(user =>
+						<Card
+							onSwipeLeft={() => console.log('swipe left')}
+							onSwipeRight={() => console.log('swipe right')}
+						>
+							<img src={user.profilePicture} alt="" />
+							<h1>{user.name}</h1>
+						</Card>
+					)}
+				</Cards>
 				<MenuBar />
 			</Layout>
 		)
