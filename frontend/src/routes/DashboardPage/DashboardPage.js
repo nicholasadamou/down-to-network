@@ -14,13 +14,13 @@ import AccountContext from '../../contexts/Account/AccountContext';
 class DashboardPage extends Component {
 	static contextType = AccountContext
 
-  constructor (props) {
-    super(props)
+	constructor (props) {
+		super(props)
 
-    this.state = {}
-  }
+		this.state = {}
+	}
 
-  componentWillMount () {
+	componentWillMount () {
 		const { firebase } = this.props
 		const { user } = this.context
 		console.log('user=', user)
@@ -39,18 +39,18 @@ class DashboardPage extends Component {
 			const matches = firebase.getUsersByMatchSettings(users, user.matchSettings)
 			console.log('matches=', matches)
 		})
-  }
+	}
 
-  render () {
-    return (
-      <Layout>
-        <MenuBar />
-      </Layout>
-    )
-  }
+	render () {
+		return (
+			<Layout>
+				s<MenuBar />
+			</Layout>
+		)
+	}
 }
 
 export default compose(
-  withEmailVerification,
-  withAuthorization(authUser => !!authUser)
+	withEmailVerification,
+	withAuthorization(authUser => !!authUser)
 )(DashboardPage)
