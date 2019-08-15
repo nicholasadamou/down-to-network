@@ -38,7 +38,7 @@ DownToNetwork is a dynamic web / mobile app optimized to connect new fellow IBMe
 
 ## 🧐 Problem Statement
 
-Many of my co-workers at IBM have mentioned how difficult it is to meet talented individuals outside of their respective teams.
+Many of our co-workers at IBM have mentioned how difficult it is to meet talented individuals outside of their respective teams.
 
 ## 💡 Idea / Solution
 
@@ -46,7 +46,7 @@ We designed the app to have a "tinder-like" feel where you sign up and create an
 
 ## ⛓️ Dependencies / Limitations
 
-Since the app does not integrate with IBM w3, the application requires already on-boarded IBMer's to sign up though the app itself. If the application utilized w3 we could have integrated an already on-boarded IBMer into the application itself.
+Since the app does not integrate with IBM w3, the application requires already on-boarded IBMer's to sign up though the app itself.
 
 ## 🚀 Future Scope
 
