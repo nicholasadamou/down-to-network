@@ -139,8 +139,34 @@ class AccountProvider extends Component {
 		const { account } = this.state
 		const { firebase } = this.props
 
+		this.setState({
+			loading: true
+		}, () => console.log('loading=', this.state.loading))
+
 		firebase.doSignInWithEmailAndPassword(account.email, account.password).then(() => {
-			window.location.href = `${ROUTES.DASHBOARD}`
+			firebase.auth.onAuthStateChanged(authUser => {
+				if (authUser) {
+					localStorage.setItem('authUser', JSON.stringify(authUser))
+
+					const user = JSON.parse(JSON.stringify(authUser))
+
+					console.log(user)
+
+					this.setState({
+						authUser,
+						account: {
+							name: user.name,
+							email: user.email,
+							profilePicture: user.profilePicture,
+							role: user.role,
+							matchSettings: user.matchSettings,
+						},
+						loading: false
+					}, () => {
+						window.location.href = `${ROUTES.DASHBOARD}`
+					})
+				}
+			})
 		}).catch(error => {
 			this.setState({
 				error: {
@@ -250,27 +276,30 @@ class AccountProvider extends Component {
 	}
 
 	componentWillMount() {
-		const { user } = this.state
+		let { user } = this.state
 		const { firebase } = this.props
 
-        firebase.auth.onAuthStateChanged(authUser => {
-            if (authUser) {
-				this.setState({
-					authUser,
-					loading: false
-				}, () => console.log('authUser=', this.state.authUser))
-            }
-		})
-
-		this.setState({
-			account: {
-				name: user.name,
-				email: user.email,
-				profilePicture: user.profilePicture,
-				role: user.role,
-				matchSettings: user.matchSettings
-			}
-		}, () => console.log('account=', this.state.account))
+		if (user) {
+			firebase.auth.onAuthStateChanged(authUser => {
+				if (authUser) {
+					this.setState({
+						authUser,
+						account: {
+							name: user.name,
+							email: user.email,
+							profilePicture: user.profilePicture,
+							role: user.role,
+							matchSettings: user.matchSettings,
+						},
+						loading: false
+					}, () => {
+						console.log('authUser=', this.state.authUser)
+						console.log('account=', this.state.account)
+						console.log('loading=', this.state.loading)
+					})
+				}
+			})
+		}
 	}
 
 	render() {

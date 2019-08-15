@@ -4,8 +4,6 @@ import React from 'react'
 
 import styled from 'styled-components'
 
-import { Link } from 'react-router-dom'
-
 import * as ROUTES from '../constants/routes'
 
 import Home20 from '@carbon/icons-react/es/home/20'
@@ -61,19 +59,25 @@ const MenuBar = () => {
     <Wrapper>
       <ul>
         <li>
-          <Link to={ROUTES.DASHBOARD}>
+          <button onClick={() => {
+            window.location.href = `${ROUTES.DASHBOARD}`
+          }}>
             <Home20 />
-          </Link>
+          </button>
         </li>
         <li>
-          <Link to={ROUTES.MATCHES}>
+          <button onClick={() => {
+            window.location.href = `${ROUTES.MATCHES}`
+          }}>
             <Checkmark20 />
-          </Link>
+          </button>
         </li>
         <li>
-          <Link to={ROUTES.ACCOUNT}>
+          <button onClick={() => {
+            window.location.href = `${ROUTES.ACCOUNT}`
+          }}>
             <User20 />
-          </Link>
+          </button>
         </li>
       </ul>
     </Wrapper>

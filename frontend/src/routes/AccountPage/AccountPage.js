@@ -152,7 +152,7 @@ class AccountPage extends React.Component {
 		this.state = {}
 	}
 
-	componentDidMount() {}
+	componentWillMount() {}
 
 	render() {
 		const { account, loading } = this.context

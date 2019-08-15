@@ -28,27 +28,21 @@ const Routes = () => {
 		<Suspense fallback={<Loading />}>
 			<Switch>
 				{/* main pages */}
-				<Route exact path={ROUTES.LANDING} render={props => {
+				<Route exact path={ROUTES.LANDING} render={() => {
 					return !isAuthenticated()
 						? <Redirect to={ROUTES.SIGN_IN} />
 						: <Redirect to={ROUTES.DASHBOARD} />
 				}} />
 				<Route exact path={ROUTES.DASHBOARD} render={props => {
-						return isAuthenticated()
-							? <DashboardPage {...props} />
-							: <Redirect to={ROUTES.LANDING} />
+						return <DashboardPage {...props} />
 					}}
 				/>
 				<Route exact path={ROUTES.MATCHES} render={props => {
-						return isAuthenticated()
-							? <MatchesPage {...props} />
-							: <Redirect to={ROUTES.LANDING} />
+						return <MatchesPage {...props} />
 					}}
 				/>
 				<Route exact path={ROUTES.ACCOUNT} render={props => {
-						return isAuthenticated()
-							? <AccountPage {...props} />
-							: <Redirect to={ROUTES.LANDING} />
+						return <AccountPage {...props} />
 					}}
 				/>
 

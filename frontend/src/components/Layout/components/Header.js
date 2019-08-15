@@ -1,16 +1,19 @@
-import React from 'react';
+/* eslint-disable no-tabs */
+/* eslint-disable no-unused-vars */
+import React from 'react'
+
+import * as ROUTES from '../../../constants/routes'
 
 import { Header as CarbonHeader, HeaderName } from 'carbon-components-react'
 
 const Header = () => {
-	return (
-		<CarbonHeader aria-label="DTN">
-			<HeaderName href="/">
-				Down To Network?
-			</HeaderName>
-		</CarbonHeader>
-	);
-};
+  return (
+    <CarbonHeader aria-label="DTN">
+      <HeaderName href={ROUTES.DASHBOARD}>
+		Down To Network?
+      </HeaderName>
+    </CarbonHeader>
+  )
+}
 
-export default Header;
-
+export default Header

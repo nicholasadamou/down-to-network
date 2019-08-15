@@ -11,11 +11,11 @@ import Header from './components/Header'
 
 const Layout = props => {
   const { children } = props
-  const { loading } = useContext(AccountContext)
+  const { loading, isAuthenticated } = useContext(AccountContext)
 
   return (
 		<>
-			{ loading
+			{ loading && isAuthenticated()
 			  ?	(
 			    <Loading />
 			  ) : (
