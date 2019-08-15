@@ -31,7 +31,7 @@ const Routes = () => {
 				<Route exact path={ROUTES.LANDING} render={props => {
 					return !isAuthenticated()
 						? <Redirect to={ROUTES.SIGN_IN} />
-						: <DashboardPage {...props} />
+						: <Redirect to={ROUTES.DASHBOARD} />
 				}} />
 				<Route exact path={ROUTES.DASHBOARD} render={props => {
 						return isAuthenticated()
