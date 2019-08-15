@@ -44,7 +44,7 @@ class DashboardPage extends Component {
 	render () {
 		return (
 			<Layout>
-				s<MenuBar />
+				<MenuBar />
 			</Layout>
 		)
 	}
