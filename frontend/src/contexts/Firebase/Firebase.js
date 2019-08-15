@@ -93,6 +93,8 @@ class Firebase {
 
 	// *** Match API ***
 
+	matches = (uid) => this.getEntities(`matches/${uid}`)
+
 	getUsersByMatchSettings = (users, matchSettings) => {
 		let matches = []
 

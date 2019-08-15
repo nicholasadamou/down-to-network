@@ -11,13 +11,17 @@ import Layout from '../../components/Layout/Layout'
 import MenuBar from '../../components/MenuBar'
 import AccountContext from '../../contexts/Account/AccountContext';
 
+import './index.scss'
+
 class DashboardPage extends Component {
 	static contextType = AccountContext
 
 	constructor (props) {
 		super(props)
 
-		this.state = {}
+		this.state = {
+			matches: []
+		}
 	}
 
 	componentWillMount () {
@@ -36,12 +40,16 @@ class DashboardPage extends Component {
 			// Get list of users whose role matches the
 			// currently authenticated user's list of
 			// networking preferences
-			const matches = firebase.getUsersByMatchSettings(users, user.matchSettings)
-			console.log('matches=', matches)
+			this.setState({
+				matches: response
+				// matches: firebase.getUsersByMatchSettings(users, user.matchSettings)
+			}, () => console.log('matches=', this.state.matches))
 		})
 	}
 
 	render () {
+		const { matches } = this.state
+
 		return (
 			<Layout>
 				<MenuBar />

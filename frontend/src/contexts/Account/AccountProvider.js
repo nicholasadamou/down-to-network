@@ -139,17 +139,17 @@ class AccountProvider extends Component {
 		const { account } = this.state
 		const { firebase } = this.props
 
-		this.setState({
-			loading: true
-		}, () => console.log('loading=', this.state.loading))
-
 		firebase.doSignInWithEmailAndPassword(account.email, account.password).then(() => {
+			// Obtain authenticated user
 			firebase.onAuthUserListener(authUser => {
 				if (authUser) {
+					// Store the authenticated user in user
 					const user = authUser
 
+					// Set the authUser local storage item
 					localStorage.setItem('authUser', JSON.stringify(authUser))
 
+					// Set the state
 					this.setState({
 						authUser,
 						user: JSON.parse(localStorage.getItem('authUser')),
@@ -166,6 +166,7 @@ class AccountProvider extends Component {
 						console.log('account=', this.state.account)
 						console.log('loading=', this.state.loading)
 
+						// Redirect to Dashboard page
 						window.location.href = `${ROUTES.DASHBOARD}`
 					})
 				}
