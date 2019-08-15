@@ -146,16 +146,19 @@ class AccountProvider extends Component {
 		firebase.doSignInWithEmailAndPassword(account.email, account.password).then(() => {
 			firebase.onAuthUserListener(authUser => {
 				if (authUser) {
+					const user = authUser
+
 					localStorage.setItem('authUser', JSON.stringify(authUser))
 
 					this.setState({
 						authUser,
+						user: JSON.parse(localStorage.getItem('authUser')),
 						account: {
-							name: authUser.name,
-							email: authUser.email,
-							profilePicture: authUser.profilePicture,
-							role: authUser.role,
-							matchSettings: authUser.matchSettings,
+							name: user.name,
+							email: user.email,
+							profilePicture: user.profilePicture,
+							role: user.role,
+							matchSettings: user.matchSettings,
 						},
 						loading: false
 					}, () => {
