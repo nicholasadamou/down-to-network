@@ -23,7 +23,7 @@
 
 ---
 
-## What is '_Down To Network_'?
+## 🤔 What is '_Down To Network_'?
 
 This project was created for the Summer IBM HackCIO event, where fellow IBM interns in groups of 4 had 24 hours to design and construct an app that would improve IBM in one of the following categories:
 
