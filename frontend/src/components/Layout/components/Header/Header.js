@@ -2,9 +2,11 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../../constants/routes'
 
 import { Header as CarbonHeader, HeaderName } from 'carbon-components-react'
+
+import './index.scss'
 
 const Header = () => {
   return (
