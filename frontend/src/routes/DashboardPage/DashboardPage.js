@@ -176,7 +176,7 @@ class DashboardPage extends Component {
 								<NoCardsWrapper>
 									<Card style={{ zIndex: -2, height: '100%', width: '100%' }}>
 										<h1>No more potential matches. <span role="img" aria-label="crying face">😢</span></h1>
-										<p>Please refresh the page or change your match preferences to obtain more potential matches.</p>
+										<p>Please refresh the page or change your match preferences to get match'n again.</p>
 									</Card>
 								</NoCardsWrapper>
 							)}
