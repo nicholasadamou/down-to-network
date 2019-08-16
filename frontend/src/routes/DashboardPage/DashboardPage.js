@@ -85,15 +85,12 @@ const UserWrapper = styled.div`
 `
 
 const TextWrapper = styled.div`
-	position: absolute;
-	bottom: 0;
-
 	width: 100%;
 
 	padding: 10px;
 
-	background-color: black;
-	color: white;
+	background-color: whitesmoke;
+	color: #171717;
 `
 
 class DashboardPage extends Component {
@@ -130,9 +127,9 @@ class DashboardPage extends Component {
 			// currently authenticated user's list of
 			// networking preferences
 			this.setState({
-				// matches: response,
+				matches: response,
 				loading: false,
-				matches: firebase.getUsersByMatchSettings(users, user.matchSettings)
+				// matches: firebase.getUsersByMatchSettings(users, user.matchSettings)
 			}, () => console.log('matches=', this.state.matches))
 		}).catch(error => {
 			this.setState({
