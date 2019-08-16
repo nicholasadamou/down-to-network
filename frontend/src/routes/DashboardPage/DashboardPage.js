@@ -168,7 +168,7 @@ class DashboardPage extends Component {
 							{matches.length <= 1 && (
 								<NoCardsWrapper>
 									<Card style={{ zIndex: -2, height: '100%', width: '100%' }}>
-										<h1>No more matches. <span role="img" aria-label="sad face">😢</span></h1>
+										<h1>No more matches. <span role="img" aria-label="crying face">😢</span></h1>
 										<p>Please refresh the page or change your match preferences to obtain more potential matches.</p>
 									</Card>
 								</NoCardsWrapper>
