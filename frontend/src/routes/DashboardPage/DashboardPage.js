@@ -8,11 +8,10 @@ import Swipeable from "react-swipy";
 import styled from 'styled-components'
 
 import { withAuthorization, withEmailVerification } from '../../contexts/Session'
+import AccountContext from '../../contexts/Account/AccountContext';
 
 import Layout from '../../components/Layout/Layout'
 import MenuBar from '../../components/MenuBar'
-import AccountContext from '../../contexts/Account/AccountContext';
-
 import Loading from '../../components/Loading'
 
 import './index.scss'
@@ -135,6 +134,14 @@ class DashboardPage extends Component {
 				loading: false,
 				matches: firebase.getUsersByMatchSettings(users, user.matchSettings)
 			}, () => console.log('matches=', this.state.matches))
+		}).catch(error => {
+			this.setState({
+				error: {
+					error: true,
+					message: error.message
+				},
+				loading: false
+			}, () => console.log('error=', this.state.error))
 		})
 	}
 
@@ -168,7 +175,7 @@ class DashboardPage extends Component {
 							{matches.length === 0 && (
 								<NoCardsWrapper>
 									<Card style={{ zIndex: -2, height: '100%', width: '100%' }}>
-										<h1>No more matches. <span role="img" aria-label="crying face">😢</span></h1>
+										<h1>No more potential matches. <span role="img" aria-label="crying face">😢</span></h1>
 										<p>Please refresh the page or change your match preferences to obtain more potential matches.</p>
 									</Card>
 								</NoCardsWrapper>
