@@ -165,7 +165,7 @@ class DashboardPage extends Component {
 									{matches.length > 1 && <Card style={{ zIndex: -1 }}>{matches[1].name}</Card>}
 								</CardsWrapper>
 							)}
-							{matches.length <= 1 && (
+							{matches.length === 0 && (
 								<NoCardsWrapper>
 									<Card style={{ zIndex: -2, height: '100%', width: '100%' }}>
 										<h1>No more matches. <span role="img" aria-label="crying face">😢</span></h1>
