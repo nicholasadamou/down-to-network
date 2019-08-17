@@ -118,6 +118,40 @@ class CloseAccountForm extends Component {
 					user
 					.delete()
 					.then(() => {
+						// Remove user from all user's match and rejection history
+						firebase.ref(`users`).then(users => {
+							// Remember who the current user is
+							const currentUser = user
+
+							users.forEach(user => {
+								// Skip current user
+								if (user.id !== currentUser.uid) {
+									// Make sure that the user doesn't have an empty match history
+									if (user.matches.length !== 0) {
+										// Remove current user from this user's match history if user exists
+										if (user.matches.includes(currentUser)) {
+											firebase.ref(`users/${user.id}/matches/${currentUser.uid}`).remove()
+										}
+									}
+
+									// Make sure that the user doesn't have an empty rejection history
+									if (user.rejections.length !== 0) {
+										// Remove current user from this user's rejection history if user exists
+										if (user.rejections.includes(currentUser)) {
+											firebase.ref(`users/${user.id}/rejections/${currentUser.uid}`).remove()
+										}
+									}
+								}
+							})
+						}).catch(error => {
+							this.setState({
+								error: {
+									error: true,
+									message: error.message
+								}
+							}, () => console.log('error=', this.state.error))
+						})
+
 						// Remove user from real time database
 						firebase.ref(`users/${user.uid}`).remove()
 

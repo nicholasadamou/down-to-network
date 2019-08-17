@@ -125,7 +125,7 @@ class DashboardPage extends Component {
 
 		// Check if user swiped right
 		if (e === 'right') {
-			firebase.ref(`matches/${user.uid}/users`).update({
+			firebase.ref(`users/${user.uid}/matches`).update({
 				[target.id]: target
 			})
 
@@ -134,7 +134,7 @@ class DashboardPage extends Component {
 
 		// Check if user swiped left
 		if (e === 'left') {
-			firebase.ref(`rejections/${user.uid}/users`).update({
+			firebase.ref(`users/${user.uid}/rejections`).update({
 				[target.id]: target
 			})
 
