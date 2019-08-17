@@ -204,6 +204,18 @@ class AccountProvider extends Component {
 				}, () => console.log('error=', this.state.error))
 			})
 
+			// Create user's rejection history in Firebase's real time database
+			firebase.ref(`rejections/${authUser.user.uid}`).set({
+				users: []
+			}).catch(error => {
+				this.setState({
+					error: {
+						error: true,
+						message: error.message
+					}
+				}, () => console.log('error=', this.state.error))
+			})
+
 			// Create a user in Firebase's real time database
 			return firebase.user(`${authUser.user.uid}`).set({
 				name,
