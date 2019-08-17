@@ -192,7 +192,19 @@ class AccountProvider extends Component {
 		const { profilePicture, name, role, matchSettings } = account
 
 		firebase.doCreateUserWithEmailAndPassword(account.email, account.password).then(authUser => {
-			// Create a user in your Firebase real time database
+			// Create user's match history in Firebase's real time database
+			firebase.ref(`matches/${authUser.user.uid}`).set({
+				users: []
+			}).catch(error => {
+				this.setState({
+					error: {
+						error: true,
+						message: error.message
+					}
+				}, () => console.log('error=', this.state.error))
+			})
+
+			// Create a user in Firebase's real time database
 			return firebase.user(`${authUser.user.uid}`).set({
 				name,
 				email: account.email,

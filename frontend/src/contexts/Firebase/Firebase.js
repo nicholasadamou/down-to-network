@@ -91,9 +91,11 @@ class Firebase {
 
 	users = () => this.getEntities('users')
 
-	// *** Match API ***
+	// *** Match / Rejection API ***
 
-	matches = (uid) => this.getEntities(`matches/${uid}`)
+	matches = (uid) => this.getEntities(`matches/${uid}/users`)
+
+	rejections = (uid) => this.getEntities(`rejections/${uid}/users`)
 
 	getUsersByMatchSettings = (users, matchSettings) => {
 		let matches = []

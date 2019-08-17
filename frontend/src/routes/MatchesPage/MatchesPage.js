@@ -13,6 +13,20 @@ import Layout from '../../components/Layout/Layout'
 import MenuBar from '../../components/MenuBar'
 import Loading from '../../components/Loading'
 
+import User from './components/User'
+
+const MatchesWrapper = styled.div`
+	margin-top: 4rem;
+
+	h1 {
+		font-size: x-large;
+		font-weight: bold;
+
+		margin-bottom: 20px;
+		margin-left: 10px;
+	}
+`
+
 const NoMatchesWrapper = styled.div`
 	display: flex;
 	align-items: flex-start;
@@ -58,9 +72,9 @@ class MatchesPage extends Component {
     const { user } = this.context
     console.log(user)
 
-    firebase.matches(user.uid).then(matches => {
+    firebase.matches(user.uid).then(response => {
       this.setState({
-        matches,
+        matches: response,
         loading: false
       }, () => console.log('matches=', this.state.matches))
     }).catch(error => {
@@ -75,7 +89,7 @@ class MatchesPage extends Component {
   }
 
   render () {
-    const { matches, loading } = this.state
+		const { matches, loading } = this.state
 
     return (
       <Layout>
@@ -84,7 +98,14 @@ class MatchesPage extends Component {
             <Loading />
           ) : (
             matches.length > 0 ? (
-              ''
+							<MatchesWrapper>
+								<h1>Who's Down to Network?</h1>
+								{
+										matches.map(user => (
+										<User user={user} key={user.id} />
+									))
+								}
+							</MatchesWrapper>
             ) : (
               <NoMatchesWrapper>
                 <h1>You don't have any matches. <span role="img" aria-label="crying face">😢</span></h1>

@@ -115,7 +115,31 @@ class DashboardPage extends Component {
 			loading: true,
 		}
 
+		this.swipe = this.swipe.bind(this)
 		this.remove = this.remove.bind(this)
+	}
+
+	swipe = (e, target) => {
+		const { firebase } = this.props
+		const { user } = this.context
+
+		// Check if user swiped right
+		if (e === 'right') {
+			firebase.ref(`matches/${user.uid}/users`).update({
+				[target.id]: target
+			})
+
+			console.log('swiped right 😍')
+		}
+
+		// Check if user swiped left
+		if (e === 'left') {
+			firebase.ref(`rejections/${user.uid}/users`).update({
+				[target.id]: target
+			})
+
+			console.log('swiped left 🤮')
+		}
 	}
 
 	remove = () =>
@@ -129,19 +153,50 @@ class DashboardPage extends Component {
 		// Get list of all users
 		firebase.users().then(response => {
 			// Filter current user out of users
-			const users = response.filter(user => user.id !== this.context.user.uid)
+			// let users = response
+			let users = response.filter(user => user.id !== this.context.user.uid)
 			console.log('users=', users)
 
-			// TODO: Filter previously matched users out of users
+			firebase.matches(user.uid).then(response => {
+				// Filter previously matched users out of users
+				response.forEach(matchedUser => {
+					users = users.filter(user => user.id !== matchedUser.id)
+				})
+				console.log('users=', users)
 
-			// Get list of users whose role matches the
-			// currently authenticated user's list of
-			// networking preferences
-			this.setState({
-				matches: response,
-				loading: false,
-				// matches: firebase.getUsersByMatchSettings(users, user.matchSettings)
-			}, () => console.log('matches=', this.state.matches))
+				firebase.rejections(user.uid).then(response => {
+					// Filter previously rejected users out of users
+					response.forEach(rejectedUser => {
+						users = users.filter(user => user.id !== rejectedUser.id)
+					})
+					console.log('users=', users)
+
+					this.setState({
+						loading: false,
+						// Get list of users whose role matches the
+						// currently authenticated user's list of
+						// networking preferences
+						matches: firebase.getUsersByMatchSettings(users, user.matchSettings)
+						// matches: users
+					}, () => console.log('matches=', this.state.matches))
+				}).catch(error => {
+					this.setState({
+						error: {
+							error: true,
+							message: error.message
+						},
+						loading: false
+					}, () => console.log('error=', this.state.error))
+				})
+			}).catch(error => {
+				this.setState({
+					error: {
+						error: true,
+						message: error.message
+					},
+					loading: false
+				}, () => console.log('error=', this.state.error))
+			})
 		}).catch(error => {
 			this.setState({
 				error: {
@@ -166,6 +221,7 @@ class DashboardPage extends Component {
 							{matches.length > 0 && (
 								<CardsWrapper>
 									<Swipeable
+										onSwipe={e => this.swipe(e, matches[0])}
 										onAfterSwipe={this.remove}
 									>
 										<Card>
