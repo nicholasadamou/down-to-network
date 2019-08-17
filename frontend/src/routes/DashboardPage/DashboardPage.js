@@ -66,16 +66,11 @@ const Card = styled.div`
 	cursor: pointer;
 
 	background-color: white;
-	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 `
 
 const UserWrapper = styled.div`
 	position: relative;
-
-	h1 {
-		font-size: x-large;
-		font-weight: bold;
-	}
 
 	img {
 		display: block;
@@ -85,12 +80,26 @@ const UserWrapper = styled.div`
 `
 
 const TextWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
 	width: 100%;
 
 	padding: 10px;
 
-	background-color: whitesmoke;
+	background-color: white;
 	color: #171717;
+
+	h1 {
+		font-size: x-large;
+		font-weight: bold;
+	}
+
+	p {
+		font-size: medium;
+		font-style: italic;
+	}
 `
 
 class DashboardPage extends Component {
@@ -162,6 +171,7 @@ class DashboardPage extends Component {
 												<img src={matches[0].profilePicture} alt="" />
 												<TextWrapper>
 													<h1>{matches[0].name}</h1>
+													<p>{matches[0].role}</p>
 												</TextWrapper>
 											</UserWrapper>
 										</Card>

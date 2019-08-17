@@ -101,11 +101,11 @@ class RoleChangeForm extends Component {
                         />
                         <SelectItem
                             value="New Hire"
-                            text="New Hires"
+                            text="New Hire"
                         />
                         <SelectItem
-                            value="Interns"
-                            text="Interns"
+                            value="Intern"
+                            text="Intern"
                         />
                         <SelectItem
                             value="Full Time IBMer"
