@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-tabs */
 import React from 'react'
@@ -14,6 +15,7 @@ const UsersWrapper = styled.div`
 
 	padding: 10px;
 	margin: 0 auto;
+	margin-bottom: 10px;
 
 	background-color: whitesmoke;
 `
@@ -39,15 +41,24 @@ const UserDetails = styled.div`
 
 	img {
 		width: 80px;
-		border-radius: 100%;
+		height: 80px;
+
+		object-fit: cover;
+
+		border-radius: 50%;
 	}
 
-	span {
+	div {
+		display: flex;
+		flex-direction: column;
+
 		margin-left: 10px;
 
 		font-size: small;
 
 		strong {
+			margin-bottom: 10px;
+
 			font-weight: bold;
 		}
 
@@ -65,7 +76,10 @@ const User = props => {
       <UserContainer>
         <UserDetails>
           <img src={user.profilePicture} alt={user.name} />
-          <span><strong>{user.name}</strong> / <em>{user.role}</em></span>
+          <div>
+            <strong>{user.name}</strong>
+            <em>{user.role}</em>
+		  </div>
         </UserDetails>
 
         <a href={`mailto:${user.email}`}>Email</a>

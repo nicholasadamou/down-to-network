@@ -74,10 +74,15 @@ const Card = styled.div`
 const UserWrapper = styled.div`
 	position: relative;
 
+	width: 100%;
+
 	img {
 		display: block;
 
 		width: 100%;
+		height: 600px;
+
+		object-fit: cover;
 	}
 `
 
@@ -176,7 +181,7 @@ class DashboardPage extends Component {
 						// Get list of users whose role matches the
 						// currently authenticated user's list of
 						// networking preferences
-						matches: firebase.getUsersByMatchSettings(users, user.matchSettings)
+						matches: firebase.getUsersByMatchSettings(users, user.matchSettings).sort(() => Math.random() - 0.5)
 						// matches: users
 					}, () => console.log('matches=', this.state.matches))
 				}).catch(error => {
