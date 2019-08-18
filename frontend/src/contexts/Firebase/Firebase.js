@@ -107,6 +107,8 @@ class Firebase {
 			}
 		})
 
+		console.log('⏳ Filtering users by networking preferences=', matches)
+
 		return matches
 	}
 }
