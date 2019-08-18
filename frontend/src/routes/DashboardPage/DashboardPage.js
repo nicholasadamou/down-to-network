@@ -158,7 +158,6 @@ class DashboardPage extends Component {
 		// Get list of all users
 		firebase.users().then(response => {
 			// Filter current user out of users
-			// let users = response
 			let users = response.filter(user => user.id !== this.context.user.uid)
 			console.log('⏳ Filter current user out of users=', users)
 
@@ -182,7 +181,6 @@ class DashboardPage extends Component {
 						// currently authenticated user's list of
 						// networking preferences
 						matches: firebase.getUsersByMatchSettings(users, user.matchSettings).sort(() => Math.random() - 0.5)
-						// matches: users
 					}, () => console.log('🥳 matches=', this.state.matches))
 				}).catch(error => {
 					this.setState({
