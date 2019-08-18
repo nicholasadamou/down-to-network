@@ -160,21 +160,21 @@ class DashboardPage extends Component {
 			// Filter current user out of users
 			// let users = response
 			let users = response.filter(user => user.id !== this.context.user.uid)
-			console.log('users=', users)
+			console.log('1) users=', users)
 
 			firebase.matches(user.uid).then(response => {
 				// Filter previously matched users out of users
 				response.forEach(matchedUser => {
 					users = users.filter(user => user.id !== matchedUser.id)
 				})
-				console.log('users=', users)
+				console.log('2) users=', users)
 
 				firebase.rejections(user.uid).then(response => {
 					// Filter previously rejected users out of users
 					response.forEach(rejectedUser => {
 						users = users.filter(user => user.id !== rejectedUser.id)
 					})
-					console.log('users=', users)
+					console.log('3) users=', users)
 
 					this.setState({
 						loading: false,
@@ -183,7 +183,7 @@ class DashboardPage extends Component {
 						// networking preferences
 						matches: firebase.getUsersByMatchSettings(users, user.matchSettings).sort(() => Math.random() - 0.5)
 						// matches: users
-					}, () => console.log('matches=', this.state.matches))
+					}, () => console.log('🥳 matches=', this.state.matches))
 				}).catch(error => {
 					this.setState({
 						error: {
@@ -191,7 +191,7 @@ class DashboardPage extends Component {
 							message: error.message
 						},
 						loading: false
-					}, () => console.log('error=', this.state.error))
+					}, () => console.log('⁉️error=', this.state.error))
 				})
 			}).catch(error => {
 				this.setState({
@@ -200,7 +200,7 @@ class DashboardPage extends Component {
 						message: error.message
 					},
 					loading: false
-				}, () => console.log('error=', this.state.error))
+				}, () => console.log('⁉️error=', this.state.error))
 			})
 		}).catch(error => {
 			this.setState({
@@ -209,7 +209,7 @@ class DashboardPage extends Component {
 					message: error.message
 				},
 				loading: false
-			}, () => console.log('error=', this.state.error))
+			}, () => console.log('⁉️error=', this.state.error))
 		})
 	}
 

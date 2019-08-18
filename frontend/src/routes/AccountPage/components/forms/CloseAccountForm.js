@@ -149,7 +149,7 @@ class CloseAccountForm extends Component {
 									error: true,
 									message: error.message
 								}
-							}, () => console.log('error=', this.state.error))
+							}, () => console.log('⁉️error=', this.state.error))
 						})
 
 						// Remove user from real time database
@@ -170,7 +170,7 @@ class CloseAccountForm extends Component {
                                 error: true,
                                 message: error.message
                             }
-						}, () => console.log('error=', this.state.error))
+						}, () => console.log('⁉️error=', this.state.error))
 					})
 				})
 			}

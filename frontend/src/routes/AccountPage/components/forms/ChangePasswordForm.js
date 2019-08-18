@@ -200,7 +200,7 @@ class ChangePasswordForm extends Component {
                                 error: true,
                                 message: error.message
                             }
-						}, () => console.log('error=', this.state.error))
+						}, () => console.log('⁉️error=', this.state.error))
 					})
 			})
 			.catch(error => {
@@ -209,7 +209,7 @@ class ChangePasswordForm extends Component {
                         error: true,
                         message: error.message
                     }
-				}, () => console.log('error=', this.state.error))
+				}, () => console.log('⁉️error=', this.state.error))
 			})
 	}
 

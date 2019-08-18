@@ -70,7 +70,7 @@ class ChangeMatchSettingsForm extends Component {
                         error: true,
                         message: error.message
                     }
-				}, () => console.log('error=', this.state.error))
+				}, () => console.log('⁉️error=', this.state.error))
 			})
 	}
 

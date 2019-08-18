@@ -76,7 +76,7 @@ class MatchesPage extends Component {
       this.setState({
         matches: response,
         loading: false
-      }, () => console.log('matches=', this.state.matches))
+      }, () => console.log('🥳 matches=', this.state.matches))
     }).catch(error => {
 			this.setState({
 				error: {
@@ -84,7 +84,7 @@ class MatchesPage extends Component {
 					message: error.message
 				},
 				loading: false
-			}, () => console.log('error=', this.state.error))
+			}, () => console.log('⁉️error=', this.state.error))
 		})
   }
 

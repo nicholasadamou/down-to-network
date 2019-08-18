@@ -177,7 +177,7 @@ class AccountProvider extends Component {
 					error: true,
 					message: error.message
 				}
-			}, () => console.log('error=', this.state.error))
+			}, () => console.log('⁉️error=', this.state.error))
 		})
 
 		console.log('AccountProvider.handleLogin=', account)
@@ -221,7 +221,7 @@ class AccountProvider extends Component {
 					error: true,
 					message: error.message
 				}
-			}, () => console.log('error=', this.state.error))
+			}, () => console.log('⁉️error=', this.state.error))
 		})
 
 
@@ -240,7 +240,7 @@ class AccountProvider extends Component {
 					error: true,
 					message: error.message
 				}
-			}, () => console.log('error=', this.state.error))
+			}, () => console.log('⁉️error=', this.state.error))
 		})
 
 		window.location.href = `${ROUTES.LANDING}`
