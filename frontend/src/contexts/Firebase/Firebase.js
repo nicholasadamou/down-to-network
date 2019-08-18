@@ -101,7 +101,7 @@ class Firebase {
 		let matches = []
 
 		users.forEach(user => {
-			console.log('⏳ Filtering users by networking preferences=', matches, matchSettings)
+			console.log('⏳ Filtering users by networking preferences=', matches)
 			if (matchSettings.includes(user.role)) {
 				matches.push(user)
 			}
