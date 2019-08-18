@@ -80,7 +80,7 @@ const UserWrapper = styled.div`
 		display: block;
 
 		width: 100%;
-		height: 600px;
+		height: 650px;
 
 		object-fit: cover;
 	}
