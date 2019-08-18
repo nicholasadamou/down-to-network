@@ -160,21 +160,21 @@ class DashboardPage extends Component {
 			// Filter current user out of users
 			// let users = response
 			let users = response.filter(user => user.id !== this.context.user.uid)
-			console.log('1) users=', users)
+			console.log('1) ⏳ Filter current user out of users=', users)
 
 			firebase.matches(user.uid).then(response => {
 				// Filter previously matched users out of users
 				response.forEach(matchedUser => {
 					users = users.filter(user => user.id !== matchedUser.id)
 				})
-				console.log('2) users=', users)
+				console.log('2) ⏳ Filter previously matched users out of users=', users)
 
 				firebase.rejections(user.uid).then(response => {
 					// Filter previously rejected users out of users
 					response.forEach(rejectedUser => {
 						users = users.filter(user => user.id !== rejectedUser.id)
 					})
-					console.log('3) users=', users)
+					console.log('3) ⏳ Filter previously rejected users out of users=', users)
 
 					this.setState({
 						loading: false,
