@@ -153,10 +153,12 @@ class DashboardPage extends Component {
 	componentWillMount () {
 		const { firebase } = this.props
 		const { user } = this.context
-		console.log('user=', user)
+		console.log('👨🏼‍💻 user=', user)
 
 		// Get list of all users
 		firebase.users().then(response => {
+			console.log('👨🏼‍💻 users=', response)
+
 			// Filter current user out of users
 			let users = response.filter(user => user.id !== this.context.user.uid)
 			console.log('⏳ Filter current user out of users=', users)

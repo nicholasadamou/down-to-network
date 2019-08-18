@@ -65,7 +65,7 @@ class AccountProvider extends Component {
 
 		this.setState({
 			account
-		}, () => console.log('AccountProvider.account=', this.state.account))
+		}, () => console.log('👨🏼‍💻 AccountProvider.account=', this.state.account))
 	}
 
 	setAccount = (id, e) => {
@@ -110,7 +110,7 @@ class AccountProvider extends Component {
 
 		this.setState({
 			account,
-		}, () => console.log('AccountProvider.account=', this.state.account))
+		}, () => console.log('👨🏼‍💻 AccountProvider.account=', this.state.account))
 	}
 
 	isAccountValid = account => {
@@ -162,8 +162,8 @@ class AccountProvider extends Component {
 						},
 						loading: false
 					}, () => {
-						console.log('authUser=', this.state.authUser)
-						console.log('account=', this.state.account)
+						console.log('👨🏼‍💻 authUser=', this.state.authUser)
+						console.log('👨🏼‍💻 account=', this.state.account)
 						console.log('loading=', this.state.loading)
 
 						// Redirect to Dashboard page
@@ -180,7 +180,7 @@ class AccountProvider extends Component {
 			}, () => console.log('⁉️error=', this.state.error))
 		})
 
-		console.log('AccountProvider.handleLogin=', account)
+		console.log('👨🏼‍💻 AccountProvider.handleLogin=', account)
 	}
 
 	handleSignUp = e => {
@@ -225,7 +225,7 @@ class AccountProvider extends Component {
 		})
 
 
-		console.log('AccountProvider.handleSignUp=', account)
+		console.log('👨🏼‍💻 AccountProvider.handleSignUp=', account)
 	}
 
 	handlePasswordReset = e => {
@@ -299,9 +299,9 @@ class AccountProvider extends Component {
 						},
 						loading: false
 					}, () => {
-						console.log('authUser=', this.state.authUser)
-						console.log('account=', this.state.account)
-						console.log('loading=', this.state.loading)
+						console.log('👨🏼‍💻 authUser=', this.state.authUser)
+						console.log('👨🏼‍💻 account=', this.state.account)
+						console.log('⏳ loading=', this.state.loading)
 					})
 				}
 			})
