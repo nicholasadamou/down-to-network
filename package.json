@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "A dynamic web / mobile app optimized to connect new fellow IBMers to experienced IBMers through the power of matching.",
 	"scripts": {
-		"install-dependencies": "cd frontend/ && yarn install",
+		"install-dependencies": "cd frontend/ && npx yarn install",
 		"build": "cd frontend/ && npx yarn install && npx yarn build",
 		"clean": "cd frontend/ && npx yarn clean"
 	},
