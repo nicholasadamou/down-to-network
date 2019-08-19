@@ -52,7 +52,7 @@ class MatchSettings extends Component {
         const { setAccount, handleSignUp } = this.context
 
         return (
-            <Form>
+            <Form className="signup-form">
                 <h1>Choose your Settings</h1>
                 <MultiSelect
                     id="match-settings"

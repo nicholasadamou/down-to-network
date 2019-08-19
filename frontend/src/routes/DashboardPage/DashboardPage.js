@@ -83,6 +83,10 @@ const UserWrapper = styled.div`
 		height: 650px;
 
 		object-fit: cover;
+
+		@media (max-width: 375px) {
+			height: 400px;
+		}
 	}
 `
 

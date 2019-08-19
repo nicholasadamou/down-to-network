@@ -82,7 +82,7 @@ class UserDetails extends Component {
         const { error, emailInvalid, emailInvalidText, passwordInvalid, passwordInvalidText } = this.state
 
         return(
-            <Form>
+            <Form className="signup-form">
                 <h1>Build your Profile</h1>
                 <TextInput
                     id="email"
@@ -161,7 +161,7 @@ class UserDetails extends Component {
 
                 {error.error ? (
                     <span style={{ lineHeight: 2 }}>
-                        <span role="img" aria-label="warning">⚠️</span>
+                        <span role="img" aria-label="warning">⚠️</span>{' '}
                         {error.message}
                     </span>
                 ) : (

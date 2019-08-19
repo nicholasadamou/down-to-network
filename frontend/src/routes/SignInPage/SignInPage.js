@@ -26,7 +26,7 @@ const ImageLogo = styled.img`
 	width: 20rem;
 
 	@media (max-width: 375px) {
-		top: 25%;
+		display: none;
 	}
 `
 

@@ -82,7 +82,7 @@ class PersonalDetails extends Component {
         let fileUploader;
 
         return(
-            <Form>
+            <Form className="signup-form">
                 <h1>Build your Profile</h1>
 				{
 					profilePicture && (
