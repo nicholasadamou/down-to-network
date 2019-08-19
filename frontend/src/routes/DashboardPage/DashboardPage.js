@@ -183,7 +183,7 @@ class DashboardPage extends Component {
 						// currently authenticated user's list of
 						// networking preferences
 						matches: firebase.getUsersByMatchSettings(users, user.matchSettings).sort(() => Math.random() - 0.5)
-					}, () => console.log('🥳 matches=', this.state.matches))
+					}, () => console.log('🥳 potential matches=', this.state.matches))
 				}).catch(error => {
 					this.setState({
 						error: {
