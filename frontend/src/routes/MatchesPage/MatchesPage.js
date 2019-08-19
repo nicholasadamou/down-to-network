@@ -76,7 +76,7 @@ class MatchesPage extends Component {
       this.setState({
         matches: response,
         loading: false
-      }, () => console.log('🥳 matches=', this.state.matches))
+      }, () => console.log('🥳 previous matches=', this.state.matches))
     }).catch(error => {
 			this.setState({
 				error: {
