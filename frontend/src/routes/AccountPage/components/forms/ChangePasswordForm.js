@@ -258,7 +258,7 @@ class ChangePasswordForm extends Component {
 
                     {error.error ? (
                             <div style={{ textAlign: 'left', marginBottom: 20, lineHeight: 2 }}>
-                                <span role="img" aria-label="warning">⚠️</span>
+                                <span role="img" aria-label="warning">⚠️</span>{' '}
                                 {error.message}
                             </div>
                         ) : (

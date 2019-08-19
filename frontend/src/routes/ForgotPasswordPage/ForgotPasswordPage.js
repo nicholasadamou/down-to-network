@@ -75,7 +75,7 @@ const ForgotPasswordPage = () => {
           {
             error.error && (
               <span style={{ lineHeight: 2 }}>
-                <span role="img" aria-label="warning">⚠️</span>
+                <span role="img" aria-label="warning">⚠️</span>{' '}
                 {error.message}
               </span>
             )

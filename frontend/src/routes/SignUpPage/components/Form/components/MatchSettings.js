@@ -74,7 +74,7 @@ class MatchSettings extends Component {
                 />
                 {this.state.error.error || this.context.error.error ? (
                     <span style={{ lineHeight: 2 }}>
-                        <span role="img" aria-label="warning">⚠️</span>
+                        <span role="img" aria-label="warning">⚠️</span>{' '}
                         {this.state.error.message || this.context.error.message}
                     </span>
                 ) : (

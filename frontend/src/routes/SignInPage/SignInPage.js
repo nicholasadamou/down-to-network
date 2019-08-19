@@ -65,10 +65,10 @@ const Wrapper = styled.div`
 		}
 
 		h1 {
-            font-size: larger;
+			font-size: larger;
 			font-weight: bold;
-            margin-bottom: 20px;
-        }
+			margin-bottom: 20px;
+		}
 
 		button {
 			max-width: 100%;
@@ -90,8 +90,8 @@ const SignInPage = () => {
           <h1>Sign In</h1>
           {
             error.error && (
-              <span style={{ lineHeight: 2 }}>
-                <span role="img" aria-label="warning">⚠️</span>
+              <span style={{ display: 'block', marginBottom: 20, lineHeight: 2 }}>
+                <span role="img" aria-label="warning">⚠️</span>{' '}
                 {error.message}
               </span>
             )
