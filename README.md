@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/nicholasadamou/DownToNetwork"><img src="data/images/logo.png" alt="Logo"></a>
+  <a href="https://github.com/nicholasadamou/down-to-network"><img src="data/images/logo.png" alt="Logo"></a>
   <br>
   Down to Network Mono Repo
   <br>
@@ -10,11 +10,11 @@
 
 <p align="center">
 	<img src="https://img.shields.io/badge/hackathon-Intern%20HackCIO%202019-blue" alt="Intern HackCIO 2019">
-  <a href="https://github.com/nicholasadamou/DownToNetwork/blob/master/LICENSE.txt">
+  <a href="https://github.com/nicholasadamou/down-to-network/blob/master/LICENSE.txt">
       <img src="https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square" alt="License">
   </a>
-  <a href="https://travis-ci.org/nicholasadamou/DownToNetwork">
-      <img src="https://img.shields.io/travis/nicholasadamou/DownToNetwork/master.svg?style=flat-square" alt="Build Status">
+  <a href="https://travis-ci.org/nicholasadamou/down-to-network">
+      <img src="https://img.shields.io/travis/nicholasadamou/down-to-network/master.svg?style=flat-square" alt="Build Status">
   </a>
   <a href="https://saythanks.io/to/NicholasAdamou">
       <img src="https://img.shields.io/badge/say-thanks-ff69b4.svg" alt="Say Thanks">
