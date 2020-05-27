@@ -16,8 +16,7 @@
         "apollo-cache-inmemory": "^1.6.2",
         "carbon-components": "^10.1.0",
         "carbon-components-react": "^7.1.0",
-        "carbon-icons": "^7.0.7",
-        "dotenv": "^8.0.0",
+        "carbon-icons": "^7.0.7"
         "eslint-config-standard": "^13.0.1",
         "eslint-plugin-node": "^9.1.0",
         "eslint-plugin-promise": "^4.2.1",
@@ -43,6 +42,7 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
+        "update": "npx yarn-check -u",
         "clean": "sudo rm -rf node_modules package-lock.json yarn.lock"
     },
     "eslintConfig": {
