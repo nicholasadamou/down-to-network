@@ -16,7 +16,7 @@
         "apollo-cache-inmemory": "^1.6.2",
         "carbon-components": "^10.1.0",
         "carbon-components-react": "^7.1.0",
-        "carbon-icons": "^7.0.7"
+        "carbon-icons": "^7.0.7",
         "eslint-config-standard": "^13.0.1",
         "eslint-plugin-node": "^9.1.0",
         "eslint-plugin-promise": "^4.2.1",
