@@ -7,8 +7,6 @@ import * as serviceWorker from './serviceWorker'
 
 import Firebase, { FirebaseContext } from './contexts/Firebase'
 
-require('dotenv').config()
-
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>
     <App />
