@@ -13,9 +13,6 @@
   <a href="https://github.com/nicholasadamou/down-to-network/blob/master/LICENSE.txt">
       <img src="https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square" alt="License">
   </a>
-  <a href="https://travis-ci.org/nicholasadamou/down-to-network">
-      <img src="https://img.shields.io/travis/nicholasadamou/down-to-network/master.svg?style=flat-square" alt="Build Status">
-  </a>
   <a href="https://saythanks.io/to/NicholasAdamou">
       <img src="https://img.shields.io/badge/say-thanks-ff69b4.svg" alt="Say Thanks">
   </a>
