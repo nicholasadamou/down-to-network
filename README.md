@@ -13,9 +13,6 @@
   <a href="https://github.com/nicholasadamou/down-to-network/blob/master/LICENSE.txt">
       <img src="https://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square" alt="License">
   </a>
-  <a href="https://saythanks.io/to/NicholasAdamou">
-      <img src="https://img.shields.io/badge/say-thanks-ff69b4.svg" alt="Say Thanks">
-  </a>
 </p>
 
 ---
